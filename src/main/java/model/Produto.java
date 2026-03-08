@@ -1,24 +1,16 @@
 package model;
 
-public class Produto {
+public abstract class Produto {
+    protected int id; // Agora você que manda o valor para cá
+    protected String nome;
 
-    private int id;
-    private String nome;
-    private double preco;
-    private int estoque;
-
-    public Produto(int id, String nome, double preco, int estoque) {
+    public Produto(int id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.preco = preco;
-        this.estoque = estoque;
     }
 
     public int getId() { return id; }
     public String getNome() { return nome; }
-    public double getPreco() { return preco; }
-    public int getEstoque() { return estoque; }
 
-    public void setPreco(double preco) { this.preco = preco; }
-    public void setEstoque(int estoque) { this.estoque = estoque; }
+    public abstract double calcularPreco(double valor);
 }
