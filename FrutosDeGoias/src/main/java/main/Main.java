@@ -59,6 +59,7 @@ public class Main {
             System.out.println("4. Cadastrar Novo Produto");
             System.out.println("5. Editar Produto");
             System.out.println("6. Deletar Produto");
+            System.out.println("7. Cadastrar Funcionário");
         }
 
         System.out.println("0. Sair (Logout)");
@@ -73,6 +74,7 @@ public class Main {
             case 4 -> { if (logado instanceof Gerente) cadastrarNovoProduto(); }
             case 5 -> { if (logado instanceof Gerente) editarProduto(); }
             case 6 -> { if (logado instanceof Gerente) deletarProduto(); }
+            case 7 -> { if (logado instanceof Gerente) cadastrarNovoFuncionario(); }
             case 0 -> logado = null; // Faz o logout e volta para a tela de login
             default -> System.out.println("Opção inválida!");
         }
@@ -85,11 +87,10 @@ public class Main {
         System.out.print("Digite o CODIGO (ID) do produto: ");
         int idDigitado = Integer.parseInt(sc.nextLine());
 
-        // Usamos o novo método buscarPorId que criamos no Service
         Produto p = prodService.buscarPorId(idDigitado);
 
         if (p == null) {
-            System.out.println("[X] Erro: Produto com ID " + idDigitado + " não encontrado!");
+            System.out.println("[X] Erro: Produto não encontrado!");
             return;
         }
 
@@ -97,6 +98,24 @@ public class Main {
         double input = Double.parseDouble(sc.nextLine());
         double subtotal = p.calcularPreco(input);
 
+        System.out.printf("Subtotal: R$ %.2f\n", subtotal);
+
+        System.out.println("Forma de Pagamento: 1. Dinheiro | 2. Cartão (+5%)");
+        int opPag = Integer.parseInt(sc.nextLine());
+
+        Pagamento formaPg;
+        if (opPag == 2) {
+            formaPg = new PagamentoCartao();
+        } else {
+            formaPg = new PagamentoDinheiro();
+        }
+
+        double valorFinal = formaPg.calcularFinal(subtotal);
+
+        vendaService.salvarVenda(valorFinal, logado);
+
+        System.out.println("\n[V] VENDA FINALIZADA COM SUCESSO!");
+        System.out.printf("Total Pago (%s): R$ %.2f\n", formaPg.getNome(), valorFinal);
     }
 
     private static void listarProdutos() {
@@ -110,8 +129,10 @@ public class Main {
         System.out.print("Defina um ID para este produto: ");
         int id = Integer.parseInt(sc.nextLine());
 
-        // Dica: Seria bom checar se o ID já existe antes de continuar
-
+        if (prodService.idJaExiste(id)) {
+            System.out.println("[X] Erro: Já existe um produto com o ID " + id + "!");
+            return; // Sai do método e volta para o menu
+        }
         System.out.print("Nome: ");
         String nome = sc.nextLine();
 
@@ -131,15 +152,31 @@ public class Main {
     }
 
     private static void exibirRelatorio() {
-        System.out.println("\n=== RELATÓRIO DE VENDAS ===");
-        System.out.printf("Total Geral: R$ %.2f\n", vendaService.getTotalLoja());
+        System.out.println("\n=== RELATÓRIO DE VENDAS (GERENCIAL) ===");
+        System.out.printf("FATURAMENTO TOTAL DA LOJA: R$ %.2f\n", vendaService.getTotalLoja());
+        System.out.println("---------------------------------------");
+        System.out.println("PERFORMANCE POR FUNCIONÁRIO:");
+
+        // 1. Pegamos a lista de todos os usuários do seu userService
+        for (Usuario u : userService.listarTodos()) {
+
+            // 2. Verificamos se o usuário da vez é um Funcionário
+            if (u instanceof Funcionario) {
+
+                // 3. Fazemos o "Casting" (conversão temporária) para acessar o totalVendas
+                Funcionario f = (Funcionario) u;
+
+                System.out.printf("- %s: R$ %.2f\n", f.getNome(), f.getTotalVendas());
+            }
+        }
+        System.out.println("=======================================");
     }
 
     private static void deletarProduto() {
         listarProdutos();
-        System.out.print("Digite o número do produto para excluir: ");
-        int index = Integer.parseInt(sc.nextLine()) - 1;
-        prodService.deletar(index);
+        System.out.print("Digite o CODIGO (ID) do produto para excluir: ");
+        int id = Integer.parseInt(sc.nextLine()); // O usuário digita "101"
+        prodService.deletarPorId(id); // O Service se vira para achar o 101
     }
 
     private static void editarProduto() {
@@ -147,7 +184,7 @@ public class Main {
         System.out.print("Digite o CODIGO (ID) do produto que deseja editar: ");
         int idBusca = Integer.parseInt(sc.nextLine());
 
-        // 1. Busca o produto atual no Service
+        // 1. Busca o produto atual para saber o que estamos editando
         Produto produtoAntigo = prodService.buscarPorId(idBusca);
 
         if (produtoAntigo == null) {
@@ -161,12 +198,18 @@ public class Main {
         System.out.print("Novo ID (ou digite " + produtoAntigo.getId() + " para manter): ");
         int novoId = Integer.parseInt(sc.nextLine());
 
+        // Validação: Se o ID mudou, verifica se o novo ID já não existe em outro produto
+        if (novoId != idBusca && prodService.idJaExiste(novoId)) {
+            System.out.println("[X] Erro: O novo ID " + novoId + " já pertence a outro produto!");
+            return;
+        }
+
         System.out.print("Novo Nome: ");
         String novoNome = sc.nextLine();
 
         Produto novoProduto;
 
-        // 3. Verifica o tipo para pedir o preço correto
+        // 3. Verifica o tipo (Picolé ou Massa) para criar o objeto correto
         if (produtoAntigo instanceof Picole) {
             System.out.print("Novo Preço Unitário: ");
             double novoPreco = Double.parseDouble(sc.nextLine());
@@ -177,7 +220,27 @@ public class Main {
             novoProduto = new SorveteMassa(novoId, novoNome, novoPreco);
         }
 
-        prodService.atualizar(idBusca, novoProduto);
+        // 4. ENVIA PARA O SERVICE EXECUTAR A TROCA
+        prodService.editarPorId(idBusca, novoProduto);
+
         System.out.println("[V] Produto atualizado com sucesso!");
+    }
+
+    private static void cadastrarNovoFuncionario() {
+        System.out.println("\n--- NOVO FUNCIONÁRIO ---");
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("Login: ");
+        String login = sc.nextLine();
+        System.out.print("Senha: ");
+        String senha = sc.nextLine();
+
+        // Criamos o objeto do tipo Funcionario
+        Funcionario novoF = new Funcionario(nome, login, senha);
+
+        // Chamamos o SEU userService para salvar na lista de usuários
+        userService.cadastrar(novoF);
+
+        System.out.println("[V] " + nome + " agora é um funcionário do sistema!");
     }
 }
