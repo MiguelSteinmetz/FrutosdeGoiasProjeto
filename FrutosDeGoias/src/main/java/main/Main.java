@@ -10,10 +10,10 @@ public class Main {
     private static UsuarioService userService = new UsuarioService();
     private static ProdutoService prodService = new ProdutoService();
     private static VendaService vendaService = new VendaService();
-    private static Usuario logado = null; // Começa como null para forçar o login
+    private static Usuario logado = null;
 
     public static void main(String[] args) {
-        inicializarDados(); // Cria os usuários e produtos iniciais
+        inicializarDados();
 
         while (true) {
             if (logado == null) {
@@ -59,12 +59,13 @@ public class Main {
             System.out.println("4. Cadastrar Novo Produto");
             System.out.println("5. Editar Produto");
             System.out.println("6. Deletar Produto");
+            System.out.println("7. Cadastrar Funcionário");
         }
 
         System.out.println("0. Sair (Logout)");
         System.out.print("Escolha uma opção: ");
 
-        int op = Integer.parseInt(sc.nextLine());
+        int op =  lerInteiro();
 
         switch (op) {
             case 1 -> realizarVenda();
@@ -73,7 +74,8 @@ public class Main {
             case 4 -> { if (logado instanceof Gerente) cadastrarNovoProduto(); }
             case 5 -> { if (logado instanceof Gerente) editarProduto(); }
             case 6 -> { if (logado instanceof Gerente) deletarProduto(); }
-            case 0 -> logado = null; // Faz o logout e volta para a tela de login
+            case 7 -> { if (logado instanceof Gerente) cadastrarNovoFuncionario(); }
+            case 0 -> logado = null;
             default -> System.out.println("Opção inválida!");
         }
     }
@@ -83,20 +85,37 @@ public class Main {
         listarProdutos();
 
         System.out.print("Digite o CODIGO (ID) do produto: ");
-        int idDigitado = Integer.parseInt(sc.nextLine());
+        int idDigitado = lerInteiro();
 
-        // Usamos o novo método buscarPorId que criamos no Service
         Produto p = prodService.buscarPorId(idDigitado);
 
         if (p == null) {
-            System.out.println("[X] Erro: Produto com ID " + idDigitado + " não encontrado!");
+            System.out.println("[X] Erro: Produto não encontrado!");
             return;
         }
 
         System.out.print("Informe Quantidade ou Gramas: ");
-        double input = Double.parseDouble(sc.nextLine());
+        double input = lerDouble();
         double subtotal = p.calcularPreco(input);
 
+        System.out.printf("Subtotal: R$ %.2f\n", subtotal);
+
+        System.out.println("Forma de Pagamento: 1. Dinheiro | 2. Cartão (+5%)");
+        int opPag =  lerInteiro();
+
+        Pagamento formaPg;
+        if (opPag == 2) {
+            formaPg = new PagamentoCartao();
+        } else {
+            formaPg = new PagamentoDinheiro();
+        }
+
+        double valorFinal = formaPg.calcularFinal(subtotal);
+
+        vendaService.salvarVenda(valorFinal, logado);
+
+        System.out.println("\n[V] VENDA FINALIZADA COM SUCESSO!");
+        System.out.printf("Total Pago (%s): R$ %.2f\n", formaPg.getNome(), valorFinal);
     }
 
     private static void listarProdutos() {
@@ -108,46 +127,63 @@ public class Main {
 
     private static void cadastrarNovoProduto() {
         System.out.print("Defina um ID para este produto: ");
-        int id = Integer.parseInt(sc.nextLine());
+        int id = lerInteiro();
 
-        // Dica: Seria bom checar se o ID já existe antes de continuar
-
+        if (prodService.idJaExiste(id)) {
+            System.out.println("[X] Erro: Já existe um produto com o ID " + id + "!");
+            return;
+        }
         System.out.print("Nome: ");
         String nome = sc.nextLine();
 
         System.out.println("1. Picolé | 2. Sorvete de Massa");
-        int tipo = Integer.parseInt(sc.nextLine());
+        int tipo = lerInteiro();
 
         if (tipo == 1) {
             System.out.print("Preço unitário: ");
-            double preco = Double.parseDouble(sc.nextLine());
+            double preco = lerDouble();
             prodService.adicionar(new Picole(id, nome, preco));
         } else {
             System.out.print("Preço por KG: ");
-            double preco = Double.parseDouble(sc.nextLine());
+            double preco = lerDouble();
             prodService.adicionar(new SorveteMassa(id, nome, preco));
         }
         System.out.println("Produto " + id + " cadastrado com sucesso!");
     }
 
     private static void exibirRelatorio() {
-        System.out.println("\n=== RELATÓRIO DE VENDAS ===");
-        System.out.printf("Total Geral: R$ %.2f\n", vendaService.getTotalLoja());
+        System.out.println("\n=== RELATÓRIO DE VENDAS (GERENCIAL) ===");
+        System.out.printf("FATURAMENTO TOTAL DA LOJA: R$ %.2f\n", vendaService.getTotalLoja());
+        System.out.println("---------------------------------------");
+        System.out.println("PERFORMANCE POR FUNCIONÁRIO:");
+
+        for (Usuario u : userService.listarTodos()) {
+
+
+            if (u instanceof Funcionario) {
+
+
+                Funcionario f = (Funcionario) u;
+
+                System.out.printf("- %s: R$ %.2f\n", f.getNome(), f.getTotalVendas());
+            }
+        }
+        System.out.println("=======================================");
     }
 
     private static void deletarProduto() {
         listarProdutos();
-        System.out.print("Digite o número do produto para excluir: ");
-        int index = Integer.parseInt(sc.nextLine()) - 1;
-        prodService.deletar(index);
+        System.out.print("Digite o CODIGO (ID) do produto para excluir: ");
+        int id = lerInteiro();
+        prodService.deletarPorId(id);
     }
 
     private static void editarProduto() {
         listarProdutos();
         System.out.print("Digite o CODIGO (ID) do produto que deseja editar: ");
-        int idBusca = Integer.parseInt(sc.nextLine());
+        int idBusca = lerInteiro();
 
-        // 1. Busca o produto atual no Service
+
         Produto produtoAntigo = prodService.buscarPorId(idBusca);
 
         if (produtoAntigo == null) {
@@ -157,27 +193,71 @@ public class Main {
 
         System.out.println("Editando: " + produtoAntigo.getNome());
 
-        // 2. Pergunta os novos dados
         System.out.print("Novo ID (ou digite " + produtoAntigo.getId() + " para manter): ");
-        int novoId = Integer.parseInt(sc.nextLine());
+        int novoId = lerInteiro();
+
+        if (novoId != idBusca && prodService.idJaExiste(novoId)) {
+            System.out.println("[X] Erro: O novo ID " + novoId + " já pertence a outro produto!");
+            return;
+        }
 
         System.out.print("Novo Nome: ");
         String novoNome = sc.nextLine();
 
         Produto novoProduto;
 
-        // 3. Verifica o tipo para pedir o preço correto
         if (produtoAntigo instanceof Picole) {
             System.out.print("Novo Preço Unitário: ");
-            double novoPreco = Double.parseDouble(sc.nextLine());
+            double novoPreco = lerDouble();
             novoProduto = new Picole(novoId, novoNome, novoPreco);
         } else {
             System.out.print("Novo Preço por KG: ");
-            double novoPreco = Double.parseDouble(sc.nextLine());
+            double novoPreco = lerDouble();
             novoProduto = new SorveteMassa(novoId, novoNome, novoPreco);
         }
 
-        prodService.atualizar(idBusca, novoProduto);
+        prodService.editarPorId(idBusca, novoProduto);
+
         System.out.println("[V] Produto atualizado com sucesso!");
+    }
+
+    private static void cadastrarNovoFuncionario() {
+        System.out.println("\n--- NOVO FUNCIONÁRIO ---");
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("Login: ");
+        String login = sc.nextLine();
+        System.out.print("Senha: ");
+        String senha = sc.nextLine();
+
+        // Criamos o objeto do tipo Funcionario
+        Funcionario novoF = new Funcionario(nome, login, senha);
+
+        // Chamamos o SEU userService para salvar na lista de usuários
+        userService.cadastrar(novoF);
+
+        System.out.println("[V] " + nome + " agora é um funcionário do sistema!");
+    }
+
+    private static int lerInteiro() {
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.print("[!] Erro: Digite um número inteiro válido: ");
+            }
+        }
+    }
+
+    private static double lerDouble() {
+        while (true) {
+            try {
+                // Substitui vírgula por ponto para evitar erros de padrão regional
+                String entrada = sc.nextLine().replace(",", ".");
+                return Double.parseDouble(entrada);
+            } catch (NumberFormatException e) {
+                System.out.print("[!] Erro: Digite um valor numérico (ex: 10.50): ");
+            }
+        }
     }
 }

@@ -17,50 +17,35 @@ public class ProdutoService {
                 return p;
             }
         }
-        return null; // Não achou
+        return null;
     }
 
     public List<Produto> listarTodos() {
         return produtos;
     }
 
-    public Produto buscarPorIndice(int index) {
-        if (index >= 0 && index < produtos.size()) {
-            return produtos.get(index);
-        }
-        System.out.println("[X] Produto não encontrado!");
-        return null;
-    }
-    public void deletar(int index) {
-        if (index >= 0 && index < produtos.size()) {
-            produtos.remove(index);
-            System.out.println("[V] Produto removido com sucesso!");
-        } else {
-            System.out.println("[X] Índice inválido!");
-        }
-    }
-
-    public void atualizar(int idAntigo, Produto novoProduto) {
-        // 1. Remove o produto que tem o ID antigo
-        Produto p = buscarPorId(idAntigo);
+    public void deletarPorId(int id) {
+        Produto p = buscarPorId(id);
         if (p != null) {
             produtos.remove(p);
-            // 2. Adiciona a nova versão editada
-            produtos.add(novoProduto);
+            System.out.println("[ Produto " + id + " removido com sucesso!");
+        } else {
+            System.out.println(" Erro: Produto com ID " + id + " não encontrado!");
         }
     }
 
-    public void editar(int index, Produto novoProduto) {
-        if (index >= 0 && index < produtos.size()) {
+    public void editarPorId(int idBusca, Produto novoProduto) {
+        Produto pAntigo = buscarPorId(idBusca);
+        if (pAntigo != null) {
+            int index = produtos.indexOf(pAntigo);
             produtos.set(index, novoProduto);
-            System.out.println("[V] Produto atualizado!");
         }
     }
 
     public boolean idJaExiste(int id) {
         for (Produto p : produtos) {
             if (p.getId() == id) {
-                return true; // Encontrou um produto com esse ID
+                return true;
             }
         }
         return false;
