@@ -1,17 +1,21 @@
 package model;
 
 public abstract class Usuario {
+    protected String nome;
+    protected String login;
+    protected String senha;
+    protected String tipo;
 
-    private String login;
-    private String senha;
-
-    public Usuario(String login, String senha) {
+    public Usuario(String nome, String login, String senha, String tipo) {
+        this.nome = nome;
         this.login = login;
         this.senha = senha;
+        this.tipo = tipo;
     }
 
+    // Getters básicos
+    public String getNome() { return nome; }
     public String getLogin() { return login; }
     public String getSenha() { return senha; }
-
-    public abstract void mostrarMenu();
+    public String getTipo() { return tipo; }
 }

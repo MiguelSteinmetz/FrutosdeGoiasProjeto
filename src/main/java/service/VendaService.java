@@ -1,23 +1,21 @@
 package service;
 
-import model.Venda;
-
-import java.util.ArrayList;
-import java.util.List;
+import model.Usuario;
+import model.Funcionario;
 
 public class VendaService {
+    private double totalGeralLoja = 0.0;
 
-    private List<Venda> vendas = new ArrayList<>();
+    public void salvarVenda(double valorFinal, Usuario logado) {
+        totalGeralLoja += valorFinal;
 
-    public void registrarVenda(Venda venda) {
-        vendas.add(venda);
+        // Se quem vendeu foi um funcionário, atualiza a performance dele
+        if (logado instanceof Funcionario) {
+            ((Funcionario) logado).adicionarVenda(valorFinal);
+        }
     }
 
-    public double calcularTotalVendas() {
-        double total = 0;
-        for (Venda v : vendas) {
-            total += v.calcularTotal();
-        }
-        return total;
+    public double getTotalLoja() {
+        return totalGeralLoja;
     }
 }

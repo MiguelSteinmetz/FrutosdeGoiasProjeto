@@ -1,16 +1,18 @@
 package model;
 
 public class Funcionario extends Usuario {
+    private double totalVendas; // Para o relatório de performance
 
-    public Funcionario(String login, String senha) {
-        super(login, senha);
+    public Funcionario(String nome, String login, String senha) {
+        super(nome, login, senha, "Funcionário");
+        this.totalVendas = 0.0;
     }
 
-    @Override
-    public void mostrarMenu() {
-        System.out.println("=== MENU FUNCIONÁRIO ===");
-        System.out.println("1 - Realizar Venda");
-        System.out.println("2 - Listar Produtos");
-        System.out.println("0 - Sair");
+    public void adicionarVenda(double valor) {
+        this.totalVendas += valor;
+    }
+
+    public double getTotalVendas() {
+        return totalVendas;
     }
 }
