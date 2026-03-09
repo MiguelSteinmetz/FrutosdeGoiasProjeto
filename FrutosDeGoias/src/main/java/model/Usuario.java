@@ -13,7 +13,6 @@ public abstract class Usuario {
         this.tipo = tipo;
     }
 
-    // Getters básicos
     public String getNome() { return nome; }
     public String getLogin() { return login; }
     public String getSenha() { return senha; }

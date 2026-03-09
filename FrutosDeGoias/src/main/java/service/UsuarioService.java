@@ -1,8 +1,10 @@
 package service;
 
+import model.Funcionario;
 import model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class UsuarioService {
     private List<Usuario> usuarios = new ArrayList<>();
@@ -23,4 +25,14 @@ public class UsuarioService {
     public List<Usuario> listarTodos() {
         return usuarios;
     }
+
+    public boolean loginJaExiste(String login) {
+        for (Usuario u : usuarios) {
+            if (u.getLogin().equalsIgnoreCase(login)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

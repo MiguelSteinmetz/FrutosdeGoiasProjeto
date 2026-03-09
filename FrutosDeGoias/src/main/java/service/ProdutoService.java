@@ -5,64 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoService {
-    private List<Produto> produtos = new ArrayList<>();
+    private List<Produto> listaProdutos = new ArrayList<>();
 
     public void adicionar(Produto p) {
-        produtos.add(p);
-    }
-
-    public Produto buscarPorId(int id) {
-        for (Produto p : produtos) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null; // Não achou
+        listaProdutos.add(p);
     }
 
     public List<Produto> listarTodos() {
-        return produtos;
+        return listaProdutos;
     }
 
-    public Produto buscarPorIndice(int index) {
-        if (index >= 0 && index < produtos.size()) {
-            return produtos.get(index);
+    public Produto buscarPorId(int id) {
+        for (Produto p : listaProdutos) {
+            if (p.getId() == id) return p;
         }
-        System.out.println("[X] Produto não encontrado!");
         return null;
     }
-    public void deletar(int index) {
-        if (index >= 0 && index < produtos.size()) {
-            produtos.remove(index);
-            System.out.println("[V] Produto removido com sucesso!");
-        } else {
-            System.out.println("[X] Índice inválido!");
-        }
-    }
 
-    public void atualizar(int idAntigo, Produto novoProduto) {
-        // 1. Remove o produto que tem o ID antigo
-        Produto p = buscarPorId(idAntigo);
+    public boolean deletarPorId(int id) {
+        Produto p = buscarPorId(id);
         if (p != null) {
-            produtos.remove(p);
-            // 2. Adiciona a nova versão editada
-            produtos.add(novoProduto);
+            return listaProdutos.remove(p);
         }
-    }
-
-    public void editar(int index, Produto novoProduto) {
-        if (index >= 0 && index < produtos.size()) {
-            produtos.set(index, novoProduto);
-            System.out.println("[V] Produto atualizado!");
-        }
+        return false;
     }
 
     public boolean idJaExiste(int id) {
-        for (Produto p : produtos) {
-            if (p.getId() == id) {
-                return true; // Encontrou um produto com esse ID
-            }
-        }
-        return false;
+        return buscarPorId(id) != null;
     }
 }

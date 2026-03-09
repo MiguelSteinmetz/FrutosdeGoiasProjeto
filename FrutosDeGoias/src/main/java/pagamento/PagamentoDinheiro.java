@@ -7,6 +7,6 @@ public class PagamentoDinheiro extends Pagamento {
 
     @Override
     public double calcularFinal(double valorBruto) {
-        return valorBruto; // Sem taxas
+        return valorBruto;
     }
 }

@@ -1,15 +1,17 @@
 package model;
 
 public class SorveteMassa extends Produto {
-    private double precoPorKg;
-
-    public SorveteMassa(int id, String nome, double precoPorKg) {
-        super(id, nome);
-        this.precoPorKg = precoPorKg;
+    public SorveteMassa(int id, String nome, double preco, double estoque) {
+        super(id, nome, preco, estoque);
     }
 
     @Override
-    public double calcularPreco(double gramas) {
-        return (precoPorKg / 1000) * gramas;
+    public String toString() {
+        return String.format("ID: %d | [MASSA]  %-15s | Preço Kg: R$ %.2f | Estoque: %.3f kg",
+                getId(), getNome(), getPreco(), getEstoque());
+    }
+    @Override
+    public double calcularPreco(double qtd) {
+        return (this.getPreco() / 1000) * qtd;
     }
 }
