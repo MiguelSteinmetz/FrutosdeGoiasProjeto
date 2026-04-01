@@ -31,6 +31,8 @@ public class Main {
 
     private static void inicializarDados() {
 
+        produtos.adicionar(new Produto(101, "Picolé de Morango", 5.00, 50, "Picole"));
+        produtos.adicionar(new Produto(201, "Chocolate (KG)", 60.00, 10000, "sorvete massa"));
         produtos.adicionar(new Picole(101, "Picolé de Morango", 5.00, 50));
         produtos.adicionar(new SorveteMassa(201, "Chocolate (KG)", 60.00, 10000));
 
@@ -152,22 +154,13 @@ public class Main {
             return;
         }
 
-        System.out.println("\n========================================================================");
-        System.out.printf("%-5s | %-10s | %-20s | %-12s | %-10s\n", "ID", "TIPO", "NOME", "PREÇO", "ESTOQUE");
-        System.out.println("------------------------------------------------------------------------");
-
         for (Produto p : produto) {
-            String tipo = (p instanceof Picole) ? "PICOLÉ" : "MASSA";
 
-            System.out.printf("%-5d | %-10s | %-20s | R$ %-9.2f | %-10.2f\n",
                     p.getId(),
-                    tipo,
                     p.getNome(),
                     p.getPreco(),
-                    p.getEstoque()
             );
         }
-        System.out.println("========================================================================\n");
     }
 
     private static void cadastrarNovoProduto() {
@@ -184,7 +177,6 @@ public class Main {
         String nome = sc.nextLine();
 
 
-        System.out.print("Estoque Inicial (Unid para Picole / Gramas para Massa): ");
         double estoqueInicial = lerDouble();
 
         if (estoqueInicial < 0) {
@@ -192,25 +184,9 @@ public class Main {
             return;
         }
 
-        System.out.println("Tipo: 1. Picole | 2. Sorvete de Massa");
-        int tipo = lerInteiro();
 
-        if (tipo == 1) {
-            System.out.print("Preço unitário: ");
-            double preco = lerDouble();
 
-            produtos.adicionar(new Picole(id, nome, preco, estoqueInicial));
-        } else if (tipo == 2) {
-            System.out.print("Preço por KG: ");
-            double preco = lerDouble();
 
-            produtos.adicionar(new SorveteMassa(id, nome, preco, estoqueInicial));
-        } else {
-            System.out.println("[X] Erro: Tipo inválido! Produto não cadastrado.");
-            return;
-        }
-
-        System.out.println("[V] Produto " + id + " (" + nome + ") cadastrado com sucesso!");
     }
 
     private static void exibirRelatorio() {
