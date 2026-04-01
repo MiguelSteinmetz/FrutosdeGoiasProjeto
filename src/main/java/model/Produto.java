@@ -1,6 +1,7 @@
 package model;
 
 public class Produto {
+public abstract class Produto {
     private int id;
     private String nome;
     private double preco;
@@ -8,6 +9,7 @@ public class Produto {
     private String tipo;
 
     public Produto(int id, String nome, double preco, double estoque, String tipo) {
+    public Produto(int id, String nome, double preco, double estoque) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
@@ -24,10 +26,12 @@ public class Produto {
     public double getEstoque() { return estoque; }
     public String getTipo() {return tipo; }
     public void adicionarEstoque(double qtd) {this.estoque += qtd; }
+
+
+    public void adicionarEstoque(double qtd) {
+        this.estoque += qtd; }
+
     public void baixarEstoque(double qtd) {
     this.estoque -= qtd; }
 
- public double calcularPreco(double quantidade) {
-        return quantidade * getPreco();
-    }
 }

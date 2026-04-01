@@ -33,6 +33,8 @@ public class Main {
 
         produtos.adicionar(new Produto(101, "Picolé de Morango", 5.00, 50, "Picole"));
         produtos.adicionar(new Produto(201, "Chocolate (KG)", 60.00, 10000, "sorvete massa"));
+        produtos.adicionar(new Picole(101, "Picolé de Morango", 5.00, 50));
+        produtos.adicionar(new SorveteMassa(201, "Chocolate (KG)", 60.00, 10000));
 
         usuario.cadastrar(new Gerente("Admin", "admin", "123"));
     }
@@ -151,28 +153,19 @@ public class Main {
             System.out.println("\n[!] Nenhum produto cadastrado no sistema.");
             return;
         }
-        System.out.println("|========================================================================|");
-        System.out.printf("| %-5s | %-20s | R$ %-7.5s | %-9s | %-14s | \n",
-                "  id", "   Nome Produto", "Preco", " Estoque", "  tipo");
-        System.out.println("|========================================================================|");
 
         for (Produto p : produto) {
 
-            System.out.printf("| %-5d | %-20s |R$ %-7.5s | %-9.2f | %-15s | \n",
                     p.getId(),
                     p.getNome(),
                     p.getPreco(),
-                    p.getEstoque(),
-                    p.getTipo()
             );
         }
-        System.out.println("|========================================================================|\n");
     }
 
     private static void cadastrarNovoProduto() {
         System.out.println("\n--- CADASTRAR NOVO PRODUTO ---");
         System.out.print("Defina um ID para este produto: ");
-
         int id = lerInteiro();
 
         if (produtos.idJaExiste(id)) {
@@ -183,10 +176,7 @@ public class Main {
         System.out.print("Nome do Produto: ");
         String nome = sc.nextLine();
 
-        System.out.print("Preço do produto: ");
-        double preco = lerDouble();
 
-        System.out.print("Estoque Inicial: ");
         double estoqueInicial = lerDouble();
 
         if (estoqueInicial < 0) {
@@ -194,13 +184,9 @@ public class Main {
             return;
         }
 
-        System.out.println("Tipo: ");
-        String tipo = sc.nextLine();
 
 
-        produtos.adicionar(new Produto(id, nome, preco, estoqueInicial, tipo));
 
-        System.out.println(" Produto " + id + " (" + nome + ") cadastrado com sucesso!");
     }
 
     private static void exibirRelatorio() {
