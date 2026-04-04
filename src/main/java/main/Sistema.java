@@ -6,10 +6,11 @@ import java.util.Scanner;
 
 import model.*;
 import pagamento.*;
+import repository.ProdutosRepository;
 import service.*;
 
 public class Sistema {
-
+    ProdutosRepository produtosRepository = new ProdutosRepository();
     private Scanner sc = new Scanner(System.in);
     private UsuarioService usuario = new UsuarioService();
     private ProdutoService produtos = new ProdutoService();
@@ -161,17 +162,10 @@ public class Sistema {
 
     // ================= PRODUTOS =================
     private void listarProdutos() {
-        List<Produto> lista = produtos.listarTodos();
-
-        if (lista.isEmpty()) {
-            System.out.println("Nenhum produto cadastrado.");
-            return;
-        }
-
         System.out.println("\nID | NOME | PREÇO | ESTOQUE");
 
-        for (Produto p : lista) {
-            System.out.printf("%d | %s | R$ %.2f | %.2f\n",
+        for (Produto p : produtosRepository.buscartodos()) {
+            System.out.printf("%d | %s | R$ %.2f | %d\n",
                     p.getId(),
                     p.getNome(),
                     p.getPreco(),
@@ -180,8 +174,6 @@ public class Sistema {
     }
 
     private void cadastrarProduto() {
-        System.out.print("ID: ");
-        int id = lerInteiro();
 
         System.out.print("Nome: ");
         String nome = sc.nextLine();
@@ -190,9 +182,9 @@ public class Sistema {
         double preco = lerDouble();
 
         System.out.print("Estoque: ");
-        double estoque = lerDouble();
-
-        produtos.adicionar(new Picole(id, nome, preco, estoque));
+        int estoque = lerInteiro();
+        Produto p = (new Produto(nome, preco, estoque));
+       produtosRepository.salvar(p);
 
         System.out.println("Produto cadastrado!");
     }
@@ -215,10 +207,11 @@ public class Sistema {
     }
 
     private void deletarProduto() {
+        listarProdutos();
         System.out.print("ID: ");
         int id = lerInteiro();
 
-        produtos.deletarPorId(id);
+        produtosRepository.deletar(id);
         System.out.println("Deletado!");
     }
 
@@ -268,7 +261,6 @@ public class Sistema {
     }
 
     private void inicializarDados() {
-        produtos.adicionar(new Picole(1, "Morango", 5.0, 50));
         usuario.cadastrar(new Gerente("Admin", "admin", "123"));
     }
 }

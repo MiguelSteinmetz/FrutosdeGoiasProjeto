@@ -1,18 +1,24 @@
-<!DOCTYPE hibernate-configuration PUBLI
-
-
-
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>                 <!--Configuraçao drive do banco de dodos-->
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Frutosdegoias</property> <!--rota de acesso IP:PORTA/NOME DO BANCO-->
-        <property name="hibernate.connection.username">postgres</property>                                  <!--Usuario para logar-->
-        <property name="hibernate.connection.password">123456</property>                                    <!--Senha do usuario para logar-->
-        <property name="hibernate.dialect">org.hibernate.dialeet.PostgreSQLDialeet</property>               <!--Informando dialeto SQL compativel-->
-        <property name="hibernate.hbm2ddl.auto">update</property>                                           <!---->
-        <property name="hibernate.show_sql.">true</property>                                                <!--exibe o comando SQL no Terminal-->
-        <property name="hibernate.format_sql">true</property>                                               <!--exibe o comando SQL formatado-->
-        </session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 
-        </hibernate-configuration>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Frutosdegoias</property>
+
+        <property name="hibernate.connection.username">postgres</property>                       <!--Usuario para logar-->
+
+        <property name="hibernate.connection.password">postgres</property>                       <!--Senha do usuario para logar-->
+
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>    <!--Informando dialeto SQL compativel-->
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <property name="hibernate.show_sql">false</property>      <!--exibe o comando SQL no Terminal-->
+        <property name="hibernate.format_sql">true</property>     <!--exibe o comando SQL formatado-->
+
+        <mapping class="model.Produto"/>
+    </session-factory>
+</hibernate-configuration>

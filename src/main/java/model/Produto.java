@@ -1,13 +1,20 @@
 package model;
 
-public abstract class Produto {
-    private int id;
-    private String nome;
-    private double preco;
-    private double estoque;
+import jakarta.persistence.*;
 
-    public Produto(int id, String nome, double preco, double estoque) {
-        this.id = id;
+@Entity(name = "Produto")
+public class Produto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "preco")
+    private double preco;
+    @Column(name = "estoque")
+    private int estoque;
+
+    public Produto(String nome, double preco, int estoque) {
         this.nome = nome;
         this.preco = preco;
         this.estoque = estoque;
@@ -19,7 +26,7 @@ public abstract class Produto {
     public void setNome(String nome) { this.nome = nome; }
     public double getPreco() { return preco; }
     public void setPreco(double preco) { this.preco = preco; }
-    public double getEstoque() { return estoque; }
+    public int getEstoque() { return estoque; }
 
 
     public void adicionarEstoque(double qtd) {
@@ -28,5 +35,9 @@ public abstract class Produto {
     public void baixarEstoque(double qtd) {
         this.estoque -= qtd; }
 
-    public abstract double calcularPreco(double qtd);
+    public double calcularPreco(double qtd){
+        return this.preco * qtd;
+    }
+
+    public Produto(){}
 }
