@@ -54,7 +54,7 @@ public class Sistema {
         System.out.println("1. Realizar Venda");
         System.out.println("2. Ver Cardápio");
 
-        if (logado instanceof Gerente) {
+        if (logado instanceof Usuario.Gerente) {
             System.out.println("3. Relatório de Vendas");
             System.out.println("4. Deletar Produto");
             System.out.println("5. Editar Produto");
@@ -73,32 +73,32 @@ public class Sistema {
             case 2 -> listarProdutos();
 
             case 3 -> {
-                if (logado instanceof Gerente) exibirRelatorio();
+                if (logado instanceof Usuario.Gerente) exibirRelatorio();
                 else acessoNegado();
             }
 
             case 4 -> {
-                if (logado instanceof Gerente) deletarProduto();
+                if (logado instanceof Usuario.Gerente) deletarProduto();
                 else acessoNegado();
             }
 
             case 5 -> {
-                if (logado instanceof Gerente) editarProduto();
+                if (logado instanceof Usuario.Gerente) editarProduto();
                 else acessoNegado();
             }
 
             case 6 -> {
-                if (logado instanceof Gerente) cadastrarProduto();
+                if (logado instanceof Usuario.Gerente) cadastrarProduto();
                 else acessoNegado();
             }
 
             case 7 -> {
-                if (logado instanceof Gerente) cadastrarFuncionario();
+                if (logado instanceof Usuario.Gerente) cadastrarFuncionario();
                 else acessoNegado();
             }
 
             case 8 -> {
-                if (logado instanceof Gerente) {
+                if (logado instanceof Usuario.Gerente) {
                     System.out.println("Encerrando sistema...");
                     System.exit(0);
                 } else acessoNegado();
@@ -233,7 +233,7 @@ public class Sistema {
         System.out.print("Senha: ");
         String senha = sc.nextLine();
 
-        usuario.cadastrar(new Funcionario(nome, login, senha));
+        usuario.cadastrar(new Usuario.Funcionario(nome, login, senha));
         System.out.println("Funcionário cadastrado!");
     }
 
@@ -269,6 +269,6 @@ public class Sistema {
 
     private void inicializarDados() {
         produtos.adicionar(new Picole(1, "Morango", 5.0, 50));
-        usuario.cadastrar(new Gerente("Admin", "admin", "123"));
+        usuario.cadastrar(new Usuario.Gerente("Admin", "admin", "123"));
     }
 }

@@ -13,6 +13,7 @@ public class ItemCarrinho {
         return produto.calcularPreco(quantidade);
     }
 
+
     public Produto getProduto() { return produto; }
     public double getQuantidade() { return quantidade; }
 }

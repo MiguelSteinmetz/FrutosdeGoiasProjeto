@@ -3,6 +3,7 @@ package model;
 public abstract class Produto {
     private int id;
     private String nome;
+    private double custo;
     private double preco;
     private double estoque;
 
@@ -29,4 +30,10 @@ public abstract class Produto {
         this.estoque -= qtd; }
 
     public abstract double calcularPreco(double qtd);
+
+    public String getTipo() {
+        return getNome();
+    }
+
+
 }

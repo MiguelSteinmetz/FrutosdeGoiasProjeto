@@ -1,9 +1,12 @@
 package model;
 
+
 public class Picole extends Produto {
     public Picole(int id, String nome, double preco, double estoque) {
         super(id, nome, preco, estoque);
     }
+
+
 
     @Override
     public String toString() {
