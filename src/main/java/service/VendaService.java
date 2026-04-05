@@ -1,7 +1,7 @@
 package service;
 
 import model.Usuario;
-import model.Funcionario;
+
 
 public class VendaService {
     private double totalGeralLoja = 0.0;
@@ -9,8 +9,8 @@ public class VendaService {
     public void salvarVenda(double valorFinal, Usuario logado) {
         this.totalGeralLoja += valorFinal;
 
-        if (logado instanceof Funcionario) {
-            ((Funcionario) logado).adicionarVenda(valorFinal);
+        if (logado instanceof Usuario) {
+            ((Usuario.Funcionario) logado).adicionarVenda(valorFinal);
         }
     }
 

@@ -1,6 +1,5 @@
 package service;
 
-import model.Funcionario;
 import model.Usuario;
 import java.util.ArrayList;
 import java.util.List;

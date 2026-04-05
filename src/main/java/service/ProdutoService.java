@@ -1,10 +1,14 @@
 package service;
 
 import model.Produto;
+import repository.ProdutoRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoService {
+    private ProdutoRepository repo = new ProdutoRepository();
+
     private List<Produto> listaProdutos = new ArrayList<>();
 
     public void adicionar(Produto p) {
@@ -30,7 +34,9 @@ public class ProdutoService {
         return false;
     }
 
+
     public boolean idJaExiste(int id) {
         return buscarPorId(id) != null;
     }
+
 }
