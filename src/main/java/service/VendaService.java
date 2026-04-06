@@ -7,16 +7,23 @@ package service;
 
 import model.Funcionario;
 import model.Usuario;
+import model.Venda;
+import repository.VendaRepository;
+
+import java.util.List;
 
 public class VendaService {
-    private double totalGeralLoja = (double)0.0F;
+
+    VendaRepository vendaRepository = new VendaRepository();
+    private double totalGeralLoja = 0.0;
 
     public void salvarVenda(double valorFinal, Usuario logado) {
         this.totalGeralLoja += valorFinal;
-        if (logado instanceof Funcionario) {
-            ((Funcionario)logado).adicionarVenda(valorFinal);
         }
 
+    public List<Venda> relatorioVendas(){
+        List<Venda> vendas = vendaRepository.buscartodos();
+        return vendas;
     }
 
     public double getTotalLoja() {

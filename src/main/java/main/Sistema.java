@@ -8,21 +8,22 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import model.Funcionario;
-import model.Gerente;
-import model.ItemCarrinho;
-import model.Produto;
-import model.Usuario;
+
+import model.*;
 import pagamento.Pagamento;
 import pagamento.PagamentoCartao;
 import pagamento.PagamentoDinheiro;
 import repository.ProdutoRepository;
+import repository.UsuarioRepository;
+import repository.VendaRepository;
 import service.ProdutoService;
 import service.UsuarioService;
 import service.VendaService;
 
 public class Sistema {
     ProdutoRepository produtoRepository = new ProdutoRepository();
+    UsuarioRepository usuarioRepository = new UsuarioRepository();
+    VendaRepository vendaRepository = new VendaRepository();
     private Scanner sc;
     private UsuarioService usuario;
     private ProdutoService produtos;
@@ -54,21 +55,24 @@ public class Sistema {
         System.out.print("Login: ");
         String login = this.sc.nextLine();
         System.out.print("Senha: ");
-        String senha = this.sc.nextLine();
-        this.logado = this.usuario.autenticar(login, senha);
-        if (this.logado == null) {
+        String senha = sc.nextLine();
+
+       logado = usuario.autenticar(login, senha);
+
+        if (logado == null) {
             System.out.println("[X] Usuário ou senha incorretos!");
         } else {
-            System.out.println("[V] Bem-vindo, " + this.logado.getNome());
+            System.out.println("[V] Bem-vindo, " + logado.getNome());
         }
 
     }
 
     private void exibirMenuPrincipal() {
-        System.out.println("\n=== MENU PRINCIPAL (" + this.logado.getTipo() + ") ===");
+        System.out.println("\n=== MENU PRINCIPAL (" + logado.getTipo() + ") ===");
         System.out.println("1. Realizar Venda");
         System.out.println("2. Ver Cardápio");
-        if (this.logado instanceof Gerente) {
+
+        if (logado.getTipo().equals("Gerente")) {
             System.out.println("3. Relatório de Vendas");
             System.out.println("4. Deletar Produto");
             System.out.println("5. Editar Produto");
@@ -91,42 +95,42 @@ public class Sistema {
                 this.listarProdutos();
                 break;
             case 3:
-                if (this.logado instanceof Gerente) {
+                if (logado.getTipo().equals("Gerente")) {
                     this.exibirRelatorio();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 4:
-                if (this.logado instanceof Gerente) {
+                if (logado.getTipo().equals("Gerente")) {
                     this.deletarProduto();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 5:
-                if (this.logado instanceof Gerente) {
+                if (logado.getTipo().equals("Gerente")) {
                     this.editarProduto();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 6:
-                if (this.logado instanceof Gerente) {
+                if (logado.getTipo().equals("Gerente")) {
                     this.cadastrarProduto();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 7:
-                if (this.logado instanceof Gerente) {
+                if (logado.getTipo().equals("Gerente")) {
                     this.cadastrarFuncionario();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 8:
-                if (this.logado instanceof Gerente) {
+                if (logado.getTipo().equals("Gerente")) {
                     System.out.println("Encerrando sistema...");
                     System.exit(0);
                 } else {
@@ -140,12 +144,14 @@ public class Sistema {
     }
 
     private void realizarVenda() {
-        List<ItemCarrinho> carrinho = new ArrayList();
+        List<ItemCarrinho> carrinho = new ArrayList<>();
 
         while(true) {
-            this.listarProdutos();
+           listarProdutos();
             System.out.print("ID do produto (0 para finalizar): ");
-            int id = this.lerInteiro();
+            int id = lerInteiro();
+
+            //Caso Digite 0
             if (id == 0) {
                 if (carrinho.isEmpty()) {
                     return;
@@ -155,27 +161,36 @@ public class Sistema {
                     for(ItemCarrinho item : carrinho) {
                         total += item.getSubtotal();
                     }
-
                     System.out.printf("TOTAL: R$ %.2f\n", total);
                     System.out.println("1 - Cartão | 2 - Dinheiro");
-                    int opc = this.lerInteiro();
-                    Pagamento forma = (Pagamento)(opc == 1 ? new PagamentoCartao() : new PagamentoDinheiro());
+                    int opc = lerInteiro();
+                    Pagamento forma = (opc == 1 ? new PagamentoCartao() : new PagamentoDinheiro());
                     double finalValor = forma.calcularFinal(total);
 
+                    for (ItemCarrinho item : carrinho) {
+
+                        Venda novaVenda = new Venda(
+                                logado,
+                                item.getProduto(),
+                                (int) item.getQuantidade(),
+                                item.getSubtotal()
+                        );
+                        vendaRepository.salvar(novaVenda);
+                    }
                     for(ItemCarrinho item : carrinho) {
                         item.getProduto().baixarEstoque(item.getQuantidade());
                     }
 
-                    this.sistemavendas.salvarVenda(finalValor, this.logado);
+                    sistemavendas.salvarVenda(finalValor, logado);
                     System.out.printf("Venda concluída: R$ %.2f\n", finalValor);
                     return;
                 }
             }
-
-            Produto p = this.produtos.buscarPorId(id);
+            //Caso o Usuario, nao digite 0
+            Produto p = produtos.buscarPorId(id);
             if (p != null) {
                 System.out.print("Quantidade: ");
-                double qtd = this.lerDouble();
+                double qtd = lerDouble();
                 if (qtd <= (double)p.getEstoque()) {
                     carrinho.add(new ItemCarrinho(p, qtd));
                     System.out.println("Adicionado!");
@@ -184,21 +199,23 @@ public class Sistema {
                 }
             }
         }
+
     }
 
     private void listarProdutos() {
-        List<Produto> lista = this.produtos.listarTodos();
-        if (this.produtoRepository.buscartodos().isEmpty()) {
+
+        if (produtos.listaProdutos().isEmpty()) {
             System.out.println("\nNenhum produto cadastrado.");
         } else {
             System.out.println("\nID | NOME | PREÇO | ESTOQUE");
 
-            for(Produto p : this.produtoRepository.buscartodos()) {
+            for(Produto p : produtos.listaProdutos()) {
                 System.out.printf("%d | %s | R$ %.2f | %d\n", p.getId(), p.getNome(), p.getPreco(), p.getEstoque());
             }
 
         }
     }
+
 
     private void cadastrarProduto() {
         System.out.print("Nome: ");
@@ -207,7 +224,9 @@ public class Sistema {
         double preco = this.lerDouble();
         System.out.print("Estoque: ");
         int estoque = this.lerInteiro();
+
         Produto p = new Produto(nome, preco, estoque);
+
         this.produtoRepository.salvar(p);
         System.out.println("Produto cadastrado!");
     }
@@ -229,7 +248,6 @@ public class Sistema {
     private void deletarProduto() {
         System.out.print("ID: ");
         int id = this.lerInteiro();
-        this.produtos.deletarPorId(id);
         System.out.println("Deletado!");
     }
 
@@ -240,12 +258,27 @@ public class Sistema {
         String login = this.sc.nextLine();
         System.out.print("Senha: ");
         String senha = this.sc.nextLine();
-        this.usuario.cadastrar(new Funcionario(nome, login, senha));
+        System.out.println("Cargo ");
+        System.out.println("|1 - Gerente | 2 - Funcionario |");
+        int opc = lerInteiro();
+        String tipo = (opc ==  1 )? "Gerente" : "Funcionario";
+
+
+        usuarioRepository.salvar(new Usuario(nome, login, senha, tipo));
         System.out.println("Funcionário cadastrado!");
     }
 
     private void exibirRelatorio() {
-        System.out.println("Total da loja: R$ " + this.sistemavendas.getTotalLoja());
+        for (Venda v : sistemavendas.relatorioVendas()) {
+            String nomeVendedor = v.getUsuario().getNome();
+            String nomeProduto = v.getProduto().getNome();
+            int qtd = v.getQuantidade();
+            double valor = v.getValorTotal();
+
+            System.out.printf("Vendedor: %s | Produto: %s | Qtd: %d | Total: R$ %.2f\n",
+                    nomeVendedor, nomeProduto, qtd, valor);
+
+        }
     }
 
     private void acessoNegado() {
@@ -273,6 +306,6 @@ public class Sistema {
     }
 
     private void inicializarDados() {
-        this.usuario.cadastrar(new Gerente("Admin", "admin", "123"));
+        usuario.cadastrar(new Usuario("Admin", "admin", "123", "Gerente"));
     }
 }

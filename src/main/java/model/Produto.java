@@ -11,14 +11,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(
-        name = "Produto"
+@Entity(name = "Produto"
 )
 public class Produto {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(
             name = "nome"
@@ -41,6 +38,7 @@ public class Produto {
 
     public Produto() {
     }
+
 
     public int getId() {
         return this.id;
@@ -75,6 +73,7 @@ public class Produto {
     }
 
     public double calcularPreco(double qtd) {
+
         return this.preco * qtd;
     }
 }

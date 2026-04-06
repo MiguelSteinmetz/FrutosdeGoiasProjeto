@@ -8,34 +8,30 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 import model.Produto;
+import repository.ProdutoRepository;
 
 public class ProdutoService {
-    private List<Produto> listaProdutos = new ArrayList();
+    ProdutoRepository repository = new ProdutoRepository();
 
-    public void adicionar(Produto p) {
-        this.listaProdutos.add(p);
+    public void salvarProduto(Produto p) {
+
+        if (p.getPreco() > 0) {
+            repository.salvar(p);
+        } else {
+            System.out.println("Erro: Preço inválido!");
+        }
     }
 
-    public List<Produto> listarTodos() {
-        return this.listaProdutos;
+    public List<Produto> listaProdutos(){
+        List<Produto> produtos = repository.buscartodos();
+        return produtos;
     }
 
     public Produto buscarPorId(int id) {
-        for(Produto p : this.listaProdutos) {
-            if (p.getId() == id) {
-                return p;
-            }
+        Produto p = repository.buscarPorId(id);
+        if (p == null) {
+            System.out.println("Aviso: Produto " + id + " não encontrado.");
         }
-
-        return null;
-    }
-
-    public boolean deletarPorId(int id) {
-        Produto p = this.buscarPorId(id);
-        return p != null ? this.listaProdutos.remove(p) : false;
-    }
-
-    public boolean idJaExiste(int id) {
-        return this.buscarPorId(id) != null;
+        return p;
     }
 }

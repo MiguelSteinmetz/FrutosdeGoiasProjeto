@@ -15,5 +15,9 @@
         <property name="hibernate.format_sql">true</property>
 
         <mapping class="model.Produto"/>
+        <mapping class="model.Usuario"/>
+        <mapping class="model.Venda"/>
+
+
     </session-factory>
 </hibernate-configuration>
