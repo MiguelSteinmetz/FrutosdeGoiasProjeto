@@ -2,7 +2,8 @@ package model;
 
 import jakarta.persistence.*;
 
-@Entity(name = "Produto")
+@Entity
+@Table(name = "Produto")
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
