@@ -11,10 +11,11 @@ import model.Usuario;
 import repository.UsuarioRepository;
 
 public class UsuarioService {
+
     private List<Usuario> usuarios = new ArrayList();
     UsuarioRepository usuarioRepository = new UsuarioRepository();
     public void cadastrar(Usuario u) {
-        this.usuarios.add(u);
+        usuarioRepository.salvar(u);
     }
 
     public Usuario autenticar(String login, String senha) {

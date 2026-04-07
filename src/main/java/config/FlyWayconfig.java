@@ -3,13 +3,12 @@ package config;
 import org.flywaydb.core.Flyway;
 
 public class FlyWayconfig {
-    public static void migrate(){
+    public static void migrate() {
+
         Flyway flyway = Flyway.configure()
-                .dataSource(
-                        "jbdc:postgresql://localhost:5433/postgres",
+                .dataSource("jdbc:postgresql://localhost:5433/postgres",
                         "postgres",
-                        "postgres"
-                )
+                        "admin")
                 .baselineOnMigrate(true)
                 .load();
 
