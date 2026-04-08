@@ -1,4 +1,6 @@
 package pagamento;
 
-public class TipoCartao {
+public enum TipoCartao {
+    DEBITO,
+    CREDITO
 }

@@ -144,10 +144,25 @@ public class Sistema {
         }
 
         System.out.printf("TOTAL: R$ %.2f\n", total);
-        System.out.println("1 - Cartão | 2 - Dinheiro");
+        System.out.println("1 - 💳 Cartão | 2 - 💵 Dinheiro");
         int opc = lerInteiro();
 
-        Pagamento forma = (opc == 1) ? new PagamentoCartao() : new PagamentoDinheiro();
+        Pagamento forma;
+
+        if (opc == 1) {
+            System.out.println("1 - 🏧 Débito | 2 - 💳 Crédito");
+            int tipo = lerInteiro();
+
+            if (tipo == 1) {
+                forma = new PagamentoCartao(TipoCartao.DEBITO);
+            } else {
+                forma = new PagamentoCartao(TipoCartao.CREDITO);
+            }
+
+        } else {
+            forma = new PagamentoDinheiro();
+        }
+
         double finalValor = forma.calcularFinal(total);
 
         for (ItemCarrinho item : carrinho) {
