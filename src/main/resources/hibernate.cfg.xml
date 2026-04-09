@@ -18,7 +18,7 @@
         <mapping class="model.Produto"/>
         <mapping class="model.Usuario"/>
         <mapping class="model.Venda"/>
-        <mapping class="model.PagamentoEntity"/>
+
 
 
     </session-factory>
