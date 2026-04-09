@@ -12,9 +12,12 @@ import repository.UsuarioRepository;
 
 public class UsuarioService {
 
-    private List<Usuario> usuarios = new ArrayList();
+
     UsuarioRepository usuarioRepository = new UsuarioRepository();
+
+
     public void cadastrar(Usuario u) {
+
         usuarioRepository.salvar(u);
     }
 

@@ -8,6 +8,7 @@ import java.util.List;
 public class UsuarioRepository {
 
     private EntityManager em = CustomizerFactory.getEntityManager();
+
     public void salvar(Usuario usuario) {
         this.em.getTransaction().begin();
         this.em.persist(usuario);

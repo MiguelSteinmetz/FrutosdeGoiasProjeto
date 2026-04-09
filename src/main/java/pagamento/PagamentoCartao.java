@@ -1,16 +1,20 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package pagamento;
 
 public class PagamentoCartao extends Pagamento {
-    public PagamentoCartao() {
-        super("Cartão (+5%)");
+
+    private TipoCartao tipo;
+
+    public PagamentoCartao(TipoCartao tipo) {
+        super("Cartão " + tipo);
+        this.tipo = tipo;
     }
 
+    @Override
     public double calcularFinal(double valorBruto) {
-        return valorBruto * 1.05;
+        if (tipo == TipoCartao.CREDITO) {
+            return valorBruto * 1.05; // +5%
+        } else {
+            return valorBruto;
+        }
     }
 }

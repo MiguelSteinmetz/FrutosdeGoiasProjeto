@@ -11,24 +11,24 @@ import model.Produto;
 import repository.ProdutoRepository;
 
 public class ProdutoService {
-    ProdutoRepository repository = new ProdutoRepository();
+    ProdutoRepository repositoryProduto = new ProdutoRepository();
 
     public void salvarProduto(Produto p) {
-
+        ProdutoRepository repositoryProduto = new ProdutoRepository();
         if (p.getPreco() > 0) {
-            repository.salvar(p);
+            repositoryProduto.salvar(p);
         } else {
             System.out.println("Erro: Preço inválido!");
         }
     }
 
     public List<Produto> listaProdutos(){
-        List<Produto> produtos = repository.buscartodos();
+        List<Produto> produtos = repositoryProduto.buscartodos();
         return produtos;
     }
 
     public Produto buscarPorId(int id) {
-        Produto p = repository.buscarPorId(id);
+        Produto p = repositoryProduto.buscarPorId(id);
         if (p == null) {
             System.out.println("Aviso: Produto " + id + " não encontrado.");
         }

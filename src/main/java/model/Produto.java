@@ -11,19 +11,13 @@ import jakarta.persistence.*;
 @Table(name = "Produto")
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(
-            name = "nome"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "nome")
     private String nome;
-    @Column(
-            name = "preco"
-    )
+    @Column(name = "preco")
     private double preco;
-    @Column(
-            name = "estoque"
-    )
+    @Column(name = "estoque")
     private int estoque;
 
     public Produto(String nome, double preco, int estoque) {
@@ -36,7 +30,7 @@ public class Produto {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 

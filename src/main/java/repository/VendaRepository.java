@@ -1,8 +1,6 @@
 package repository;
 
 import jakarta.persistence.EntityManager;
-import model.Produto;
-import model.Usuario;
 import model.Venda;
 
 import java.util.List;
@@ -10,6 +8,7 @@ import java.util.List;
 public class VendaRepository {
 
     private EntityManager em = CustomizerFactory.getEntityManager();
+
     public void salvar(Venda venda) {
         this.em.getTransaction().begin();
         this.em.persist(venda);

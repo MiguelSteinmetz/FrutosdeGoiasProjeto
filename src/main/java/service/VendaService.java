@@ -5,7 +5,6 @@
 
 package service;
 
-import model.Funcionario;
 import model.Usuario;
 import model.Venda;
 import repository.VendaRepository;
@@ -15,10 +14,10 @@ import java.util.List;
 public class VendaService {
 
     VendaRepository vendaRepository = new VendaRepository();
-    private double totalGeralLoja = 0.0;
 
-    public void salvarVenda(double valorFinal, Usuario logado) {
-        this.totalGeralLoja += valorFinal;
+
+    public void salvarVenda(Venda venda) {
+            vendaRepository.salvar(venda);
         }
 
     public List<Venda> relatorioVendas(){
@@ -26,7 +25,5 @@ public class VendaService {
         return vendas;
     }
 
-    public double getTotalLoja() {
-        return this.totalGeralLoja;
-    }
+
 }

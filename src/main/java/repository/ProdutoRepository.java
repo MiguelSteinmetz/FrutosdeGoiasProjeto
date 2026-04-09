@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 package repository;
 
@@ -20,6 +16,7 @@ public class ProdutoRepository {
         this.em.getTransaction().begin();
         this.em.persist(produto);
         this.em.getTransaction().commit();
+        em.close();
     }
 
     public List<Produto> buscartodos() {

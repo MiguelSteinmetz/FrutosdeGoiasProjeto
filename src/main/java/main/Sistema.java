@@ -13,17 +13,14 @@ import model.*;
 import pagamento.Pagamento;
 import pagamento.PagamentoCartao;
 import pagamento.PagamentoDinheiro;
-import repository.ProdutoRepository;
-import repository.UsuarioRepository;
-import repository.VendaRepository;
+import pagamento.TipoCartao;
 import service.ProdutoService;
 import service.UsuarioService;
 import service.VendaService;
 
 public class Sistema {
-    ProdutoRepository produtoRepository = new ProdutoRepository();
-    UsuarioRepository usuarioRepository = new UsuarioRepository();
-    VendaRepository vendaRepository = new VendaRepository();
+
+
     private Scanner sc;
     private UsuarioService usuario;
     private ProdutoService produtos;
@@ -31,6 +28,7 @@ public class Sistema {
     private Usuario logado;
 
     public Sistema() {
+
         this.sc = new Scanner(System.in);
         this.usuario = new UsuarioService();
         this.produtos = new ProdutoService();
@@ -161,27 +159,44 @@ public class Sistema {
                     for(ItemCarrinho item : carrinho) {
                         total += item.getSubtotal();
                     }
-                    System.out.printf("TOTAL: R$ %.2f\n", total);
+                    System.out.printf("\nTOTAL: R$ %.2f\n", total);
                     System.out.println("1 - Cartão | 2 - Dinheiro");
                     int opc = lerInteiro();
-                    Pagamento forma = (opc == 1 ? new PagamentoCartao() : new PagamentoDinheiro());
-                    double finalValor = forma.calcularFinal(total);
 
+                    Pagamento forma;
+
+                    if (opc == 1) {
+                        System.out.println("1 - 🏧 Débito | 2 - 💳 Crédito");
+                        int tipo = lerInteiro();
+
+                        if (tipo == 1) {
+                            forma = new PagamentoCartao(TipoCartao.DEBITO);
+                        } else {
+                            forma = new PagamentoCartao(TipoCartao.CREDITO);
+                        }
+
+                    } else {
+                        forma = new PagamentoDinheiro();
+                    }
                     for (ItemCarrinho item : carrinho) {
 
                         Venda novaVenda = new Venda(
                                 logado,
                                 item.getProduto(),
                                 (int) item.getQuantidade(),
-                                item.getSubtotal()
+                                item.getSubtotal(),
+                                forma.getNome()
                         );
-                        vendaRepository.salvar(novaVenda);
+                        sistemavendas.salvarVenda(novaVenda);
+
                     }
+
+                    double finalValor = forma.calcularFinal(total);
+
                     for(ItemCarrinho item : carrinho) {
                         item.getProduto().baixarEstoque(item.getQuantidade());
                     }
 
-                    sistemavendas.salvarVenda(finalValor, logado);
                     System.out.printf("Venda concluída: R$ %.2f\n", finalValor);
                     return;
                 }
@@ -227,7 +242,7 @@ public class Sistema {
 
         Produto p = new Produto(nome, preco, estoque);
 
-        this.produtoRepository.salvar(p);
+        produtos.salvarProduto(p);
         System.out.println("Produto cadastrado!");
     }
 
@@ -264,19 +279,15 @@ public class Sistema {
         String tipo = (opc ==  1 )? "Gerente" : "Funcionario";
 
 
-        usuarioRepository.salvar(new Usuario(nome, login, senha, tipo));
+       usuario.cadastrar(new Usuario(nome, login, senha, tipo));
         System.out.println("Funcionário cadastrado!");
     }
 
     private void exibirRelatorio() {
         for (Venda v : sistemavendas.relatorioVendas()) {
-            String nomeVendedor = v.getUsuario().getNome();
-            String nomeProduto = v.getProduto().getNome();
-            int qtd = v.getQuantidade();
-            double valor = v.getValorTotal();
 
-            System.out.printf("Vendedor: %s | Produto: %s | Qtd: %d | Total: R$ %.2f\n",
-                    nomeVendedor, nomeProduto, qtd, valor);
+            System.out.printf("Vendedor: %s | Produto: %s | Qtd: %d | Total: R$ %.2f | Tipo Pagamento: %s\n",
+                    v.getUsuario().getNome(), v.getProduto().getNome(), v.getQuantidade(), v.getValorTotal(), v.getTipoPagamento());
 
         }
     }
@@ -306,6 +317,6 @@ public class Sistema {
     }
 
     private void inicializarDados() {
-        usuario.cadastrar(new Usuario("Admin", "admin", "123", "Gerente"));
+
     }
 }

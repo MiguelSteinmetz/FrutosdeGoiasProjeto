@@ -6,6 +6,7 @@
 package pagamento;
 
 public abstract class Pagamento {
+
     protected String nome;
 
     public Pagamento(String nome) {
