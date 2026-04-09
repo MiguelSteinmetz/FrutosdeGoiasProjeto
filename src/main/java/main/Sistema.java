@@ -14,6 +14,9 @@ import pagamento.Pagamento;
 import pagamento.PagamentoCartao;
 import pagamento.PagamentoDinheiro;
 import pagamento.TipoCartao;
+import repository.ProdutoRepository;
+import repository.UsuarioRepository;
+import repository.VendaRepository;
 import service.ProdutoService;
 import service.UsuarioService;
 import service.VendaService;
@@ -178,6 +181,7 @@ public class Sistema {
                     } else {
                         forma = new PagamentoDinheiro();
                     }
+
                     for (ItemCarrinho item : carrinho) {
 
                         Venda novaVenda = new Venda(
@@ -188,6 +192,7 @@ public class Sistema {
                                 forma.getNome()
                         );
                         sistemavendas.salvarVenda(novaVenda);
+
 
                     }
 
