@@ -1,18 +1,29 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package service;
 
 import model.Usuario;
-import model.Funcionario;
+import model.Venda;
+import repository.VendaRepository;
+
+import java.util.List;
 
 public class VendaService {
-    private double totalGeralLoja = 0.0;
 
-    public void salvarVenda(double valorFinal, Usuario logado) {
-        this.totalGeralLoja += valorFinal;
+    VendaRepository vendaRepository = new VendaRepository();
 
-        if (logado instanceof Funcionario) {
-            ((Funcionario) logado).adicionarVenda(valorFinal);
+
+    public void salvarVenda(Venda venda) {
+            vendaRepository.salvar(venda);
         }
+
+    public List<Venda> relatorioVendas(){
+        List<Venda> vendas = vendaRepository.buscartodos();
+        return vendas;
     }
 
-    public double getTotalLoja() { return totalGeralLoja; }
+
 }

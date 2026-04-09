@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package model;
 
 public class ItemCarrinho {
@@ -10,9 +15,14 @@ public class ItemCarrinho {
     }
 
     public double getSubtotal() {
-        return produto.calcularPreco(quantidade);
+        return this.produto.calcularPreco(this.quantidade);
     }
 
-    public Produto getProduto() { return produto; }
-    public double getQuantidade() { return quantidade; }
+    public Produto getProduto() {
+        return this.produto;
+    }
+
+    public double getQuantidade() {
+        return this.quantidade;
+    }
 }

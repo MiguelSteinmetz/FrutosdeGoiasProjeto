@@ -14,7 +14,7 @@ public class PagamentoCartao extends Pagamento {
         if (tipo == TipoCartao.CREDITO) {
             return valorBruto * 1.05; // +5%
         } else {
-            return valorBruto; // débito sem taxa
+            return valorBruto;
         }
     }
 }
