@@ -1,7 +1,4 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
+
 
 package main;
 
@@ -10,16 +7,18 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.*;
+import org.hibernate.Session;
 import pagamento.Pagamento;
 import pagamento.PagamentoCartao;
 import pagamento.PagamentoDinheiro;
 import pagamento.TipoCartao;
-import repository.ProdutoRepository;
-import repository.UsuarioRepository;
-import repository.VendaRepository;
+import repository.CustomizerFactory;
+import repository.ProducaoRepository;
 import service.ProdutoService;
 import service.UsuarioService;
 import service.VendaService;
+import repository.VendaRepository;
+
 
 public class Sistema {
 
@@ -29,6 +28,8 @@ public class Sistema {
     private ProdutoService produtos;
     private VendaService sistemavendas;
     private Usuario logado;
+    private ProducaoRepository producaoRepo;
+
 
     public Sistema() {
 
@@ -37,6 +38,8 @@ public class Sistema {
         this.produtos = new ProdutoService();
         this.sistemavendas = new VendaService();
         this.logado = null;
+        this.producaoRepo = new ProducaoRepository();
+
     }
 
     public void iniciar() {
@@ -52,6 +55,7 @@ public class Sistema {
     }
 
     private void exibirLogin() {
+        System.out.println("\n---      FRUTOS DE GOIÀS     ---");
         System.out.println("\n--- LOGIN SISTEMA SORVETERIA ---");
         System.out.print("Login: ");
         String login = this.sc.nextLine();
@@ -69,17 +73,30 @@ public class Sistema {
     }
 
     private void exibirMenuPrincipal() {
+        System.out.println("\n---      FRUTOS DE GOIÀS     ---");
+        System.out.println("");
         System.out.println("\n=== MENU PRINCIPAL (" + logado.getTipo() + ") ===");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("---- Opcoes de Venda ----");
         System.out.println("1. Realizar Venda");
         System.out.println("2. Ver Cardápio");
 
         if (logado.getTipo().equals("Gerente")) {
             System.out.println("3. Relatório de Vendas");
-            System.out.println("4. Deletar Produto");
-            System.out.println("5. Editar Produto");
-            System.out.println("6. Cadastrar Produto");
-            System.out.println("7. Cadastrar Funcionário");
-            System.out.println("8. Encerrar Sistema");
+            System.out.println("");
+            System.out.println("---- Opcoes de Produto ----");
+            System.out.println("");
+            System.out.println("4. Top Produtos Vendidos");
+            System.out.println("5. Deletar Produto");
+            System.out.println("6. Editar Produto");
+            System.out.println("7. Cadastrar Produto");
+            System.out.println("8. Registrar Producao");
+            System.out.println("9. Total Vendidos por Produto");
+            System.out.println("");
+            System.out.println("---- Opcoes de Funcionario ----");
+            System.out.println("10. Cadastrar Funcionário");
+            System.out.println("11. Encerrar Sistema");
         }
 
         System.out.println("0. Logout");
@@ -104,33 +121,54 @@ public class Sistema {
                 break;
             case 4:
                 if (logado.getTipo().equals("Gerente")) {
-                    this.deletarProduto();
+                    this.topProdutosVendidos();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 5:
                 if (logado.getTipo().equals("Gerente")) {
-                    this.editarProduto();
+                    this.deletarProduto();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 6:
                 if (logado.getTipo().equals("Gerente")) {
-                    this.cadastrarProduto();
+                    this.editarProduto();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 7:
                 if (logado.getTipo().equals("Gerente")) {
-                    this.cadastrarFuncionario();
+                    this.cadastrarProduto();
                 } else {
                     this.acessoNegado();
                 }
                 break;
             case 8:
+                if (logado.getTipo().equals("Gerente")) {
+                    this.registrarProducao();
+                } else {
+                    this.acessoNegado();
+                }
+                break;
+            case 9:
+                if (logado.getTipo().equals("Gerente")) {
+                    this.totalVendidoPorProduto();
+                } else {
+                    this.acessoNegado();
+                }
+                break;
+            case 10:
+                if (logado.getTipo().equals("Gerente")) {
+                this.cadastrarFuncionario();
+            } else {
+                this.acessoNegado();
+            }
+                break;
+            case 11:
                 if (logado.getTipo().equals("Gerente")) {
                     System.out.println("Encerrando sistema...");
                     System.exit(0);
@@ -157,7 +195,7 @@ public class Sistema {
                 if (carrinho.isEmpty()) {
                     return;
                 } else {
-                    double total = (double)0.0F;
+                    double total = 0.0F;
 
                     for(ItemCarrinho item : carrinho) {
                         total += item.getSubtotal();
@@ -192,8 +230,6 @@ public class Sistema {
                                 forma.getNome()
                         );
                         sistemavendas.salvarVenda(novaVenda);
-
-
                     }
 
                     double finalValor = forma.calcularFinal(total);
@@ -206,6 +242,7 @@ public class Sistema {
                     return;
                 }
             }
+
             //Caso o Usuario, nao digite 0
             Produto p = produtos.buscarPorId(id);
             if (p != null) {
@@ -252,6 +289,7 @@ public class Sistema {
     }
 
     private void editarProduto() {
+        listarProdutos();
         System.out.print("ID: ");
         int id = this.lerInteiro();
         Produto p = this.produtos.buscarPorId(id);
@@ -260,24 +298,30 @@ public class Sistema {
             p.setNome(this.sc.nextLine());
             System.out.print("Novo preço: ");
             p.setPreco(this.lerDouble());
+            System.out.print("Novo estoque: ");
+            p.setEstoque(lerInteiro());
+            produtos.atualizar(p);
             System.out.println("Atualizado!");
         }
 
     }
 
     private void deletarProduto() {
-        System.out.print("ID: ");
-        int id = this.lerInteiro();
-        System.out.println("Deletado!");
+        listarProdutos();
+        System.out.print("digite um id: ");
+        int opc = lerInteiro();
+        produtos.deletar(produtos.buscarPorId(opc));
+        System.out.println("Produto deletado");
+        listarProdutos();
     }
 
     private void cadastrarFuncionario() {
         System.out.print("Nome: ");
-        String nome = this.sc.nextLine();
+        String nome = sc.nextLine();
         System.out.print("Login: ");
-        String login = this.sc.nextLine();
+        String login = sc.nextLine();
         System.out.print("Senha: ");
-        String senha = this.sc.nextLine();
+        String senha = sc.nextLine();
         System.out.println("Cargo ");
         System.out.println("|1 - Gerente | 2 - Funcionario |");
         int opc = lerInteiro();
@@ -289,6 +333,7 @@ public class Sistema {
     }
 
     private void exibirRelatorio() {
+
         for (Venda v : sistemavendas.relatorioVendas()) {
 
             System.out.printf("Vendedor: %s | Produto: %s | Qtd: %d | Total: R$ %.2f | Tipo Pagamento: %s\n",
@@ -324,4 +369,36 @@ public class Sistema {
     private void inicializarDados() {
 
     }
+    private void registrarProducao() {
+
+        System.out.print("ID do produto: ");
+        int id = lerInteiro();
+
+        System.out.print("Quantidade produzida: ");
+        double qtd = lerDouble();
+
+        Producao producao = new Producao(id, qtd);
+
+        producaoRepo.salvar(producao);
+    }
+    private void totalVendidoPorProduto() {
+
+        System.out.print("ID do produto: ");
+        int id = lerInteiro();
+
+        Long total = sistemavendas.totalVendidoPorProduto(id);
+
+        System.out.println("Total vendido: " + total);
+    }
+    private void topProdutosVendidos() {
+
+        List<Object[]> resultado = sistemavendas.topProdutosVendidos();
+
+        System.out.println("\n--- TOP PRODUTOS VENDIDOS ---");
+
+        for (Object[] row : resultado) {
+            System.out.println(row[0] + " - " + row[1]);
+        }
+    }
+
 }

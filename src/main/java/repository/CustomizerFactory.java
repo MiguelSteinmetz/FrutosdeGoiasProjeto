@@ -1,25 +1,25 @@
-
-
 package repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class CustomizerFactory {
-    private static final EntityManagerFactory emf;
 
-    public static EntityManager getEntityManager() {
-        return emf.createEntityManager();
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
+        try {
+            return new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .buildSessionFactory();
+        } catch (Throwable ex) {
+            System.out.println("❌ Erro ao criar SessionFactory!");
+            ex.printStackTrace();
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
-    public static void fechar() {
-        emf.close();
-    }
-
-    static {
-        SessionFactory sessionFactory = (new Configuration()).configure("hibernate.cfg.xml").buildSessionFactory();
-        emf = (EntityManagerFactory)sessionFactory.unwrap(EntityManagerFactory.class);
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }

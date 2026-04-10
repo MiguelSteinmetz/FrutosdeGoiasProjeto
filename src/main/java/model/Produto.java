@@ -19,7 +19,8 @@ public class Produto {
     private double preco;
     @Column(name = "estoque")
     private int estoque;
-
+    @Column (name = "ativo")
+    private boolean ativo;
     public Produto(String nome, double preco, int estoque) {
         this.nome = nome;
         this.preco = preco;
@@ -54,6 +55,10 @@ public class Produto {
         return this.estoque;
     }
 
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+
     public void adicionarEstoque(double qtd) {
         this.estoque = (int)((double)this.estoque + qtd);
     }
@@ -62,8 +67,6 @@ public class Produto {
         this.estoque = (int)((double)this.estoque - qtd);
     }
 
-    public double calcularPreco(double qtd) {
-
-        return this.preco * qtd;
-    }
+    public double calcularPreco(double qtd) {return this.preco * qtd;}
+    public void setAtivo(boolean ativo) {this.ativo = ativo;}
 }
