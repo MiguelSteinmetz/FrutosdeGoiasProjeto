@@ -1,31 +1,25 @@
-package repository;
+    package repository;
 
-import jakarta.persistence.EntityManager;
-import model.Produto;
-import model.Usuario;
+    import jakarta.persistence.EntityManager;
+    import model.Produto;
+    import model.Usuario;
 
-import java.util.List;
+    import java.util.List;
 
-public class UsuarioRepository {
-    private EntityManager em = CustomizerFactory.getEntityManager();
+    public class UsuarioRepository {
 
-    public void registrar(Usuario u) {
-        em.getTransaction().begin();
-        em.persist(u);
-        em.getTransaction().commit();
+        private EntityManager em = CustomizerFactory.getEntityManager();
 
-    }
-
-    public void deletar(int id) {
-        Produto p = em.find(Produto.class, id);
-        if (p != null) {
-            em.getTransaction().begin();
-            em.remove(p);
-            em.getTransaction().commit();
+        public void salvar(Usuario usuario) {
+            this.em.getTransaction().begin();
+            this.em.persist(usuario);
+            this.em.getTransaction().commit();
         }
-    }
-    public List<Produto> buscartodos() {
-        return em.createQuery("select u from Produto u ", Produto.class).getResultList();
-    }
 
-}
+        public List<Usuario> buscartodos() {
+            return this.em.createQuery("select u From Usuario u", Usuario.class).getResultList();
+        }
+
+
+
+    }

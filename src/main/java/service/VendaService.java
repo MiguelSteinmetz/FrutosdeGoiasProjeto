@@ -1,18 +1,36 @@
 package service;
 
-import model.Usuario;
-import model.Funcionario;
+
+import model.Venda;
+import org.hibernate.Session;
+import repository.CustomizerFactory;
+import repository.VendaRepository;
+
+import java.util.List;
 
 public class VendaService {
-    private double totalGeralLoja = 0.0;
+    VendaRepository vendaRepository = new VendaRepository();
 
-    public void salvarVenda(double valorFinal, Usuario logado) {
-        this.totalGeralLoja += valorFinal;
 
-        if (logado instanceof Funcionario) {
-            ((Funcionario) logado).adicionarVenda(valorFinal);
-        }
+    public void salvarVenda(Venda venda) {
+        vendaRepository.salvar(venda);
     }
 
-    public double getTotalLoja() { return totalGeralLoja; }
+    public List<Venda> relatorioVendas(){
+        List<Venda> vendas = vendaRepository.buscarTodos();
+        return vendas;
+    }
+
+
+    public Long totalVendidoPorProduto(int produtoId) {
+        VendaRepository repo = new VendaRepository();
+        return repo.totalVendidoPorProduto(produtoId);
+    }
+
+    public List<Object[]> topProdutosVendidos() {
+        return vendaRepository.topProdutosVendidos();
+    }
+    public List<Venda> listarVendas() {
+        return vendaRepository.buscarTodos();
+    }
 }
