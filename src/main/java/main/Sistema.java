@@ -65,9 +65,9 @@ public class Sistema {
        logado = usuario.autenticar(login, senha);
 
         if (logado == null) {
-            System.out.println("[X] Usuário ou senha incorretos!");
+            System.out.println(" ⚠\uFE0F [X] Usuário ou senha incorretos!");
         } else {
-            System.out.println("[V] Bem-vindo, " + logado.getNome());
+            System.out.println(" ⚠\uFE0F [V] Bem-vindo, " + logado.getNome());
         }
 
     }
@@ -79,28 +79,26 @@ public class Sistema {
         System.out.println("");
         System.out.println("");
         System.out.println("---- Opcoes de Venda ----");
-        System.out.println("1. Realizar Venda");
-        System.out.println("2. Ver Cardápio");
+        System.out.println("1. 🛒 Realizar Venda");
+        System.out.println("2. 📋 Ver Cardápio");
 
         if (logado.getTipo().equals("Gerente")) {
-            System.out.println("3. Relatório de Vendas");
-            System.out.println("");
-            System.out.println("---- Opcoes de Produto ----");
-            System.out.println("");
-            System.out.println("4. Top Produtos Vendidos");
-            System.out.println("5. Deletar Produto");
-            System.out.println("6. Editar Produto");
-            System.out.println("7. Cadastrar Produto");
-            System.out.println("8. Registrar Producao");
-            System.out.println("9. Total Vendidos por Produto");
-            System.out.println("");
-            System.out.println("---- Opcoes de Funcionario ----");
-            System.out.println("10. Cadastrar Funcionário");
-            System.out.println("11. Encerrar Sistema");
+            System.out.println("3. 📊 Relatório de Vendas");
+            System.out.println("\n---- 📦 Opções de Produto ----");
+            System.out.println("4. ⭐ Top Produtos Vendidos");
+            System.out.println("5. ❌ Deletar Produto");
+            System.out.println("6. ✏️ Editar Produto");
+            System.out.println("7. ➕ Cadastrar Produto");
+            System.out.println("8. 🏭 Registrar Produção");
+            System.out.println("9. 📈 Total Vendidos por Produto");
+
+            System.out.println("\n---- 👥 Opções de Funcionário ----");
+            System.out.println("10. 👤 Cadastrar Funcionário");
+            System.out.println("11. 🛑 Encerrar Sistema");
+        } else {
+            System.out.println("0. 🚪 Sair");
         }
 
-        System.out.println("0. Logout");
-        System.out.print("Escolha: ");
         int op = this.lerInteiro();
         switch (op) {
             case 0:
@@ -177,7 +175,7 @@ public class Sistema {
                 }
                 break;
             default:
-                System.out.println("Opção inválida!");
+                System.out.println(" ⚠\uFE0F Opção inválida!");
         }
 
     }
@@ -238,7 +236,7 @@ public class Sistema {
                         item.getProduto().baixarEstoque(item.getQuantidade());
                     }
 
-                    System.out.printf("Venda concluída: R$ %.2f\n", finalValor);
+                    System.out.printf( "Venda concluída: R$ %.2f\n", finalValor);
                     return;
                 }
             }
@@ -262,9 +260,9 @@ public class Sistema {
     private void listarProdutos() {
 
         if (produtos.listaProdutos().isEmpty()) {
-            System.out.println("\nNenhum produto cadastrado.");
+            System.out.println("\n ⚠\uFE0F Nenhum produto cadastrado.");
         } else {
-            System.out.println("\nID | NOME | PREÇO | ESTOQUE");
+            System.out.println("\n ID | NOME | PREÇO | ESTOQUE");
 
             for(Produto p : produtos.listaProdutos()) {
                 System.out.printf("%d | %s | R$ %.2f | %d\n", p.getId(), p.getNome(), p.getPreco(), p.getEstoque());
@@ -285,7 +283,7 @@ public class Sistema {
         Produto p = new Produto(nome, preco, estoque);
 
         produtos.salvarProduto(p);
-        System.out.println("Produto cadastrado!");
+        System.out.println(" ⚠\uFE0F Produto cadastrado!");
     }
 
     private void editarProduto() {
@@ -343,7 +341,7 @@ public class Sistema {
     }
 
     private void acessoNegado() {
-        System.out.println("Acesso permitido apenas para gerente!");
+        System.out.println(" ⚠\uFE0F Acesso permitido apenas para gerente!");
     }
 
     private int lerInteiro() {
@@ -351,7 +349,7 @@ public class Sistema {
             try {
                 return Integer.parseInt(this.sc.nextLine());
             } catch (Exception var2) {
-                System.out.print("Número inválido: ");
+                System.out.print(" ⚠\uFE0F Número inválido: ");
             }
         }
     }
@@ -361,7 +359,7 @@ public class Sistema {
             try {
                 return Double.parseDouble(this.sc.nextLine().replace(",", "."));
             } catch (Exception var2) {
-                System.out.print("Valor inválido: ");
+                System.out.print(" ⚠\uFE0F Valor inválido: ");
             }
         }
     }

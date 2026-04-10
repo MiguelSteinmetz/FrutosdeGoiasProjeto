@@ -18,7 +18,7 @@ public class Perda {
 
             tx.commit();
 
-            System.out.println("Perda salva!");
+            System.out.println("PERDA SALVA !");
 
         } catch (Exception e) {
 
