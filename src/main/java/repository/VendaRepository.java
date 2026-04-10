@@ -1,22 +1,42 @@
 package repository;
 
-import jakarta.persistence.EntityManager;
 import model.Venda;
+import org.hibernate.Session;
 
 import java.util.List;
 
 public class VendaRepository {
 
-    private EntityManager em = CustomizerFactory.getEntityManager();
-
     public void salvar(Venda venda) {
-        this.em.getTransaction().begin();
-        this.em.persist(venda);
-        this.em.getTransaction().commit();
+        Session session = CustomizerFactory.getSessionFactory().openSession();
+
+        session.beginTransaction();
+        session.persist(venda);
+        session.getTransaction().commit();
+
+        session.close();
     }
 
-    public List<Venda> buscartodos() {
-        return this.em.createQuery("select v From Venda v", Venda.class).getResultList();
-    }
+    public List<Venda> buscarTodos() {
+        Session session = CustomizerFactory.getSessionFactory().openSession();
 
+        List<Venda> lista = session
+                .createQuery("FROM Venda", Venda.class)
+                .list();
+
+        session.close();
+        return lista;
+    }
+    public Long totalVendidoPorProduto(int produtoId) {
+        Session session = CustomizerFactory.getSessionFactory().openSession();
+
+        Long total = session.createQuery(
+                        "SELECT SUM(v.quantidade) FROM Venda v WHERE v.produto.id = :id",
+                        Long.class
+                ).setParameter("id", produtoId)
+                .uniqueResult();
+
+        session.close();
+        return total != null ? total : 0;
+    }
 }
