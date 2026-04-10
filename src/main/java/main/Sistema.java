@@ -2,22 +2,20 @@
 
 package main;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import model.*;
-import org.hibernate.Session;
 import pagamento.Pagamento;
 import pagamento.PagamentoCartao;
 import pagamento.PagamentoDinheiro;
 import pagamento.TipoCartao;
-import repository.CustomizerFactory;
 import repository.ProducaoRepository;
 import service.ProdutoService;
 import service.UsuarioService;
 import service.VendaService;
-import repository.VendaRepository;
 
 
 public class Sistema {
@@ -29,6 +27,7 @@ public class Sistema {
     private VendaService sistemavendas;
     private Usuario logado;
     private ProducaoRepository producaoRepo;
+    private VendaService vendaService = new VendaService();
 
 
     public Sistema() {
@@ -92,11 +91,15 @@ public class Sistema {
             System.out.println("6. Editar Produto");
             System.out.println("7. Cadastrar Produto");
             System.out.println("8. Registrar Producao");
-            System.out.println("9. Total Vendidos por Produto");
+            System.out.println("9. Ver Produzidos");
+            System.out.println("10. Total Vendidos por Produto");
             System.out.println("");
             System.out.println("---- Opcoes de Funcionario ----");
-            System.out.println("10. Cadastrar Funcionário");
-            System.out.println("11. Encerrar Sistema");
+            System.out.println("11. Cadastrar Funcionário");
+            System.out.println("---- Relatorios ----");
+            System.out.println("12. Reletario Financeiro");
+            System.out.println("13. Encerrar Sistema");
+
         }
 
         System.out.println("0. Logout");
@@ -155,20 +158,32 @@ public class Sistema {
                 }
                 break;
             case 9:
+                if(logado.getTipo().equals("Gerente"))
+                    this.listarProducao();
+                break;
+            case 10:
                 if (logado.getTipo().equals("Gerente")) {
                     this.totalVendidoPorProduto();
                 } else {
                     this.acessoNegado();
                 }
                 break;
-            case 10:
+            case 11:
                 if (logado.getTipo().equals("Gerente")) {
                 this.cadastrarFuncionario();
             } else {
                 this.acessoNegado();
             }
                 break;
-            case 11:
+            case 12:
+                if (logado.getTipo().equals("Gerente")) {
+                    this.relatorioFinanceiro();
+                } else {
+                    this.acessoNegado();
+                }
+                break;
+
+            case 13:
                 if (logado.getTipo().equals("Gerente")) {
                     System.out.println("Encerrando sistema...");
                     System.exit(0);
@@ -187,7 +202,7 @@ public class Sistema {
 
         while(true) {
            listarProdutos();
-            System.out.print("ID do produto (0 para finalizar): ");
+            System.out.print("ID do produto (0 para finalizar compra): ");
             int id = lerInteiro();
 
             //Caso Digite 0
@@ -264,10 +279,19 @@ public class Sistema {
         if (produtos.listaProdutos().isEmpty()) {
             System.out.println("\nNenhum produto cadastrado.");
         } else {
-            System.out.println("\nID | NOME | PREÇO | ESTOQUE");
+            System.out.println("\nID | NOME | PREÇO | CUSTO | LUCRO | MARGEM | ESTOQUE\n");
 
             for(Produto p : produtos.listaProdutos()) {
-                System.out.printf("%d | %s | R$ %.2f | %d\n", p.getId(), p.getNome(), p.getPreco(), p.getEstoque());
+
+                System.out.printf(
+                        "%d | %s | R$ %.2f | R$ %.2f |  %.2f%% | %d \n",
+                        p.getId(),
+                        p.getNome(),
+                        p.getPreco(),
+                        p.getLucroBrutoUnitario(),
+                        p.getMargemLucro(),
+                        p.getEstoque()
+                );
             }
 
         }
@@ -281,8 +305,10 @@ public class Sistema {
         double preco = this.lerDouble();
         System.out.print("Estoque: ");
         int estoque = this.lerInteiro();
+        System.out.println("informe o custo do produto:");
+        double custo = this.lerDouble();
 
-        Produto p = new Produto(nome, preco, estoque);
+        Produto p = new Produto(nome, preco, estoque,custo);
 
         produtos.salvarProduto(p);
         System.out.println("Produto cadastrado!");
@@ -371,25 +397,33 @@ public class Sistema {
     }
     private void registrarProducao() {
 
-        System.out.print("ID do produto: ");
+        listarProdutos();
+        System.out.print("\nID do produto: ");
         int id = lerInteiro();
+        Produto produto = produtos.buscarPorId(id);
 
         System.out.print("Quantidade produzida: ");
         double qtd = lerDouble();
 
-        Producao producao = new Producao(id, qtd);
+        Producao producao = new Producao(produto, qtd);
 
         producaoRepo.salvar(producao);
     }
-    private void totalVendidoPorProduto() {
 
-        System.out.print("ID do produto: ");
+
+    private void totalVendidoPorProduto() {
+        listarProdutos();
+        System.out.println("ID do produto: ");
         int id = lerInteiro();
 
         Long total = sistemavendas.totalVendidoPorProduto(id);
 
-        System.out.println("Total vendido: " + total);
+        System.out.println("---- Produto Total Vendido ----");
+        System.out.println();
+        System.out.println("\nTotal vendido: " + total);
+        System.out.println();
     }
+
     private void topProdutosVendidos() {
 
         List<Object[]> resultado = sistemavendas.topProdutosVendidos();
@@ -400,5 +434,91 @@ public class Sistema {
             System.out.println(row[0] + " - " + row[1]);
         }
     }
+    private void listarProducao() {
 
+        if (producaoRepo.buscarTodos().isEmpty()) {
+            System.out.println("\nNenhum produto cadastrado.");
+        } else {
+            System.out.println();
+            System.out.println("---- Produtos Produzidos ----");
+            System.out.println();
+            System.out.println("\nID | NOME | QUANTIDADE | DATA |");
+
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+            for(Producao p : producaoRepo.buscarTodos()) {
+                System.out.printf(
+                        "%d | %s | %.2f | %s\n",
+                        p.getId(),
+                        p.getProduto().getNome(),
+                        p.getQuantidade(),
+                        p.getData().format(formatter));
+                }
+            }
+
+        }
+    private void relatorioFinanceiro() {
+
+
+        List<Venda> vendas = vendaService.listarVendas();
+
+        if (vendas.isEmpty()) {
+            System.out.println("\nNenhuma venda registrada.");
+            return;
+        }
+
+        double faturamentoTotal = 0;
+        double custoTotal = 0;
+        double lucroTotal = 0;
+        double quantidadeTotal = 0;
+
+        Produto produtoMaisLucrativo = null;
+        double maiorLucro = 0;
+
+        for (Venda v : vendas) {
+
+            Produto p = v.getProduto();
+
+            double precoVenda = (p.getPreco() != null) ? p.getPreco() : 0;
+            double custo = p.getCusto() != null ? p.getCusto() : 0;
+
+            double faturamento = precoVenda * v.getQuantidade();
+            double custoVenda = custo * v.getQuantidade();
+            double lucro = faturamento - custoVenda;
+
+            faturamentoTotal += faturamento;
+            custoTotal += custoVenda;
+            lucroTotal += lucro;
+            quantidadeTotal += v.getQuantidade();
+
+            if (lucro > maiorLucro) {
+                maiorLucro = lucro;
+                produtoMaisLucrativo = p;
+            }
+        }
+
+        double margemMedia = faturamentoTotal == 0
+                ? 0
+                : (lucroTotal / faturamentoTotal) * 100;
+
+        System.out.println("\n---- RELATORIO FINANCEIRO ----");
+
+        System.out.printf("Faturamento total: R$ %.2f\n", faturamentoTotal);
+        System.out.printf("Custo total: R$ %.2f\n", custoTotal);
+        System.out.printf("Lucro bruto total: R$ %.2f\n", lucroTotal);
+        System.out.printf("Margem media: %.2f%%\n", margemMedia);
+        System.out.printf("Quantidade vendida: %.2f\n", quantidadeTotal);
+
+        if (produtoMaisLucrativo != null) {
+            System.out.printf(
+                    "Produto mais lucrativo: %s (R$ %.2f)\n",
+                    produtoMaisLucrativo.getNome(),
+                    maiorLucro
+            );
+        }
+
+        System.out.println("------------------------------------------------");
+    }
 }
+

@@ -6,25 +6,5 @@ import org.hibernate.Transaction;
 import repository.CustomizerFactory;
 
 public class Perda {
-    public void salvar(Perda perda) {
 
-        Transaction tx = null;
-
-        try (Session session = CustomizerFactory.getSessionFactory().openSession()) {
-
-            tx = session.beginTransaction();
-
-            session.persist(perda);
-
-            tx.commit();
-
-            System.out.println("Perda salva!");
-
-        } catch (Exception e) {
-
-            if (tx != null) tx.rollback();
-
-            e.printStackTrace();
-        }
-    }
 }

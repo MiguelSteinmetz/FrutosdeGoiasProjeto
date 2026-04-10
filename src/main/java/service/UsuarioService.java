@@ -17,7 +17,7 @@ public class UsuarioService {
     }
 
     public Usuario autenticar(String login, String senha) {
-        for(Usuario u : usuarioRepository.buscarTodos()) {
+        for(Usuario u : usuarioRepository.buscartodos()) {
             if (u.getLogin().equals(login) && u.getSenha().equals(senha)) {
                 return u;
             }

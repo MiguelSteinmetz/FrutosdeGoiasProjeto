@@ -1,28 +1,23 @@
 package repository;
 
+import jakarta.persistence.EntityManager;
 import model.Usuario;
-import org.hibernate.Session;
+
 import java.util.List;
 
 public class UsuarioRepository {
 
+    private EntityManager em = CustomizerFactory.getEntityManager();
+
     public void salvar(Usuario usuario) {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-        session.beginTransaction();
-
-        session.persist(usuario);
-
-        session.getTransaction().commit();
-        session.close();
+        this.em.getTransaction().begin();
+        this.em.persist(usuario);
+        this.em.getTransaction().commit();
     }
-    public List<Usuario> buscarTodos() {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
 
-        List<Usuario> lista = session
-                .createQuery("FROM Usuario", Usuario.class)
-                .list();
-
-        session.close();
-        return lista;
+    public List<Usuario> buscartodos() {
+        return this.em.createQuery("select u From Usuario u", Usuario.class).getResultList();
     }
+
+
 }
