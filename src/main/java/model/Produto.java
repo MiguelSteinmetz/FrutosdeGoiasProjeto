@@ -10,25 +10,47 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Produto")
 public class Produto {
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "nome")
     private String nome;
     @Column(name = "preco")
-    private double preco;
+    private Double preco;
     @Column(name = "estoque")
     private int estoque;
-    @Column (name = "ativo")
-    private boolean ativo;
-    public Produto(String nome, double preco, int estoque) {
+    @Column(nullable = false)
+    private boolean ativo = true;
+    @Column(name = "custo")
+    private Double custo;
+
+    public Produto(String nome, double preco, int estoque,double custo) {
         this.nome = nome;
         this.preco = preco;
         this.estoque = estoque;
+        this.custo = custo;
     }
 
     public Produto() {
     }
+
+    public double getLucroBrutoUnitario() {
+        return preco - custo;
+    }
+
+    public double getMargemLucro() {
+
+        if (preco == 0) {
+            return 0;
+        }
+
+        return ((preco - custo) / preco) * 100;
+    }
+
+
 
 
     public Long getId() {
@@ -43,7 +65,7 @@ public class Produto {
         this.nome = nome;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return this.preco;
     }
 
@@ -69,4 +91,8 @@ public class Produto {
 
     public double calcularPreco(double qtd) {return this.preco * qtd;}
     public void setAtivo(boolean ativo) {this.ativo = ativo;}
+    public Double getCusto() {return custo;}
+
+    public void setCusto(Double custo) {this.custo = custo;}
+
 }
