@@ -18,7 +18,7 @@ public class Perda {
 
             tx.commit();
 
-            System.out.println("PERDA SALVA !");
+            System.out.println("⚠\uFE0F PERDA SALVA !");
 
         } catch (Exception e) {
 
