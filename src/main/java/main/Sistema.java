@@ -13,6 +13,7 @@ import pagamento.PagamentoCartao;
 import pagamento.PagamentoDinheiro;
 import pagamento.TipoCartao;
 import repository.ProducaoRepository;
+import service.LogService;
 import service.ProdutoService;
 import service.UsuarioService;
 import service.VendaService;
@@ -28,6 +29,7 @@ public class Sistema {
     private Usuario logado;
     private ProducaoRepository producaoRepo;
     private VendaService vendaService = new VendaService();
+    private LogService logService = new LogService();
 
 
     public Sistema() {
@@ -61,7 +63,7 @@ public class Sistema {
         System.out.print("Senha: ");
         String senha = sc.nextLine();
 
-       logado = usuario.autenticar(login, senha);
+        logado = usuario.autenticar(login, senha);
 
         if (logado == null) {
             System.out.println("[X] Usuário ou senha incorretos!");
@@ -101,11 +103,15 @@ public class Sistema {
             case 3:
                 if (logado.getTipo().equals("Gerente")) {
                     System.out.println("\n====Relatorios====\n");
-                    System.out.println("1. 📊 Relatório de Vendas");
-                    System.out.println("2. 🏆 Top Produtos Vendidos");
-                    System.out.println("3. 💰 Relatório Financeiro");
-                    System.out.println("4. 📦 Total Vendidos por Produto");
-                    System.out.println("5. 🏭 Ver Produzidos");
+
+                    System.out.println("1. Relatório de Vendas");
+                    System.out.println("2. Top Produtos Vendidos");
+                    System.out.println("3. Reletario Financeiro");
+                    System.out.println("4. Total Vendidos por Produto");
+                    System.out.println("5. Ver Produzidos");
+                    System.out.println("6. Ver Logs");
+                    System.out.print("Escolha: ");
+
                     int opc = lerInteiro();
                     switch (opc) {
                         case 1:
@@ -123,6 +129,9 @@ public class Sistema {
                             break;
                         case 5:
                             listarProducao();
+                            break;
+                        case 6:
+                            listarLogs();
                             break;
                         default:
                             System.out.println("Opção inválida!");
@@ -210,7 +219,7 @@ public class Sistema {
         List<ItemCarrinho> carrinho = new ArrayList<>();
 
         while(true) {
-           listarProdutos();
+            listarProdutos();
             System.out.print("ID do produto (0 para finalizar compra): ");
             int id = lerInteiro();
 
@@ -254,6 +263,11 @@ public class Sistema {
                                 forma.getNome()
                         );
                         sistemavendas.salvarVenda(novaVenda);
+                        //log venda
+                        logService.registrar(
+                                logado.getNome(),
+                                "Registrou venda"
+                        );
                     }
 
                     double finalValor = forma.calcularFinal(total);
@@ -264,6 +278,7 @@ public class Sistema {
 
                     System.out.printf("Venda concluída: R$ %.2f\n", finalValor);
                     return;
+
                 }
             }
 
@@ -280,6 +295,7 @@ public class Sistema {
                 }
             }
         }
+
 
     }
 
@@ -306,24 +322,24 @@ public class Sistema {
 
     private void listagemCompleta(){
 
-            if (produtos.listaProdutos().isEmpty()) {
-                System.out.println("\nNenhum produto cadastrado.");
-            } else {
-                System.out.println("\nID | NOME | PREÇO | CUSTO | LUCRO | MARGEM | ESTOQUE\n");
+        if (produtos.listaProdutos().isEmpty()) {
+            System.out.println("\nNenhum produto cadastrado.");
+        } else {
+            System.out.println("\nID | NOME | PREÇO | CUSTO | LUCRO | MARGEM | ESTOQUE\n");
 
-                for(Produto p : produtos.listaProdutos()) {
+            for(Produto p : produtos.listaProdutos()) {
 
-                    System.out.printf(
-                            "%d | %s | R$ %.2f | R$ %.2f |  %.2f%% | %d \n",
-                            p.getId(),
-                            p.getNome(),
-                            p.getPreco(),
-                            p.getLucroBrutoUnitario(),
-                            p.getMargemLucro(),
-                            p.getEstoque()
-                    );
-                }
+                System.out.printf(
+                        "%d | %s | R$ %.2f | R$ %.2f |  %.2f%% | %d \n",
+                        p.getId(),
+                        p.getNome(),
+                        p.getPreco(),
+                        p.getLucroBrutoUnitario(),
+                        p.getMargemLucro(),
+                        p.getEstoque()
+                );
             }
+        }
     }
 
 
@@ -334,13 +350,18 @@ public class Sistema {
         double preco = this.lerDouble();
         System.out.print("Estoque: ");
         int estoque = this.lerInteiro();
-        System.out.println("informe o custo do produto:");
+        System.out.print("informe o custo do produto:");
         double custo = this.lerDouble();
 
         Produto p = new Produto(nome, preco, estoque,custo);
 
         produtos.salvarProduto(p);
         System.out.println("Produto cadastrado!");
+
+        logService.registrar(
+                logado.getNome(),
+                "Registrou produção do produto " + p.getNome()
+        );
     }
 
     private void editarProduto() {
@@ -383,7 +404,7 @@ public class Sistema {
         String tipo = (opc ==  1 )? "Gerente" : "Funcionario";
 
 
-       usuario.cadastrar(new Usuario(nome, login, senha, tipo));
+        usuario.cadastrar(new Usuario(nome, login, senha, tipo));
         System.out.println("Funcionário cadastrado!");
     }
 
@@ -437,6 +458,11 @@ public class Sistema {
 
         producaoRepo.salvar(producao);
         produto.adicionarEstoque(qtd);
+
+        logService.registrar(
+                logado.getNome(),
+                "Registrou produção do produto " + produto.getNome()
+        );
     }
 
     private void totalVendidoPorProduto() {
@@ -483,10 +509,10 @@ public class Sistema {
                         p.getProduto().getNome(),
                         p.getQuantidade(),
                         p.getData().format(formatter));
-                }
             }
-
         }
+
+    }
 
     private void relatorioFinanceiro() {
 
@@ -549,6 +575,25 @@ public class Sistema {
         }
 
         System.out.println("------------------------------------------------");
+    }
+    private void listarLogs() {
+
+
+        for (LogSistema log : logService.listarTodos()) {
+
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+            System.out.println("---- LOG DO SISTEMA ----");
+            System.out.printf(
+                    "%s | %s | %s\n",
+                    log.getUsuario(),
+                    log.getAcao(),
+                    log.getData().format(formatter)   );
+
+
+
+        }
     }
 }
 
