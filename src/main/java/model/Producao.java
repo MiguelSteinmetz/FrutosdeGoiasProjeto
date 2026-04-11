@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import repository.CustomizerFactory;
-
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "producao")
@@ -15,8 +15,9 @@ public class Producao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "produto_id")
-    private int produtoId;
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
     @Column(name = "quantidade")
     private double quantidade;
@@ -27,43 +28,23 @@ public class Producao {
     public Producao() {
     }
 
-    public Producao(int produtoId, double quantidade) {
-        this.produtoId = produtoId;
+    public Producao(Produto produto, double quantidade) {
+        this.produto = produto;
         this.quantidade = quantidade;
         this.data = LocalDateTime.now();
     }
 
     // getters e setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public int getProdutoId() {
-        return produtoId;
-    }
+    public Produto getProduto() { return produto; }
+    public void setProduto(Produto produto) { this.produto = produto; }
 
-    public double getQuantidade() {
-        return quantidade;
-    }
+    public double getQuantidade() { return quantidade; }
+    public void setQuantidade(double quantidade) { this.quantidade = quantidade; }
 
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setProdutoId(int produtoId) {
-        this.produtoId = produtoId;
-    }
-
-    public void setQuantidade(double quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
+    public LocalDateTime getData() { return data; }
+    public void setData(LocalDateTime data) { this.data = data; }
 
 }

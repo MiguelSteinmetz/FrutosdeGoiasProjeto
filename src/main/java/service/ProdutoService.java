@@ -5,21 +5,16 @@
 
 package service;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import model.Produto;
 import repository.ProdutoRepository;
-import repository.*;
 
 public class ProdutoService {
-    private ProdutoRepository repositoryProduto = new ProdutoRepository();
-    private ProducaoRepository producaoRepository = new ProducaoRepository();
-    private VendaRepository vendaRepository = new VendaRepository();
-    private PerdaRepository perdaRepository = new PerdaRepository();
-
+    ProdutoRepository repositoryProduto = new ProdutoRepository();
 
     public void salvarProduto(Produto p) {
+        ProdutoRepository repositoryProduto = new ProdutoRepository();
         if (p.getPreco() > 0) {
             repositoryProduto.salvar(p);
         } else {
@@ -28,7 +23,7 @@ public class ProdutoService {
     }
 
     public List<Produto> listaProdutos(){
-        List<Produto> produtos = repositoryProduto.buscarTodos();
+        List<Produto> produtos = repositoryProduto.buscartodos();
         return produtos;
     }
 
@@ -46,14 +41,6 @@ public class ProdutoService {
 
     public void atualizar(Produto p){
         repositoryProduto.atualizar(p);
-    }
-    public int calcularEstoque(int produtoId) {
-
-        int produzido = producaoRepository.totalProduzidoPorProduto(produtoId).intValue();
-        int vendido = vendaRepository.totalVendidoPorProduto(produtoId).intValue();
-        int perdas = perdaRepository.totalPerdasPorProduto(produtoId).intValue();
-
-        return produzido - vendido - perdas;
     }
 
 }

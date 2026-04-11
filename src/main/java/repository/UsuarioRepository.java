@@ -1,28 +1,35 @@
-package repository;
+    package repository;
 
-import model.Usuario;
-import org.hibernate.Session;
-import java.util.List;
+    import jakarta.persistence.EntityManager;
+    import model.Produto;
+    import model.Usuario;
 
-public class UsuarioRepository {
+    import java.util.ArrayList;
+    import java.util.List;
 
-    public void salvar(Usuario usuario) {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-        session.beginTransaction();
+    public class UsuarioRepository {
 
-        session.persist(usuario);
+        private EntityManager em = CustomizerFactory.getEntityManager();
 
-        session.getTransaction().commit();
-        session.close();
+        public void salvar(Usuario usuario) {
+            try {
+                em.getTransaction().begin();
+                this.em.persist(usuario);
+                this.em.getTransaction().commit();
+            } catch (Exception e) {
+                System.err.println("Erro ao salvar usuário: " + e.getMessage());
+                throw e;
+            }
+        }
+
+        public List<Usuario> buscartodos() {
+            try {
+                return this.em.createQuery("select u From Usuario u", Usuario.class).getResultList();
+            } catch (Exception e) {
+                System.err.println("Erro ao listar usuários: " + e.getMessage());
+                return new ArrayList<>();
+            }
+        }
+
+
     }
-    public List<Usuario> buscarTodos() {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-
-        List<Usuario> lista = session
-                .createQuery("FROM Usuario", Usuario.class)
-                .list();
-
-        session.close();
-        return lista;
-    }
-}

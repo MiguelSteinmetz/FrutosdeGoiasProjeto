@@ -3,7 +3,10 @@ package service;
 
 
 import model.Usuario;
+import model.Venda;
 import repository.UsuarioRepository;
+
+import java.util.List;
 
 public class UsuarioService {
 
@@ -17,7 +20,7 @@ public class UsuarioService {
     }
 
     public Usuario autenticar(String login, String senha) {
-        for(Usuario u : usuarioRepository.buscarTodos()) {
+        for(Usuario u : usuarioRepository.buscartodos()) {
             if (u.getLogin().equals(login) && u.getSenha().equals(senha)) {
                 return u;
             }
@@ -25,4 +28,9 @@ public class UsuarioService {
         return null;
     }
 
+
+    public List<Usuario> listaUsuarios(){
+        List<Usuario> lista =usuarioRepository.buscartodos();
+        return lista;
+    }
 }
