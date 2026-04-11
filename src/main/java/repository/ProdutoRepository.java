@@ -1,58 +1,62 @@
+
 package repository;
 
-import java.util.List;
-
 import jakarta.persistence.EntityManager;
+import java.util.List;
 import model.Produto;
-import org.hibernate.Session;
-
 
 public class ProdutoRepository {
-
-    private EntityManager em;
+    private EntityManager em = CustomizerFactory.getEntityManager();
 
     public Produto buscarPorId(int id) {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-
-        Produto produto = session.get(Produto.class, id);
-
-        session.close();
-        return produto;
+        return this.em.find(Produto.class, id);
     }
 
     public void salvar(Produto produto) {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-
-        session.beginTransaction();
-        session.persist(produto);
-        session.getTransaction().commit();
-
-        session.close();
+        try {
+            em.getTransaction().begin();
+            em.persist(produto);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback(); // Cancela se der erro no meio
+            }
+            System.err.println("Erro ao salvar produto: " + e.getMessage());
+            throw e; // Lança para o Service/Sistema saberem que falhou
+        }
     }
 
-    public List<Produto> buscarTodos() {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-
-        List<Produto> lista = session
-                .createQuery("FROM Produto ORDER BY id ASC", Produto.class)
-                .list();
-
-        session.close();
-        return lista;
+    public List<Produto> buscartodos() {
+        return this.em.createQuery("SELECT p FROM Produto p WHERE p.ativo = true ORDER BY p.id ASC ", Produto.class).getResultList();
     }
 
     public void remover(Produto produto) {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-
-        session.beginTransaction();
-        session.remove(produto);
-        session.getTransaction().commit();
-
-        session.close();
+        try {
+            em.getTransaction().begin();
+            Produto p = this.em.find(Produto.class, produto.getId());
+            if (p != null) {
+                p.setAtivo(false);
+                this.em.merge(p);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Erro ao desativar produto: " + e.getMessage());
+            throw e;
+        }
     }
+
     public void atualizar(Produto produto) {
-        this.em.getTransaction().begin();
-        this.em.merge(produto); // atualiza no banco
-        this.em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            em.merge(produto);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.err.println("Erro ao atualizar produto: " + e.getMessage());
+            throw e;
+        }
     }
+
 }

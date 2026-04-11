@@ -1,59 +1,41 @@
 package repository;
 
+import jakarta.persistence.EntityManager;
+import java.time.LocalDateTime;
 import model.Producao;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProducaoRepository {
 
+    private EntityManager em = CustomizerFactory.getEntityManager();
+
+
     public void salvar(Producao producao) {
-
-        Transaction transaction = null;
-
-        try (Session session = CustomizerFactory.getSessionFactory().openSession()) {
-
-            transaction = session.beginTransaction();
-
-            session.persist(producao);
-
-            transaction.commit();
-
-            System.out.println("✔ Produção salva com Hibernate!");
-
+        try {
+            em.getTransaction().begin();
+            em.persist(producao);
+            em.getTransaction().commit();
         } catch (Exception e) {
+            System.err.println("Erro ao registrar produção: " + e.getMessage());
+            throw e;
+        }
+    }
 
-            if (transaction != null) {
-                transaction.rollback();
-            }
-
+    public List<Producao> buscarTodos() {
+        try {
+            return this.em.createQuery("SELECT p FROM Producao p ", Producao.class).getResultList();
+        }catch (Exception e){
+            System.out.println("Erro ao buscar a lista de producao: ");
+            return new ArrayList<>();
         }
 
-    }
-    public List<Producao> buscarTodos() {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
-
-        List<Producao> lista = session
-                .createQuery("FROM Producao", Producao.class)
-                .list();
-
-        session.close();
-        return lista;
     }
 
     public Long totalProduzidoPorProduto(int produtoId) {
-        Session session = CustomizerFactory.getSessionFactory().openSession();
 
-        try {
-            Long total = session.createQuery(
-                            "SELECT SUM(p.quantidade) FROM Producao p WHERE p.produto.id = :id",
-                            Long.class
-                    ).setParameter("id", produtoId)
-                    .uniqueResult();
-
-            return total != null ? total : 0;
-        } finally {
-            session.close();
-        }
+        Long total =  em.createQuery("SELECT SUM(p.quantidade) FROM Producao p WHERE p.produto.id =:id", Long.class).setParameter("id", produtoId).getSingleResult();
+        return total != null ? total : 0L;
     }
 }
