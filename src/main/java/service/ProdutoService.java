@@ -34,4 +34,13 @@ public class ProdutoService {
         }
         return p;
     }
+
+    public void deletar(Produto p){
+        repositoryProduto.remover(p);
+    }
+
+    public void atualizar(Produto p){
+        repositoryProduto.atualizar(p);
+    }
+
 }

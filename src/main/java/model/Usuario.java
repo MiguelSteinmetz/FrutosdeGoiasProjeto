@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 package model;
 
@@ -34,13 +30,11 @@ public class Usuario {
 
     }
 
-    public String getNome() {
-        return this.nome;
-    }
+    public int getId() {return id;}
 
-    public String getLogin() {
-        return this.login;
-    }
+    public String getNome() {return this.nome;}
+
+    public String getLogin() {return this.login;}
 
     public String getSenha() {
         return this.senha;

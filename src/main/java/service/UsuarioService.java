@@ -1,14 +1,12 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import model.Usuario;
+import model.Venda;
 import repository.UsuarioRepository;
+
+import java.util.List;
 
 public class UsuarioService {
 
@@ -30,4 +28,9 @@ public class UsuarioService {
         return null;
     }
 
+
+    public List<Usuario> listaUsuarios(){
+        List<Usuario> lista =usuarioRepository.buscartodos();
+        return lista;
+    }
 }

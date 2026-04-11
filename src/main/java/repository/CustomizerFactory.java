@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class CustomizerFactory {
+
     private static final EntityManagerFactory emf;
 
     public static EntityManager getEntityManager() {
@@ -15,6 +16,7 @@ public class CustomizerFactory {
     }
 
     public static void fechar() {
+
         emf.close();
     }
 
