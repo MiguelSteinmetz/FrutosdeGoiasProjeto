@@ -3,6 +3,7 @@ package repository;
 import model.Venda;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VendaRepository {

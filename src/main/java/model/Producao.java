@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import repository.CustomizerFactory;
-
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "producao")
