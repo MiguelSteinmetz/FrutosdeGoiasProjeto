@@ -2,6 +2,8 @@ package model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity( name = "Venda")
 public class Venda {
     @Id
@@ -24,6 +26,8 @@ public class Venda {
 
     @Column(name = "valortotal")
     private double valorTotal;
+    @Column(name = "data")
+    private LocalDateTime data;
 
     public Venda(Usuario usuario, Produto produto, int quantidade, double valorTotal, String tipoPagamento) {
         this.usuario = usuario;
@@ -37,6 +41,14 @@ public class Venda {
 
     }
 
+    public double getLucroTotal() {
+
+        return produto.getLucroBrutoUnitario() * quantidade;
+    }
+
+
+    public LocalDateTime getData() { return data; }
+    public void setData(LocalDateTime data) { this.data = data; }
     public Produto getProduto() {return produto;}
     public void setProduto(Produto produto) {this.produto = produto;}
     public Usuario getUsuario() {return usuario;}
