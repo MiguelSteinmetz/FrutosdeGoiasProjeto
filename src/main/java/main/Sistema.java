@@ -1,7 +1,4 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
+
 
 package main;
 
@@ -14,9 +11,6 @@ import pagamento.Pagamento;
 import pagamento.PagamentoCartao;
 import pagamento.PagamentoDinheiro;
 import pagamento.TipoCartao;
-import repository.ProdutoRepository;
-import repository.UsuarioRepository;
-import repository.VendaRepository;
 import service.ProdutoService;
 import service.UsuarioService;
 import service.VendaService;
@@ -157,7 +151,7 @@ public class Sistema {
                 if (carrinho.isEmpty()) {
                     return;
                 } else {
-                    double total = (double)0.0F;
+                    double total = 0.0F;
 
                     for(ItemCarrinho item : carrinho) {
                         total += item.getSubtotal();
@@ -192,8 +186,6 @@ public class Sistema {
                                 forma.getNome()
                         );
                         sistemavendas.salvarVenda(novaVenda);
-
-
                     }
 
                     double finalValor = forma.calcularFinal(total);
@@ -206,6 +198,7 @@ public class Sistema {
                     return;
                 }
             }
+
             //Caso o Usuario, nao digite 0
             Produto p = produtos.buscarPorId(id);
             if (p != null) {
@@ -227,10 +220,10 @@ public class Sistema {
         if (produtos.listaProdutos().isEmpty()) {
             System.out.println("\nNenhum produto cadastrado.");
         } else {
-            System.out.println("\nID | NOME | PREÇO | ESTOQUE");
+            System.out.println("\nID | NOME | PREÇO | ESTOQUE | TIPO");
 
             for(Produto p : produtos.listaProdutos()) {
-                System.out.printf("%d | %s | R$ %.2f | %d\n", p.getId(), p.getNome(), p.getPreco(), p.getEstoque());
+                System.out.printf("%d | %s | R$ %.2f | %d | %s\n", p.getId(), p.getNome(), p.getPreco(), p.getEstoque());
             }
 
         }
@@ -252,6 +245,7 @@ public class Sistema {
     }
 
     private void editarProduto() {
+        listarProdutos();
         System.out.print("ID: ");
         int id = this.lerInteiro();
         Produto p = this.produtos.buscarPorId(id);
@@ -260,24 +254,30 @@ public class Sistema {
             p.setNome(this.sc.nextLine());
             System.out.print("Novo preço: ");
             p.setPreco(this.lerDouble());
+            System.out.print("Novo estoque: ");
+            p.setEstoque(lerInteiro());
+            produtos.atualizar(p);
             System.out.println("Atualizado!");
         }
 
     }
 
     private void deletarProduto() {
-        System.out.print("ID: ");
-        int id = this.lerInteiro();
-        System.out.println("Deletado!");
+        listarProdutos();
+        System.out.print("digite um id: ");
+        int opc = lerInteiro();
+        produtos.deletar(produtos.buscarPorId(opc));
+        System.out.println("Produto deletado");
+        listarProdutos();
     }
 
     private void cadastrarFuncionario() {
         System.out.print("Nome: ");
-        String nome = this.sc.nextLine();
+        String nome = sc.nextLine();
         System.out.print("Login: ");
-        String login = this.sc.nextLine();
+        String login = sc.nextLine();
         System.out.print("Senha: ");
-        String senha = this.sc.nextLine();
+        String senha = sc.nextLine();
         System.out.println("Cargo ");
         System.out.println("|1 - Gerente | 2 - Funcionario |");
         int opc = lerInteiro();
@@ -289,6 +289,7 @@ public class Sistema {
     }
 
     private void exibirRelatorio() {
+
         for (Venda v : sistemavendas.relatorioVendas()) {
 
             System.out.printf("Vendedor: %s | Produto: %s | Qtd: %d | Total: R$ %.2f | Tipo Pagamento: %s\n",

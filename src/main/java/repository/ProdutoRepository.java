@@ -9,27 +9,33 @@ public class ProdutoRepository {
     private EntityManager em = CustomizerFactory.getEntityManager();
 
     public Produto buscarPorId(int id) {
-        return (Produto)this.em.find(Produto.class, id);
+        return this.em.find(Produto.class, id);
     }
 
     public void salvar(Produto produto) {
         this.em.getTransaction().begin();
         this.em.persist(produto);
         this.em.getTransaction().commit();
-        em.close();
     }
 
     public List<Produto> buscartodos() {
-        return this.em.createQuery("select p From Produto p", Produto.class).getResultList();
-    }
-
-    public List<Produto> buscarPorNome(String prefixo) {
-        return this.em.createQuery("select p from Produto p where p.nome like :prefixo", Produto.class).setParameter("prefixo", prefixo + "%").getResultList();
+        return this.em.createQuery("SELECT p FROM Produto p WHERE p.ativo = true ORDER BY p.id ASC ", Produto.class).getResultList();
     }
 
     public void remover(Produto produto) {
         this.em.getTransaction().begin();
-        this.em.remove(this.em.contains(produto) ? produto : this.em.merge(produto));
+        Produto p = this.em.find(Produto.class, produto.getId());
+        if (p != null) {
+            p.setAtivo(false);
+            this.em.merge(p);
+        }
         this.em.getTransaction().commit();
     }
+
+    public void atualizar (Produto produto){
+        this.em.getTransaction().begin();
+        this.em.merge(produto);
+        this.em.getTransaction().commit();
+    }
+
 }

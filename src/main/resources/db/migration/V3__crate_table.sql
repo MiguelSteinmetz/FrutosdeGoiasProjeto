@@ -1,9 +1,4 @@
-create table produto (
-                         id serial not null primary key,
-                         nome varchar(50) not null,
-                         preco numeric(10,2) not null,
-                         estoque int not null
-);
+
 
 create table usuario (
                          id serial not null primary key,
@@ -24,3 +19,4 @@ create table venda (
                        foreign key (id_produto_fk) references produto(id),
                        foreign key (id_usuario_fk) references usuario(id)
 );
+

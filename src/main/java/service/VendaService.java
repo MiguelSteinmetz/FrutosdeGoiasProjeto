@@ -1,11 +1,6 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package service;
 
-import model.Usuario;
+
 import model.Venda;
 import repository.VendaRepository;
 
@@ -24,6 +19,7 @@ public class VendaService {
         List<Venda> vendas = vendaRepository.buscartodos();
         return vendas;
     }
+
 
 
 }

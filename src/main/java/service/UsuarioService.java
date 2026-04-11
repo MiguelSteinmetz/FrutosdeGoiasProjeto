@@ -1,12 +1,7 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import model.Usuario;
 import repository.UsuarioRepository;
 
