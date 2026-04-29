@@ -1,15 +1,21 @@
-
-
 package main;
 
-import config.FlyWayconfig;
-
+import javax.swing.JFrame;
+import SleeknoteUI.Login;
 
 public class Main {
     public static void main(String[] args) {
-        FlyWayconfig.migrate();
-        Sistema sistema = new Sistema();
-        sistema.iniciar();
+
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrame frame = new JFrame("Tela de Login");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            frame.setContentPane(new Login());
+
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
 
     }
 }

@@ -63,14 +63,13 @@ public class Sistema {
         System.out.print("Senha: ");
         String senha = sc.nextLine();
 
-       logado = usuario.autenticar(login, senha);
+       boolean logado = usuario.autenticar(login, senha);
 
-        if (logado == null) {
-            System.out.println("[X] Usuário ou senha incorretos!");
+        if (!logado) {
+            System.out.println(" Usuario ou senha incorreto");
         } else {
-            System.out.println("[V] Bem-vindo, " + logado.getNome());
+            System.out.println("Login realizado com sucesso!!!");
         }
-
     }
 
     private void exibirMenuPrincipal() {
@@ -268,7 +267,7 @@ public class Sistema {
                         );
                     }
 
-                    double finalValor = forma.calcularFinal(total);
+                    double finalValor = forma.calcularValorFinal(total);
 
                     for(ItemCarrinho item : carrinho) {
                         item.getProduto().baixarEstoque(item.getQuantidade());

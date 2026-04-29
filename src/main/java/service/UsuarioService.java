@@ -19,18 +19,15 @@ public class UsuarioService {
         usuarioRepository.salvar(u);
     }
 
-    public Usuario autenticar(String login, String senha) {
-        for(Usuario u : usuarioRepository.buscartodos()) {
-            if (u.getLogin().equals(login) && u.getSenha().equals(senha)) {
-                return u;
-            }
-        }
-        return null;
-    }
+    public boolean autenticar(String login, String senha) {
+    Usuario usuario = usuarioRepository.buscarPorLoginESenha(login, senha);
+    return usuario != null;
+}
 
 
     public List<Usuario> listaUsuarios(){
         List<Usuario> lista =usuarioRepository.buscartodos();
         return lista;
     }
+    
 }

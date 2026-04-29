@@ -30,6 +30,26 @@
                 return new ArrayList<>();
             }
         }
+        public Usuario buscarPorLoginESenha(String login, String senha) {
+    EntityManager em = CustomizerFactory.getEntityManager();
+
+    try {
+        List<Usuario> lista = em.createQuery(
+                "SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha",
+                Usuario.class)
+                .setParameter("login", login)
+                .setParameter("senha", senha)
+                .getResultList();
+
+        return lista.isEmpty() ? null : lista.get(0);
+
+    } catch (Exception e) {
+        System.err.println("Erro no login: " + e.getMessage());
+        return null;
+    } finally {
+        em.close(); // 🔥 evita erro depois
+    }
+}
 
 
     }
