@@ -9,6 +9,7 @@ import repository.UsuarioRepository;
 import java.util.List;
 
 public class UsuarioService {
+    
 
 
     UsuarioRepository usuarioRepository = new UsuarioRepository();
