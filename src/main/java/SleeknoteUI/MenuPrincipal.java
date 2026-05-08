@@ -15,12 +15,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // telas
     Login login = new Login(this);
     TelaInicial inicial = new TelaInicial();
-    TelaProdutos produtos = new TelaProdutos();
+    TelaVendas vendas = new TelaVendas();
     TelaRelatorios relatorios = new TelaRelatorios();
 
     container.add(login, "LOGIN");
     container.add(inicial, "INICIAL");
-    container.add(produtos, "PRODUTOS");
+    container.add(vendas, "VENDAS");
     container.add(relatorios, "RELATORIOS");
 
     setContentPane(container);
@@ -36,6 +36,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     public void irParaMenu() {
         layout.show(container, "INICIAL");
+        
     }
 
     public void irParaProdutos() {
