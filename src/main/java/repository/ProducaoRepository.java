@@ -3,6 +3,8 @@ package repository;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
 import model.Producao;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProducaoRepository {
@@ -11,15 +13,24 @@ public class ProducaoRepository {
 
 
     public void salvar(Producao producao) {
-
-        em.getTransaction().begin();
-        em.persist(producao);
-        em.getTransaction().commit();
-
+        try {
+            em.getTransaction().begin();
+            em.persist(producao);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Erro ao registrar produção: " + e.getMessage());
+            throw e;
+        }
     }
 
     public List<Producao> buscarTodos() {
-        return this.em.createQuery("SELECT p FROM Producao p ", Producao.class).getResultList();
+        try {
+            return this.em.createQuery("SELECT p FROM Producao p ", Producao.class).getResultList();
+        }catch (Exception e){
+            System.out.println("Erro ao buscar a lista de producao: ");
+            return new ArrayList<>();
+        }
+
     }
 
     public Long totalProduzidoPorProduto(int produtoId) {
