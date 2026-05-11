@@ -35,7 +35,7 @@ public class TelaRelatorios extends javax.swing.JPanel {
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        BntReVendas = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
@@ -68,7 +68,7 @@ public class TelaRelatorios extends javax.swing.JPanel {
         jButton8.setBackground(new java.awt.Color(255, 153, 51));
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Pedidos");
+        jButton8.setText("Vendas");
         jButton8.setMaximumSize(new java.awt.Dimension(591, 519));
         jButton8.setMinimumSize(new java.awt.Dimension(591, 519));
         jButton8.addActionListener(this::jButton8ActionPerformed);
@@ -138,11 +138,11 @@ public class TelaRelatorios extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton7.setBackground(new java.awt.Color(255, 153, 51));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Relatorio de Vendas");
-        jButton7.addActionListener(this::jButton7ActionPerformed);
+        BntReVendas.setBackground(new java.awt.Color(255, 153, 51));
+        BntReVendas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BntReVendas.setForeground(new java.awt.Color(255, 255, 255));
+        BntReVendas.setText("Relatorio de Vendas");
+        BntReVendas.addActionListener(this::BntReVendasActionPerformed);
 
         jButton12.setBackground(new java.awt.Color(255, 153, 51));
         jButton12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -190,7 +190,7 @@ public class TelaRelatorios extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BntReVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,7 +208,7 @@ public class TelaRelatorios extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton6)
                 .addGap(91, 91, 91)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BntReVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -291,9 +291,22 @@ public class TelaRelatorios extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void BntReVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BntReVendasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        TelaReVendas tela = new TelaReVendas();
+
+    tela.setSize(this.getSize());
+
+    this.removeAll();
+
+    this.setLayout(new java.awt.BorderLayout());
+
+    this.add(tela, java.awt.BorderLayout.CENTER);
+
+    this.revalidate();
+
+    this.repaint();
+    }//GEN-LAST:event_BntReVendasActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
@@ -319,6 +332,7 @@ public class TelaRelatorios extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BntCaixa;
     private javax.swing.JButton BntProdutos;
+    private javax.swing.JButton BntReVendas;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -327,7 +341,6 @@ public class TelaRelatorios extends javax.swing.JPanel {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;

@@ -48,7 +48,8 @@ public class Venda {
         return produto.getLucroBrutoUnitario() * quantidade;
     }
 
-
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
     public LocalDateTime getData() { return data; }
     public void setData(LocalDateTime data) { this.data = data; }
     public Produto getProduto() {return produto;}
