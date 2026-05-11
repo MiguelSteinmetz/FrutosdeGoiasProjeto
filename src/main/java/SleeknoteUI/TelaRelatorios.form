@@ -50,7 +50,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton7" min="-2" pref="900" max="-2" attributes="0"/>
+                              <Component id="BntReVendas" min="-2" pref="900" max="-2" attributes="0"/>
                               <Component id="jButton13" min="-2" pref="900" max="-2" attributes="0"/>
                               <Component id="jButton12" min="-2" pref="900" max="-2" attributes="0"/>
                               <Component id="jButton14" min="-2" pref="900" max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                  <Component id="jButton7" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="BntReVendas" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="jButton13" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -210,7 +210,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pedidos"/>
+                <Property name="text" type="java.lang.String" value="Vendas"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[591, 519]"/>
                 </Property>
@@ -294,7 +294,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton7">
+        <Component class="javax.swing.JButton" name="BntReVendas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="99" red="ff" type="rgb"/>
@@ -308,7 +308,7 @@
             <Property name="text" type="java.lang.String" value="Relatorio de Vendas"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BntReVendasActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton12">
