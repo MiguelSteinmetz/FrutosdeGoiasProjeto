@@ -77,7 +77,6 @@ public class TelaProdutos extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
-        TabelaProdutos.setBackground(new java.awt.Color(255, 255, 255));
         TabelaProdutos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.darkGray, null, java.awt.Color.darkGray, java.awt.Color.darkGray));
         TabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,7 +208,6 @@ public class TelaProdutos extends javax.swing.JPanel {
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Deletar");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setText("Buscar produto por ID");
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
 

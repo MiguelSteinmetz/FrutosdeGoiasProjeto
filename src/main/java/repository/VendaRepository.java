@@ -59,4 +59,5 @@ public class VendaRepository {
             return new ArrayList<>();
         }
     }
+    
 }
