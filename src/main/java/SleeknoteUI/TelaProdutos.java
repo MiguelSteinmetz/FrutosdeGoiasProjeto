@@ -404,16 +404,16 @@ public class TelaProdutos extends javax.swing.JPanel {
         DskCadastroProdutos.setLayout(DskCadastroProdutosLayout);
         DskCadastroProdutosLayout.setHorizontalGroup(
             DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1378, Short.MAX_VALUE)
+            .addGap(0, 1384, Short.MAX_VALUE)
             .addGroup(DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(12, Short.MAX_VALUE)))
         );
         DskCadastroProdutosLayout.setVerticalGroup(
             DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 938, Short.MAX_VALUE)
+            .addGap(0, 941, Short.MAX_VALUE)
             .addGroup(DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -425,10 +425,9 @@ public class TelaProdutos extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+            .addGap(0, 1390, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addComponent(DskCadastroProdutos)
                     .addContainerGap()))
         );
@@ -436,9 +435,7 @@ public class TelaProdutos extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 941, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(DskCadastroProdutos)))
+                .addComponent(DskCadastroProdutos, javax.swing.GroupLayout.Alignment.TRAILING))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -521,7 +518,7 @@ public class TelaProdutos extends javax.swing.JPanel {
         (DefaultTableModel) TabelaProdutos.getModel();
 
         modelo.setRowCount(0);
-
+ 
         // VERIFICA SE É NÚMERO
         if (texto.matches("\\d+")) {
 
