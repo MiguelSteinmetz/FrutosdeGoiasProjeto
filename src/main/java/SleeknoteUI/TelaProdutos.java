@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -54,6 +55,7 @@ public class TelaProdutos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        DskCadastroProdutos = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaProdutos = new javax.swing.JTable();
@@ -73,11 +75,11 @@ public class TelaProdutos extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         BntCadastrarProdutos = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        DskCadastroProdutos = new javax.swing.JDesktopPane();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        DskCadastroProdutos.setBackground(new java.awt.Color(255, 255, 204));
 
-        TabelaProdutos.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+
         TabelaProdutos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.darkGray, null, java.awt.Color.darkGray, java.awt.Color.darkGray));
         TabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,7 +111,7 @@ public class TelaProdutos extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_256x256.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo_Fruto_de_Goias 256x252.png"))); // NOI18N
 
         BntCaixa.setBackground(new java.awt.Color(255, 153, 51));
         BntCaixa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -209,12 +211,12 @@ public class TelaProdutos extends javax.swing.JPanel {
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Deletar");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setText("Buscar produto por ID");
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buscar produto por ID");
 
         jButton6.setBackground(new java.awt.Color(255, 153, 51));
@@ -262,7 +264,7 @@ public class TelaProdutos extends javax.swing.JPanel {
                                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jButton2))
-                .addGap(0, 175, Short.MAX_VALUE))
+                .addGap(0, 181, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,20 +287,28 @@ public class TelaProdutos extends javax.swing.JPanel {
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BntCadastrarProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
-        DskCadastroProdutos.setBackground(new java.awt.Color(255, 255, 204));
+        DskCadastroProdutos.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout DskCadastroProdutosLayout = new javax.swing.GroupLayout(DskCadastroProdutos);
         DskCadastroProdutos.setLayout(DskCadastroProdutosLayout);
         DskCadastroProdutosLayout.setHorizontalGroup(
             DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1354, Short.MAX_VALUE)
+            .addGap(0, 1378, Short.MAX_VALUE)
+            .addGroup(DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         DskCadastroProdutosLayout.setVerticalGroup(
             DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 917, Short.MAX_VALUE)
+            .addGap(0, 929, Short.MAX_VALUE)
+            .addGroup(DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 8, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -308,11 +318,6 @@ public class TelaProdutos extends javax.swing.JPanel {
             .addGap(0, 1366, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(DskCadastroProdutos)
                     .addContainerGap()))
@@ -320,11 +325,6 @@ public class TelaProdutos extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 923, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()

@@ -518,7 +518,7 @@ public class Sistema {
 
         if (vendas.isEmpty()) {
             System.out.println("\nNenhuma venda registrada.");
-            return;
+            return ;
         }
 
         double faturamentoTotal = 0;
@@ -572,7 +572,10 @@ public class Sistema {
         }
 
         System.out.println("------------------------------------------------");
+        return ;
     }
+
+
     private void listarLogs() {
 
 

@@ -46,7 +46,7 @@ public class TelaVendas extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 204));
+        setBackground(new java.awt.Color(102, 102, 102));
 
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.darkGray, null, java.awt.Color.darkGray, java.awt.Color.darkGray));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -79,7 +79,7 @@ public class TelaVendas extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_256x256.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo_Fruto_de_Goias 256x252.png"))); // NOI18N
 
         jButton2.setBackground(new java.awt.Color(255, 153, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -167,7 +167,7 @@ public class TelaVendas extends javax.swing.JPanel {
                 .addComponent(BntRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 180, Short.MAX_VALUE))
+                .addGap(0, 184, Short.MAX_VALUE))
         );
 
         jButton4.setBackground(new java.awt.Color(102, 255, 102));
@@ -187,6 +187,7 @@ public class TelaVendas extends javax.swing.JPanel {
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buscar produto por ID");
 
         jButton6.setBackground(new java.awt.Color(255, 153, 51));
