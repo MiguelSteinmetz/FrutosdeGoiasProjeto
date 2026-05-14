@@ -329,6 +329,7 @@ public class TelaFuncionarios extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BntCaixa;
     private javax.swing.JButton BntFuncionario;
