@@ -533,6 +533,7 @@ public class TelaFuncionarios extends javax.swing.JPanel {
         // Este botão provavelmente é apenas indicador de que está na tela de funcionários
     }
 
+
     /**
      * Valida se a string contém apenas números
      *
