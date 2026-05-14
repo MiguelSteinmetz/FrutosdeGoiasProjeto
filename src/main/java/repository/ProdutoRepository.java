@@ -2,8 +2,13 @@
 package repository;
 
 import jakarta.persistence.EntityManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
+import java.util.ArrayList;
 import model.Produto;
+import org.postgresql.core.ConnectionFactory;
 
 public class ProdutoRepository {
     private EntityManager em = CustomizerFactory.getEntityManager();
@@ -11,6 +16,20 @@ public class ProdutoRepository {
     public Produto buscarPorId(int id) {
         return this.em.find(Produto.class, id);
     }
+    public List<Produto> buscarPorNome(String nome) {
+    try {
+        String jpql = "SELECT p FROM Produto p WHERE p.nome LIKE :nome";
+        
+        return this.em.createQuery(jpql, Produto.class)
+                      .setParameter("nome", "%" + nome + "%")
+                      .getResultList();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new ArrayList<>(); 
+        }
+    }
+
 
     public void salvar(Produto produto) {
         try {

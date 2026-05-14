@@ -5,7 +5,7 @@
 
 package service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import model.Produto;
 import repository.ProdutoRepository;
@@ -34,6 +34,17 @@ public class ProdutoService {
         }
         return p;
     }
+    public List<Produto> buscarPorNome(String nome) {
+
+    List<Produto> lista = repositoryProduto.buscarPorNome(nome);
+
+    if (lista.isEmpty()) {
+        System.out.println("Aviso: Produto " + nome + " não encontrado.");
+    }
+
+    return lista;
+}
+    
 
     public void deletar(Produto p){
         repositoryProduto.remover(p);
