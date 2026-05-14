@@ -60,4 +60,25 @@ public class VendaRepository {
         }
     }
     
+    public List<Object[]> totalVendidoProduto() {
+        try {
+            String jpql =
+                    "SELECT v.produto.nome, " +
+                            "v.produto.preco, " +
+                            "SUM(v.quantidade), " +
+                            "SUM(v.valorTotal) " +
+                            "FROM Venda v " +
+                            "GROUP BY v.produto.nome, v.produto.preco " +
+                            "ORDER BY SUM(v.quantidade) DESC";
+
+            return em.createQuery(jpql)
+                    .getResultList();
+
+        } catch (Exception e) {
+            System.err.println("Erro: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    
 }

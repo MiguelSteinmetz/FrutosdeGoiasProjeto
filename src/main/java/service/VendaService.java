@@ -21,6 +21,11 @@ public class VendaService {
         return vendas;
     }
 
+    
+    
+    public List<Object[]> totalVendidoProduto(){ return vendaRepository.totalVendidoProduto();}
+   
+    
     public Long totalVendidoPorProduto(int produtoId) {
         VendaRepository repo = new VendaRepository();
         return repo.totalVendidoPorProduto(produtoId);

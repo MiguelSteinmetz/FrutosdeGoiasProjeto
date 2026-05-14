@@ -8,7 +8,9 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Produto;
+import model.Usuario;
 import repository.ProdutoRepository;
+import service.LogService;
 
 /**
  *
@@ -19,6 +21,9 @@ public class TelaProdutos extends javax.swing.JPanel {
     /**
      * Creates new form TelaProduto
      */
+    
+     LogService log = new LogService();
+     Usuario usuario = new Usuario();
     public TelaProdutos() {
         initComponents();
         carregarTabela();
@@ -294,21 +299,16 @@ public class TelaProdutos extends javax.swing.JPanel {
         jButton2.setEnabled(false);
         jButton2.addActionListener(this::jButton2ActionPerformed);
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("ID");
 
         TxtNome.addActionListener(this::TxtNomeActionPerformed);
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nome");
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Custo");
 
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Estoque");
 
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Valor");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -393,7 +393,7 @@ public class TelaProdutos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BntCadastrarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BntEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(BntEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BntDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(240, Short.MAX_VALUE))
         );
@@ -404,21 +404,15 @@ public class TelaProdutos extends javax.swing.JPanel {
         DskCadastroProdutos.setLayout(DskCadastroProdutosLayout);
         DskCadastroProdutosLayout.setHorizontalGroup(
             DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1384, Short.MAX_VALUE)
-            .addGroup(DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(12, Short.MAX_VALUE)))
+            .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         DskCadastroProdutosLayout.setVerticalGroup(
             DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 941, Short.MAX_VALUE)
-            .addGroup(DskCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(DskCadastroProdutosLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -492,7 +486,8 @@ public class TelaProdutos extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(this,
             "Produto atualizado!");
-
+        
+        log.registrar(usuario.getNome(), "Editou um produto");
         listarProdutos();
 
         limparCampos();
@@ -644,6 +639,8 @@ public class TelaProdutos extends javax.swing.JPanel {
 
     JOptionPane.showMessageDialog(this,
         "Produto removido!!!");
+    
+    log.registrar(usuario.getNome(), "Deletou um produto");
                                              
 
     }//GEN-LAST:event_BntDeletarActionPerformed

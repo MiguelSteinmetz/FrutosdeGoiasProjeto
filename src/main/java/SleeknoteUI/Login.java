@@ -1,11 +1,16 @@
 package SleeknoteUI;
 
+import model.Usuario;
+import service.LogService;
 import service.UsuarioService;
 
 public class Login extends javax.swing.JPanel {
 
     private UsuarioService service = new UsuarioService();
     private MenuPrincipal mainPanel;
+    
+    Usuario usuario = new Usuario();
+    LogService log = new LogService();
 
     public Login(MenuPrincipal mainPanel) {
         this.mainPanel = mainPanel;
@@ -110,6 +115,7 @@ public class Login extends javax.swing.JPanel {
 
         if (service.autenticar(login, senha)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Bem-vindo!");
+            log.registrar(usuario.getNome(), "Entrou no sistema");
             mainPanel.irParaMenu(); //troca de tela para menu
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");

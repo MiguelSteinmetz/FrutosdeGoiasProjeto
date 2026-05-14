@@ -4,6 +4,9 @@
  */
 package SleeknoteUI;
 
+import model.Usuario;
+import service.LogService;
+
 /**
  *
  * @author vinic
@@ -13,6 +16,9 @@ public class TelaFuncionarios extends javax.swing.JPanel {
     /**
      * Creates new form TelaFuncionarios
      */
+    
+     LogService log = new LogService();
+     Usuario usuario = new Usuario();
     public TelaFuncionarios() {
         initComponents();
     }

@@ -52,15 +52,23 @@ public class telaRelatorioVendas extends javax.swing.JInternalFrame {
 
     for (Venda v : lista) {
 
-        modelo.addRow(new Object[]{
-            v.getUsuario().getNome(),
-            v.getProduto().getNome(),
-            v.getTipoPagamento(),
-            v.getQuantidade(),
-            v.getValorTotal(),
-            v.getData()
-        });
+    String nomeUsuario;
+
+    if (v.getUsuario() != null) {
+        nomeUsuario = v.getUsuario().getNome();
+    } else {
+        nomeUsuario = "Sem usuário";
     }
+
+    modelo.addRow(new Object[]{
+        nomeUsuario,
+        v.getProduto().getNome(),
+        v.getTipoPagamento(),
+        v.getQuantidade(),
+        v.getValorTotal(),
+        v.getData()
+    });
+}
 }
   
   public void criarGrafico() {
@@ -92,14 +100,13 @@ public class telaRelatorioVendas extends javax.swing.JInternalFrame {
 
     JFreeChart grafico = ChartFactory.createBarChart(  "Vendas por Produto",  "Produto",    "Valor",  dados  );
         CategoryPlot CategoryPlot;
+        
     CategoryPlot plot = grafico.getCategoryPlot();
+    BarRenderer renderer = (BarRenderer) plot.getRenderer();
+    renderer.setMaximumBarWidth(0.05);
+    renderer.setSeriesPaint( 0, Color.orange);
 
-    BarRenderer renderer =
-        (BarRenderer) plot.getRenderer();
-
-renderer.setSeriesPaint( 0, Color.BLUE);
-    ChartPanel painel =
-            new ChartPanel(grafico);
+    ChartPanel painel = new ChartPanel(grafico);
 
     jPanelGrafico.removeAll();
     jPanelGrafico.setLayout( new BorderLayout());

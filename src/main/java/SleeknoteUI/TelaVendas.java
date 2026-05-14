@@ -10,6 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import repository.ProdutoRepository;
 import javax.swing.JDialog;
+import model.ItemCarrinho;
+import model.Usuario;
+import model.Venda;
+import service.LogService;
+import service.ProdutoService;
+import service.VendaService;
 
 /**
  *
@@ -20,6 +26,12 @@ public class TelaVendas extends javax.swing.JPanel {
     /**
      * Creates new form TelaProdutos
      */
+    
+     LogService log = new LogService();
+     private Usuario usuario;
+     VendaService vendaService = new VendaService();
+     ProdutoService produtoService = new ProdutoService();
+     
     public TelaVendas() {
         initComponents();
         carregarTabela();
@@ -50,6 +62,10 @@ public class TelaVendas extends javax.swing.JPanel {
     TxtBuscarProduto.setText("");
     }
     
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     public void carregarTabela() {
 
         DefaultTableModel modelo =
@@ -74,7 +90,8 @@ public class TelaVendas extends javax.swing.JPanel {
     
     }
     
-    private void calcularTotal() {
+    private void calcularTotal() 
+    {
 
         DefaultTableModel modelo =
             (DefaultTableModel) tabelaCarrinho.getModel();
@@ -100,10 +117,11 @@ public class TelaVendas extends javax.swing.JPanel {
 
     txtValorTotalPg.setText("R$ " + total);
     }
+    
+    
     private void adicionarAoCarrinho() {
         
         int linhaProduto = tabelaProdutos.getSelectedRow();
-
         if (linhaProduto == -1) {
 
             JOptionPane.showMessageDialog(null,
@@ -153,8 +171,56 @@ public class TelaVendas extends javax.swing.JPanel {
         calcularTotal();
     }
         
+    private void salvarVenda(String pagamento) {
 
+    DefaultTableModel carrinho =
+            (DefaultTableModel) tabelaCarrinho.getModel();
 
+    for (int i = 0; i < carrinho.getRowCount(); i++) {
+
+        Long idProduto = Long.parseLong(
+                carrinho.getValueAt(i, 0).toString()
+        );
+
+        int quantidade = Integer.parseInt(
+                carrinho.getValueAt(i, 3).toString()
+        );
+
+        double valor = Double.parseDouble(
+                carrinho.getValueAt(i, 4).toString()
+        );
+
+        Produto produto =
+                produtoService.buscarPorId(
+                        idProduto.intValue()
+                );
+
+        if (produto != null) {
+
+            Venda venda = new Venda();
+
+            venda.setUsuario(usuario);
+
+            venda.setProduto(produto);
+
+            venda.setQuantidade(quantidade);
+
+            venda.setTipoPagamento(pagamento);
+
+            venda.setValorTotal(valor * quantidade);
+
+            vendaService.salvarVenda(venda);
+
+       
+            produto.setEstoque(
+                    produto.getEstoque() - quantidade
+            );
+
+            produtoService.atualizar(produto);
+        }
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -547,13 +613,20 @@ public class TelaVendas extends javax.swing.JPanel {
 
     if (confirmar == JOptionPane.YES_OPTION) {
 
+        salvarVenda(pagamento);
         JOptionPane.showMessageDialog(
                 null,
                 "Pagamento realizado com sucesso!"
                 + "\nForma: " + pagamento
                 + "\nTotal: " + total
         );
+        String nome = usuario != null
+        ? usuario.getNome()
+        : "Sem usuário";
 
+        log.registrar(nome, "Vendeu um Produto");
+       
+        
         carrinho.setRowCount(0);
 
         txtValorTotalPg.setText("R$ 0,00");
