@@ -1,6 +1,7 @@
 package SleeknoteUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import model.Venda;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import service.VendaService;
 
@@ -17,6 +20,8 @@ import service.VendaService;
  * @author Erik_
  */
 public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
+    
+    
 
     public telaRelatorioFinanceiro() {
         initComponents();
@@ -169,6 +174,11 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
                     dados
             );
 
+    CategoryPlot plot = grafico.getCategoryPlot();
+    BarRenderer renderer = (BarRenderer) plot.getRenderer();
+    renderer.setMaximumBarWidth(0.05);
+    renderer.setSeriesPaint( 0, Color.orange);
+    
     ChartPanel painel =
             new ChartPanel(grafico);
 
@@ -183,7 +193,6 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
     );
 
     jPanelRelatorioFinanceiro.revalidate();
-
     jPanelRelatorioFinanceiro.repaint();
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables

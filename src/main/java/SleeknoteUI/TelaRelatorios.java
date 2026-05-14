@@ -37,11 +37,10 @@ public class TelaRelatorios extends javax.swing.JPanel {
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         BntReVendas = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        btnTopPRodutoVendidos = new javax.swing.JButton();
         btnRelatorioFinanceiro = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
+        TotalVendidoProduto = new javax.swing.JButton();
+        btnRelatoriosLogs = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         DesktopRelatorios = new javax.swing.JDesktopPane();
 
@@ -137,7 +136,7 @@ public class TelaRelatorios extends javax.swing.JPanel {
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 96, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         BntReVendas.setBackground(new java.awt.Color(255, 153, 51));
@@ -146,11 +145,11 @@ public class TelaRelatorios extends javax.swing.JPanel {
         BntReVendas.setText("Relatorio de Vendas");
         BntReVendas.addActionListener(this::BntReVendasActionPerformed);
 
-        jButton12.setBackground(new java.awt.Color(255, 153, 51));
-        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton12.setForeground(new java.awt.Color(255, 255, 255));
-        jButton12.setText("Top Produtos Vendidos");
-        jButton12.addActionListener(this::jButton12ActionPerformed);
+        btnTopPRodutoVendidos.setBackground(new java.awt.Color(255, 153, 51));
+        btnTopPRodutoVendidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnTopPRodutoVendidos.setForeground(new java.awt.Color(255, 255, 255));
+        btnTopPRodutoVendidos.setText("Top Produtos Vendidos");
+        btnTopPRodutoVendidos.addActionListener(this::btnTopPRodutoVendidosActionPerformed);
 
         btnRelatorioFinanceiro.setBackground(new java.awt.Color(255, 153, 51));
         btnRelatorioFinanceiro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -158,23 +157,17 @@ public class TelaRelatorios extends javax.swing.JPanel {
         btnRelatorioFinanceiro.setText("Relatorio Financeiro");
         btnRelatorioFinanceiro.addActionListener(this::btnRelatorioFinanceiroActionPerformed);
 
-        jButton14.setBackground(new java.awt.Color(255, 153, 51));
-        jButton14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("Total Vendido Por Produto");
-        jButton14.addActionListener(this::jButton14ActionPerformed);
+        TotalVendidoProduto.setBackground(new java.awt.Color(255, 153, 51));
+        TotalVendidoProduto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalVendidoProduto.setForeground(new java.awt.Color(255, 255, 255));
+        TotalVendidoProduto.setText("Total Vendido Por Produto");
+        TotalVendidoProduto.addActionListener(this::TotalVendidoProdutoActionPerformed);
 
-        jButton15.setBackground(new java.awt.Color(255, 153, 51));
-        jButton15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton15.setForeground(new java.awt.Color(255, 255, 255));
-        jButton15.setText("Ver Produzidos");
-        jButton15.addActionListener(this::jButton15ActionPerformed);
-
-        jButton16.setBackground(new java.awt.Color(255, 153, 51));
-        jButton16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton16.setForeground(new java.awt.Color(255, 255, 255));
-        jButton16.setText("Ver Logs");
-        jButton16.addActionListener(this::jButton16ActionPerformed);
+        btnRelatoriosLogs.setBackground(new java.awt.Color(255, 153, 51));
+        btnRelatoriosLogs.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRelatoriosLogs.setForeground(new java.awt.Color(255, 255, 255));
+        btnRelatoriosLogs.setText("Ver Logs");
+        btnRelatoriosLogs.addActionListener(this::btnRelatoriosLogsActionPerformed);
 
         jButton6.setBackground(new java.awt.Color(255, 153, 51));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -201,33 +194,26 @@ public class TelaRelatorios extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton6)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 21, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton6)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(DesktopRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(BntReVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnRelatorioFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(478, 478, 478))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(BntReVendas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRelatorioFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnTopPRodutoVendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TotalVendidoProduto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRelatoriosLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(DesktopRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(478, 478, 478))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,18 +221,16 @@ public class TelaRelatorios extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton6)
-                .addGap(18, 18, 18)
+                .addGap(78, 78, 78)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BntReVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRelatorioFinanceiro, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTopPRodutoVendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TotalVendidoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRelatoriosLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(DesktopRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(102, 102, 102))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -254,16 +238,14 @@ public class TelaRelatorios extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -331,9 +313,11 @@ public class TelaRelatorios extends javax.swing.JPanel {
            DesktopRelatorios.add(tela).setVisible(true);
     }//GEN-LAST:event_BntReVendasActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+    private void btnTopPRodutoVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopPRodutoVendidosActionPerformed
+         DesktopRelatorios.removeAll();
+        telaRelatorioTopVendidos tela = new telaRelatorioTopVendidos();
+        DesktopRelatorios.add(tela).setVisible(true);
+    }//GEN-LAST:event_btnTopPRodutoVendidosActionPerformed
 
     private void btnRelatorioFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioFinanceiroActionPerformed
         DesktopRelatorios.removeAll();
@@ -341,17 +325,17 @@ public class TelaRelatorios extends javax.swing.JPanel {
         DesktopRelatorios.add(tela).setVisible(true);
     }//GEN-LAST:event_btnRelatorioFinanceiroActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
+    private void TotalVendidoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TotalVendidoProdutoActionPerformed
+        DesktopRelatorios.removeAll();
+        telaRelatorioTotalVendidos tela = new telaRelatorioTotalVendidos();
+        DesktopRelatorios.add(tela).setVisible(true);
+    }//GEN-LAST:event_TotalVendidoProdutoActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton16ActionPerformed
+    private void btnRelatoriosLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosLogsActionPerformed
+        DesktopRelatorios.removeAll();
+        telaRelatorioLogs tela = new telaRelatorioLogs();
+        DesktopRelatorios.add(tela).setVisible(true);
+    }//GEN-LAST:event_btnRelatoriosLogsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -359,13 +343,12 @@ public class TelaRelatorios extends javax.swing.JPanel {
     private javax.swing.JButton BntProdutos;
     private javax.swing.JButton BntReVendas;
     private javax.swing.JDesktopPane DesktopRelatorios;
+    private javax.swing.JButton TotalVendidoProduto;
     private javax.swing.JButton btnRelatorioFinanceiro;
+    private javax.swing.JButton btnRelatoriosLogs;
+    private javax.swing.JButton btnTopPRodutoVendidos;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;

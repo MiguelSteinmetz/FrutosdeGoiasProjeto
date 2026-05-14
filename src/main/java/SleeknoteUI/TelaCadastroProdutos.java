@@ -7,6 +7,8 @@ import model.Produto;
 import repository.ProdutoRepository;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import model.Usuario;
+import service.LogService;
 
 /**
  *
@@ -14,7 +16,10 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
 
- 
+    
+     LogService log = new LogService();
+     Usuario usuario = new Usuario();
+     
     public TelaCadastroProdutos() {
         initComponents();
         listarProdutos();
@@ -285,7 +290,8 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
 
         JOptionPane.showMessageDialog(this,
             "Produto atualizado!");
-
+        
+        log.registrar(usuario.getNome(), "Editou um produto");
         listarProdutos();
 
         limparCampos();
@@ -323,7 +329,7 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
         repository.salvar(produto);
         
         JOptionPane.showMessageDialog(this, "Produto Cadastrado com sucesso!!!");
-        
+        log.registrar(usuario.getNome(), "Cadastrou um produto");
         listarProdutos();
       }catch(Exception e) {
           JOptionPane.showMessageDialog(this, "Produto nao cadastrado \n Erro : " + e.getMessage());
@@ -361,6 +367,9 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
 
     JOptionPane.showMessageDialog(this,
         "Produto removido!!!");
+    
+    log.registrar(usuario.getNome(), "Deletou um produto");
+    
     }//GEN-LAST:event_BntDeletaActionPerformed
 
     private void TabelaCadastroProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaCadastroProdutosMouseClicked
