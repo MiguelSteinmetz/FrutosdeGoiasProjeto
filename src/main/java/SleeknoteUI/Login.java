@@ -1,129 +1,153 @@
 package SleeknoteUI;
 
-import service.UsuarioService;
+import javax.swing.JPanel;
 
+/**
+ * @author migue
+ */
+// MUDANÇA 1: Agora ele estende JPanel (para caber dentro do MenuPrincipal)
 public class Login extends javax.swing.JPanel {
 
-    private UsuarioService service = new UsuarioService();
-    private MenuPrincipal mainPanel;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
 
-    public Login(MenuPrincipal mainPanel) {
-        this.mainPanel = mainPanel;
+    // MUDANÇA 2: Variável para guardar a referência do MenuPrincipal
+    private MenuPrincipal framePrincipal;
+
+    /**
+     * MUDANÇA 3: Novo construtor que aceita o MenuPrincipal
+     */
+    public Login(MenuPrincipal frame) {
+        this.framePrincipal = frame;
+        initComponents();
+    }
+
+    // Mantemos esse para o editor do NetBeans não bugar
+    public Login() {
         initComponents();
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtLogin = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(1366, 768));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fundo Login 2.png")));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_128x128 (1).png")));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Login");
 
-        jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image-removebg-preview.png")));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Senha");
+
+        btnEntrar.setBackground(new java.awt.Color(255, 153, 0));
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEntrar.setText("Entrar");
+        btnEntrar.setBorder(null);
+        btnEntrar.addActionListener(this::btnEntrarActionPerformed);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(199, 199, 199)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtLogin)
+                                        .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(160, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(110, 110, 110))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(120, 120, 120))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(234, 234, 234))))
         );
-
-        jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-        );
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_256x256.png")));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel4.setText("Login");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel5.setText("Senha");
-
-        jCheckBox1.setText("Lembre-me");
-
-        jButton1.setText("Logar");
-        jButton1.addActionListener(evt -> logar());
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(100)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jTextField1, 200, 200, 200)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jPasswordField1, 200, 200, 200)
-                                        .addComponent(jCheckBox1)
-                                        .addComponent(jButton1, 200, 200, 200))
-                                .addGap(100)
-                                .addComponent(jPanel3))
-        );
-
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel3)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(150)
-                                .addComponent(jLabel3)
-                                .addGap(30)
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel4)
-                                .addGap(10)
-                                .addComponent(jTextField1, 30, 30, 30)
-                                .addGap(10)
-                                .addComponent(jLabel5)
-                                .addGap(10)
-                                .addComponent(jPasswordField1, 30, 30, 30)
-                                .addGap(10)
-                                .addComponent(jCheckBox1)
-                                .addGap(20)
-                                .addComponent(jButton1, 40, 40, 40))
+                                .addGap(2, 2, 2)
+                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        setLayout(new java.awt.BorderLayout());
-        add(jPanel2, java.awt.BorderLayout.CENTER);
-    }
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+    }// </editor-fold>                        
 
-    private void logar() {
-        String login = jTextField1.getText();
-        String senha = new String(jPasswordField1.getPassword());
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
+        String login = txtLogin.getText();
+        String senha = new String(txtSenha.getPassword());
 
         if (login.isEmpty() || senha.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, insira suas credenciais.");
             return;
         }
 
-        if (service.autenticar(login, senha)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Bem-vindo!");
-            mainPanel.irParaMenu(); //troca de tela para menu
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+        // Simulação de login (Ajuste para usar seu UsuarioService)
+        try {
+            service.UsuarioService usuarioService = new service.UsuarioService();
+            boolean logado = usuarioService.autenticar(login, senha);
+
+            if (logado) {
+                // MUDANÇA 4: Em vez de abrir um novo JFrame, avisamos o MenuPrincipal para trocar de tela
+                if (framePrincipal != null) {
+                    framePrincipal.irParaMenu();
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos.");
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao conectar com serviço.");
         }
     }
 
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtLogin;
+    private javax.swing.JPasswordField txtSenha;
+    // End of variables declaration                   
 }

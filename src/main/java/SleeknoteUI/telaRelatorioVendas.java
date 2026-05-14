@@ -118,7 +118,7 @@ renderer.setSeriesPaint( 0, Color.BLUE);
         jButton2 = new javax.swing.JButton();
         jPanelGrafico = new javax.swing.JPanel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 650));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

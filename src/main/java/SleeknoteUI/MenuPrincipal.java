@@ -9,7 +9,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JPanel container;
 
     public MenuPrincipal() {
-        layout = new CardLayout();
+    setSize(600, 600);
+    setLocationRelativeTo(null);
+     layout = new CardLayout();
     container = new JPanel(layout);
 
     // telas
@@ -27,8 +29,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     layout.show(container, "LOGIN");
 
-    setSize(1366, 768);
-    setLocationRelativeTo(null);
+
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -36,6 +37,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     public void irParaMenu() {
         layout.show(container, "INICIAL");
+          setSize(1366, 768);
+          setLocationRelativeTo(null);
+          
         
     }
 

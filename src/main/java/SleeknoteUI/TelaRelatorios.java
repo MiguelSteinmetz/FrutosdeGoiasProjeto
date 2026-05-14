@@ -45,11 +45,11 @@ public class TelaRelatorios extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         DesktopRelatorios = new javax.swing.JDesktopPane();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_256x256.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo_Fruto_de_Goias 256x252.png"))); // NOI18N
 
         BntCaixa.setBackground(new java.awt.Color(255, 153, 51));
         BntCaixa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
