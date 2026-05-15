@@ -19,7 +19,7 @@ public class Main {
         painel.add(texto, BorderLayout.CENTER);
         splash.getContentPane().add(painel);
         
-        // tamanho da tela 
+        // tamanho da tela ADM
         splash.setSize(450, 250);
         splash.setLocationRelativeTo(null);
         splash.setVisible(true);
