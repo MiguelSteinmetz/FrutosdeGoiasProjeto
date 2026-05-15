@@ -63,26 +63,27 @@ public class Sistema {
         System.out.print("Senha: ");
         String senha = sc.nextLine();
 
-       boolean logado = usuario.autenticar(login, senha);
+        logado = usuario.autenticar(login, senha);
 
-        if (!logado) {
-            System.out.println(" Usuario ou senha incorreto");
+        if (logado == null) {
+            System.out.println("[X] Usuário ou senha incorretos!");
         } else {
-            System.out.println("Login realizado com sucesso!!!");
+            System.out.println("[V] Bem-vindo, " + logado.getNome());
         }
+
     }
 
     private void exibirMenuPrincipal() {
         System.out.println("\n---      FRUTOS DE GOIÀS     ---");
         System.out.println("\n=== MENU PRINCIPAL (" + logado.getTipo() + ") ===");
         System.out.println("---- Opcoes de Venda ----");
-        System.out.println("1. Realizar Venda");
-        System.out.println("2. Ver Cardápio");
+        System.out.println("1. 🛒 Realizar Venda");
+        System.out.println("2. 📋 Ver Cardápio");
 
         if (logado.getTipo().equals("Gerente")) {
-            System.out.println("3. Relatorios");
-            System.out.println("4. Opçoes Produto");
-            System.out.println("5. Opçoes funcionario");
+            System.out.println("3. 📊 Relatórios");
+            System.out.println("4. 📦 Opções Produto");
+            System.out.println("5. 👥 Opções Funcionário");
         }
 
         System.out.println("0. Logout");
@@ -102,6 +103,7 @@ public class Sistema {
             case 3:
                 if (logado.getTipo().equals("Gerente")) {
                     System.out.println("\n====Relatorios====\n");
+
                     System.out.println("1. Relatório de Vendas");
                     System.out.println("2. Top Produtos Vendidos");
                     System.out.println("3. Reletario Financeiro");
@@ -109,6 +111,7 @@ public class Sistema {
                     System.out.println("5. Ver Produzidos");
                     System.out.println("6. Ver Logs");
                     System.out.print("Escolha: ");
+
                     int opc = lerInteiro();
                     switch (opc) {
                         case 1:
@@ -140,11 +143,11 @@ public class Sistema {
                 break;
             case 4:
                 if (logado.getTipo().equals("Gerente")) {
-                    System.out.println("\n===Opçoes Produtos===\n");
-                    System.out.println("1. Deletar Produto");
-                    System.out.println("2. Editar Produto");
-                    System.out.println("3. Cadastrar Produto");
-                    System.out.println("4. Registrar Producao");
+                    System.out.println("\n=== 📦 Opções de Produtos ===\n");
+                    System.out.println("1. 🗑️ Deletar Produto");
+                    System.out.println("2. ✏️ Editar Produto");
+                    System.out.println("3. ➕ Cadastrar Produto");
+                    System.out.println("4. 🏭 Registrar Produção");
                     System.out.print("Escolha: ");
                     int opc = lerInteiro();
                     switch (opc) {
@@ -170,8 +173,8 @@ public class Sistema {
             case 5:
                 if (logado.getTipo().equals("Gerente")) {
                     System.out.println("\n==Opçoes Funcionarios==\n");
-                    System.out.println("1. Cadastrar Funcionário");
-                    System.out.println("2. Listar Funcionarios");
+                    System.out.println("1. 👤➕ Cadastrar Funcionário");
+                    System.out.println("2. 📋👥 Listar Funcionários");
                     System.out.print("Escolha: ");
                     int opc = lerInteiro();
                     switch (opc) {
@@ -216,7 +219,7 @@ public class Sistema {
         List<ItemCarrinho> carrinho = new ArrayList<>();
 
         while(true) {
-           listarProdutos();
+            listarProdutos();
             System.out.print("ID do produto (0 para finalizar compra): ");
             int id = lerInteiro();
 
@@ -267,7 +270,7 @@ public class Sistema {
                         );
                     }
 
-                    double finalValor = forma.calcularValorFinal(total);
+                    double finalValor = forma.calcularFinal(total);
 
                     for(ItemCarrinho item : carrinho) {
                         item.getProduto().baixarEstoque(item.getQuantidade());
@@ -288,7 +291,7 @@ public class Sistema {
                     carrinho.add(new ItemCarrinho(p, qtd));
                     System.out.println("Adicionado!");
                 } else {
-                    System.out.println("Estoque insuficiente!");
+                    System.out.println("⚠\uFE0F Estoque insuficiente!");
                 }
             }
         }
@@ -319,24 +322,24 @@ public class Sistema {
 
     private void listagemCompleta(){
 
-            if (produtos.listaProdutos().isEmpty()) {
-                System.out.println("\nNenhum produto cadastrado.");
-            } else {
-                System.out.println("\nID | NOME | PREÇO | CUSTO | LUCRO | MARGEM | ESTOQUE\n");
+        if (produtos.listaProdutos().isEmpty()) {
+            System.out.println("\nNenhum produto cadastrado.");
+        } else {
+            System.out.println("\nID | NOME | PREÇO | CUSTO | LUCRO | MARGEM | ESTOQUE\n");
 
-                for(Produto p : produtos.listaProdutos()) {
+            for(Produto p : produtos.listaProdutos()) {
 
-                    System.out.printf(
-                            "%d | %s | R$ %.2f | R$ %.2f |  %.2f%% | %d \n",
-                            p.getId(),
-                            p.getNome(),
-                            p.getPreco(),
-                            p.getLucroBrutoUnitario(),
-                            p.getMargemLucro(),
-                            p.getEstoque()
-                    );
-                }
+                System.out.printf(
+                        "%d | %s | R$ %.2f | R$ %.2f |  %.2f%% | %d \n",
+                        p.getId(),
+                        p.getNome(),
+                        p.getPreco(),
+                        p.getLucroBrutoUnitario(),
+                        p.getMargemLucro(),
+                        p.getEstoque()
+                );
             }
+        }
     }
 
 
@@ -384,7 +387,7 @@ public class Sistema {
         System.out.print("digite um id: ");
         int opc = lerInteiro();
         produtos.deletar(produtos.buscarPorId(opc));
-        System.out.println("Produto deletado");
+        System.out.println("⚠\uFE0F Produto deletado");
         listarProdutos();
     }
 
@@ -401,7 +404,7 @@ public class Sistema {
         String tipo = (opc ==  1 )? "Gerente" : "Funcionario";
 
 
-       usuario.cadastrar(new Usuario(nome, login, senha, tipo));
+        usuario.cadastrar(new Usuario(nome, login, senha, tipo));
         System.out.println("Funcionário cadastrado!");
     }
 
@@ -409,7 +412,7 @@ public class Sistema {
 
         for (Venda v : sistemavendas.relatorioVendas()) {
 
-            System.out.printf("Vendedor: %s | Produto: %s | Qtd: %d | Total: R$ %.2f | Tipo Pagamento: %s\n",
+            System.out.printf("⚠\uFE0F Vendedor: %s | Produto: %s | Qtd: %d | Total: R$ %.2f | Tipo Pagamento: %s\n",
                     v.getUsuario().getNome(), v.getProduto().getNome(), v.getQuantidade(), v.getValorTotal(), v.getTipoPagamento());
 
         }
@@ -422,7 +425,7 @@ public class Sistema {
             try {
                 return Integer.parseInt(this.sc.nextLine());
             } catch (Exception var2) {
-                System.out.print("Número inválido: ");
+                System.out.print("⚠\uFE0F Número inválido: ");
             }
         }
     }
@@ -432,7 +435,7 @@ public class Sistema {
             try {
                 return Double.parseDouble(this.sc.nextLine().replace(",", "."));
             } catch (Exception var2) {
-                System.out.print("Valor inválido: ");
+                System.out.print("⚠\uFE0F Valor inválido: ");
             }
         }
     }
@@ -448,7 +451,7 @@ public class Sistema {
         int id = lerInteiro();
         Produto produto = produtos.buscarPorId(id);
 
-        System.out.print("Quantidade produzida: ");
+        System.out.print(" ⚠\uFE0F Quantidade produzida: ");
         double qtd = lerDouble();
 
         Producao producao = new Producao(produto, qtd);
@@ -469,7 +472,7 @@ public class Sistema {
 
         Long total = sistemavendas.totalVendidoPorProduto(id);
 
-        System.out.println("---- Produto Total Vendido ----");
+        System.out.println("----⚠\uFE0F Produto Total Vendido ----");
         System.out.println();
         System.out.println("\nTotal vendido: " + total);
         System.out.println();
@@ -479,7 +482,7 @@ public class Sistema {
 
         List<Object[]> resultado = sistemavendas.topProdutosVendidos();
 
-        System.out.println("\n--- TOP PRODUTOS VENDIDOS ---");
+        System.out.println(" ⚠\uFE0F \n--- TOP PRODUTOS VENDIDOS ---");
 
         for (Object[] row : resultado) {
             System.out.println(row[0] + " - " + row[1]);
@@ -506,10 +509,10 @@ public class Sistema {
                         p.getProduto().getNome(),
                         p.getQuantidade(),
                         p.getData().format(formatter));
-                }
             }
-
         }
+
+    }
 
     private void relatorioFinanceiro() {
 
@@ -517,8 +520,8 @@ public class Sistema {
         List<Venda> vendas = vendaService.listarVendas();
 
         if (vendas.isEmpty()) {
-            System.out.println("\nNenhuma venda registrada.");
-            return ;
+            System.out.println("⚠\uFE0F \nNenhuma venda registrada.");
+            return;
         }
 
         double faturamentoTotal = 0;
@@ -557,25 +560,22 @@ public class Sistema {
 
         System.out.println("\n---- RELATORIO FINANCEIRO ----");
 
-        System.out.printf("Faturamento total: R$ %.2f\n", faturamentoTotal);
-        System.out.printf("Custo total: R$ %.2f\n", custoTotal);
-        System.out.printf("Lucro bruto total: R$ %.2f\n", lucroTotal);
-        System.out.printf("Margem media: %.2f%%\n", margemMedia);
-        System.out.printf("Quantidade vendida: %.2f\n", quantidadeTotal);
+        System.out.printf("⚠\uFE0F Faturamento total: R$ %.2f\n", faturamentoTotal);
+        System.out.printf("⚠\uFE0F Custo total: R$ %.2f\n", custoTotal);
+        System.out.printf("⚠\uFE0F Lucro bruto total: R$ %.2f\n", lucroTotal);
+        System.out.printf("⚠\uFE0F Margem media: %.2f%%\n", margemMedia);
+        System.out.printf("⚠\uFE0F Quantidade vendida: %.2f\n", quantidadeTotal);
 
         if (produtoMaisLucrativo != null) {
             System.out.printf(
-                    "Produto mais lucrativo: %s (R$ %.2f)\n",
+                    "⚠\uFE0F Produto mais lucrativo: %s (R$ %.2f)\n",
                     produtoMaisLucrativo.getNome(),
                     maiorLucro
             );
         }
 
         System.out.println("------------------------------------------------");
-        return ;
     }
-
-
     private void listarLogs() {
 
 
@@ -584,8 +584,8 @@ public class Sistema {
             DateTimeFormatter formatter =
                     DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-                System.out.println("---- LOG DO SISTEMA ----");
-                System.out.printf(
+            System.out.println("---- LOG DO SISTEMA ----");
+            System.out.printf(
                     "%s | %s | %s\n",
                     log.getUsuario(),
                     log.getAcao(),

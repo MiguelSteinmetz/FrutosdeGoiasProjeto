@@ -1,16 +1,17 @@
+
 package pagamento;
 
 public abstract class Pagamento {
 
-    protected final String nome;
+    protected String nome;
 
     public Pagamento(String nome) {
         this.nome = nome;
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
-    public abstract double calcularValorFinal(double valorBruto);
+    public abstract double calcularFinal(double var1);
 }
