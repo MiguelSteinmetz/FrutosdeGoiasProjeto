@@ -225,7 +225,7 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(99, 99, 99))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         TelaCadastroFuncionariosDSKLayout.setVerticalGroup(
             TelaCadastroFuncionariosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,19 +260,13 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 845, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(3, 3, 3)
-                    .addComponent(TelaCadastroFuncionariosDSK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(47, Short.MAX_VALUE)))
+                .addComponent(TelaCadastroFuncionariosDSK))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 648, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(15, 15, 15)
-                    .addComponent(TelaCadastroFuncionariosDSK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(TelaCadastroFuncionariosDSK))
         );
 
         getAccessibleContext().setAccessibleName("Tela de Cadastro de Funcionarios");
