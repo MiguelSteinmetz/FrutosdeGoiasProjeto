@@ -56,20 +56,7 @@ public class Sistema {
     }
 
     private void exibirLogin() {
-        System.out.println("\n---      FRUTOS DE GOIÀS     ---");
-        System.out.println("\n--- LOGIN SISTEMA SORVETERIA ---");
-        System.out.print("Login: ");
-        String login = this.sc.nextLine();
-        System.out.print("Senha: ");
-        String senha = sc.nextLine();
-
-       boolean logado = usuario.autenticar(login, senha);
-
-        if (!logado) {
-            System.out.println(" Usuario ou senha incorreto");
-        } else {
-            System.out.println("Login realizado com sucesso!!!");
-        }
+       
     }
 
     private void exibirMenuPrincipal() {

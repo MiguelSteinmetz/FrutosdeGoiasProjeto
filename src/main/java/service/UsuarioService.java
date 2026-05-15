@@ -20,9 +20,9 @@ public class UsuarioService {
         usuarioRepository.salvar(u);
     }
 
-    public boolean autenticar(String login, String senha) {
+    public Usuario autenticar(String login, String senha) {
     Usuario usuario = usuarioRepository.buscarPorLoginESenha(login, senha);
-    return usuario != null;
+    return usuario;
 }
 
 

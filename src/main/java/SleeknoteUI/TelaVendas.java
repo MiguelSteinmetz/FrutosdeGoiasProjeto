@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import repository.ProdutoRepository;
 import javax.swing.JDialog;
-import model.ItemCarrinho;
+import model.SessaoUsuario;
 import model.Usuario;
 import model.Venda;
 import service.LogService;
@@ -36,6 +36,7 @@ public class TelaVendas extends javax.swing.JPanel {
         initComponents();
         carregarTabela();
         listarProdutos();
+        aplicarPermissoes();
     }
      public void listarProdutos() {
 
@@ -83,6 +84,7 @@ public class TelaVendas extends javax.swing.JPanel {
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
+                p.getCusto(),
                 p.getEstoque(),
                 p.getPreco()
             });
@@ -199,7 +201,7 @@ public class TelaVendas extends javax.swing.JPanel {
 
             Venda venda = new Venda();
 
-            venda.setUsuario(usuario);
+            venda.setUsuario(SessaoUsuario.getUsuarioLogado());
 
             venda.setProduto(produto);
 
@@ -221,6 +223,22 @@ public class TelaVendas extends javax.swing.JPanel {
     }
 }
     
+    private void aplicarPermissoes() {
+
+        Usuario u = SessaoUsuario.getUsuarioLogado();
+
+        if (u == null) return;
+
+        String cargo = u.getTipo();
+
+        if (!cargo.equals("Gerente")) {
+            
+            BntRelatorios.setEnabled(false);
+            BntFuncionarios.setEnabled(false);
+           
+           
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -236,10 +254,9 @@ public class TelaVendas extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BntSair = new javax.swing.JButton();
         BntRelatorios = new javax.swing.JButton();
         BntFuncionarios = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
         BntProdutos = new javax.swing.JButton();
         BntPagar = new javax.swing.JButton();
         BntDeletar = new javax.swing.JButton();
@@ -305,13 +322,13 @@ public class TelaVendas extends javax.swing.JPanel {
         jButton2.setMinimumSize(new java.awt.Dimension(591, 519));
         jButton2.addActionListener(this::jButton2ActionPerformed);
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 51));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Fechar Caixa");
-        jButton3.setMaximumSize(new java.awt.Dimension(591, 519));
-        jButton3.setMinimumSize(new java.awt.Dimension(591, 519));
-        jButton3.addActionListener(this::jButton3ActionPerformed);
+        BntSair.setBackground(new java.awt.Color(255, 153, 51));
+        BntSair.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        BntSair.setForeground(new java.awt.Color(255, 255, 255));
+        BntSair.setText("Sair");
+        BntSair.setMaximumSize(new java.awt.Dimension(591, 519));
+        BntSair.setMinimumSize(new java.awt.Dimension(591, 519));
+        BntSair.addActionListener(this::BntSairActionPerformed);
 
         BntRelatorios.setBackground(new java.awt.Color(255, 153, 51));
         BntRelatorios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -328,14 +345,6 @@ public class TelaVendas extends javax.swing.JPanel {
         BntFuncionarios.setMaximumSize(new java.awt.Dimension(591, 519));
         BntFuncionarios.setMinimumSize(new java.awt.Dimension(591, 519));
         BntFuncionarios.addActionListener(this::BntFuncionariosActionPerformed);
-
-        jButton9.setBackground(new java.awt.Color(255, 153, 51));
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Pedidos");
-        jButton9.setMaximumSize(new java.awt.Dimension(591, 519));
-        jButton9.setMinimumSize(new java.awt.Dimension(591, 519));
-        jButton9.addActionListener(this::jButton9ActionPerformed);
 
         BntProdutos.setBackground(new java.awt.Color(255, 153, 51));
         BntProdutos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -358,10 +367,9 @@ public class TelaVendas extends javax.swing.JPanel {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BntSair, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BntRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BntFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BntProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -375,14 +383,12 @@ public class TelaVendas extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(BntProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(BntFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BntRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 180, Short.MAX_VALUE))
+                .addComponent(BntSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         BntPagar.setBackground(new java.awt.Color(102, 255, 102));
@@ -442,7 +448,6 @@ public class TelaVendas extends javax.swing.JPanel {
         adcionarCarrinho.addActionListener(this::adcionarCarrinhoActionPerformed);
 
         txtValorTotalPg.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtValorTotalPg.setForeground(new java.awt.Color(0, 0, 0));
 
         BntRemover.setBackground(new java.awt.Color(255, 153, 51));
         BntRemover.setForeground(new java.awt.Color(255, 255, 255));
@@ -519,7 +524,7 @@ public class TelaVendas extends javax.swing.JPanel {
                             .addComponent(txtValorTotalPg, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(BntDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BntPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -527,9 +532,14 @@ public class TelaVendas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void BntSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BntSairActionPerformed
+
+    SessaoUsuario.limpar(); 
+    MenuPrincipal tela = new MenuPrincipal();
+    tela.setVisible(true);
+
+    javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
+    }//GEN-LAST:event_BntSairActionPerformed
 
     private void BntPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BntPagarActionPerformed
         // TODO add your handling code here:
@@ -595,8 +605,13 @@ public class TelaVendas extends javax.swing.JPanel {
         dialog.setLocationRelativeTo(null);
 
         dialog.setVisible(true);
-
+        salvarVenda(pagamento);
+        
+        carrinho.setRowCount(0);
+        txtValorTotalPg.setText("R$ 0,00");
+        
         return;
+        
     }
 
     //
@@ -620,18 +635,16 @@ public class TelaVendas extends javax.swing.JPanel {
                 + "\nForma: " + pagamento
                 + "\nTotal: " + total
         );
-        String nome = usuario != null
-        ? usuario.getNome()
-        : "Sem usuário";
-
-        log.registrar(nome, "Vendeu um Produto");
+        
+         log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Vendeu um Produto" );
        
         
         carrinho.setRowCount(0);
 
         txtValorTotalPg.setText("R$ 0,00");
     }
-
+    
+   
     }//GEN-LAST:event_BntPagarActionPerformed
 
     private void TxtBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBuscarProdutoActionPerformed
@@ -672,10 +685,6 @@ public class TelaVendas extends javax.swing.JPanel {
     this.repaint();
     }//GEN-LAST:event_BntFuncionariosActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void BntProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BntProdutosActionPerformed
         // TODO add your handling code here:
         TelaProdutos tela = new TelaProdutos();
@@ -694,7 +703,6 @@ public class TelaVendas extends javax.swing.JPanel {
     }//GEN-LAST:event_BntProdutosActionPerformed
 
     private void RecarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecarregarActionPerformed
-        // TODO add your handling code here:
         limparCampos();
         carregarTabela();
     }//GEN-LAST:event_RecarregarActionPerformed
@@ -834,14 +842,13 @@ public class TelaVendas extends javax.swing.JPanel {
     private javax.swing.JButton BntProdutos;
     private javax.swing.JButton BntRelatorios;
     private javax.swing.JButton BntRemover;
+    private javax.swing.JButton BntSair;
     private javax.swing.JButton Pesquisar;
     private javax.swing.JButton Recarregar;
     private javax.swing.JTextField TxtBuscarProduto;
     private javax.swing.JButton adcionarCarrinho;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

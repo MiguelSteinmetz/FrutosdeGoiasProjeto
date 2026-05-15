@@ -277,10 +277,9 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="BntCaixa" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Component id="BntProdutos" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <Component id="jButton8" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Component id="BntFuncionario" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Component id="BntRelatorios" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <Component id="jButton11" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="bntSair" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -298,13 +297,11 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BntProdutos" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton8" min="-2" pref="50" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BntFuncionario" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BntRelatorios" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton11" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="bntSair" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -365,29 +362,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BntProdutosActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton8">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="99" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="18" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Pedidos"/>
-                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[591, 519]"/>
-                    </Property>
-                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[591, 519]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JButton" name="BntFuncionario">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -399,7 +373,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Funcionario"/>
+                    <Property name="text" type="java.lang.String" value="Funcionarios"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[591, 519]"/>
                     </Property>
@@ -434,7 +408,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BntRelatoriosActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton11">
+                <Component class="javax.swing.JButton" name="bntSair">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="99" red="ff" type="rgb"/>
@@ -454,7 +428,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntSairActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

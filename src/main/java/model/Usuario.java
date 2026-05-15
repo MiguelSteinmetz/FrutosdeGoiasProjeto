@@ -47,4 +47,31 @@ public class Usuario {
     public void adicionarVenda(double valor) {
         this.totalVendas += valor;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public double getTotalVendas() {
+        return totalVendas;
+    }
+
+    public void setTotalVendas(double totalVendas) {
+        this.totalVendas = totalVendas;
+    }
 }

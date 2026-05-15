@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import SleeknoteUI.TelaVendas;
 import javax.swing.JOptionPane;
+import model.SessaoUsuario;
 import model.Usuario;
 import service.LogService;
 
@@ -20,7 +21,7 @@ public class TelaPix extends javax.swing.JPanel {
      * Creates new form TelaPagamentoPix
      */
      LogService log = new LogService();
-     Usuario usuario = new Usuario();
+     
     public TelaPix(String total) {
         initComponents();
 
@@ -118,7 +119,8 @@ public class TelaPix extends javax.swing.JPanel {
                 null,
                 "Pagamento aprovado!"
         );
-        log.registrar(usuario.getNome(), "Vendeu um produto utilizando pix");
+        
+         log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Vendeu um Produto" );
         javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
     
     }//GEN-LAST:event_bntConfirmarActionPerformed
