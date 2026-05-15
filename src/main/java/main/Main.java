@@ -27,7 +27,7 @@ public class Main {
         // carregamento em segundo plano
         new Thread(() -> {
             try {
-                
+
                 System.out.println("Carregando recursos e banco de dados...");
                
                 Thread.sleep(3000); 
@@ -42,7 +42,11 @@ public class Main {
                     
                     
                     MenuPrincipal sistema = new MenuPrincipal();
+                    
+                    sistema.setLocationRelativeTo(null);
+                    sistema.setResizable(false);
                     sistema.setVisible(true); 
+                    
                 });
             }
         }).start();

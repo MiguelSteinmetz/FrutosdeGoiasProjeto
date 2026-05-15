@@ -9,7 +9,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private JPanel container;
 
     public MenuPrincipal() {
-    setSize(600, 600);
+    setSize(612, 600);
     setLocationRelativeTo(null);
      layout = new CardLayout();
     container = new JPanel(layout);
