@@ -51,14 +51,14 @@ public class Login extends javax.swing.JPanel {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_256x256.png")));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel4.setText("Login");
+        jLabel4.setText("LOGIN");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel5.setText("Senha");
+        jLabel5.setText("SENHA");
 
       
 
-        jButton1.setText("Logar");
+        jButton1.setText("LOGAR");
         jButton1.addActionListener(evt -> logar());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -107,18 +107,18 @@ public class Login extends javax.swing.JPanel {
         String senha = new String(jPasswordField1.getPassword());
 
         if (login.isEmpty() || senha.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            javax.swing.JOptionPane.showMessageDialog(this, " ATENÇÃO PREENCHA TODOS OS CAMPOS! ");
             return;
         }
         Usuario logado = service.autenticar(login, senha);
         
         if (logado != null) {
             SessaoUsuario.setUsuarioLogado(logado);
-            log.registrar(logado.getNome(), "Entrou no sistema");
+            log.registrar(logado.getNome(), " ENTROU NO SISTEMA ");
           
             mainPanel.irParaMenu(); //troca de tela para menu
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+            javax.swing.JOptionPane.showMessageDialog(this, " USUÁRIO OU SENHA INVÁLIDOS! ");
         }
     }
 
@@ -132,4 +132,5 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+
 }

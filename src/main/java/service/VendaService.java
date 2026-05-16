@@ -17,6 +17,7 @@ public class VendaService {
     }
 
     public List<Venda> relatorioVendas(){
+
         List<Venda> vendas = vendaRepository.buscarTodos();
         return vendas;
     }
@@ -27,6 +28,7 @@ public class VendaService {
    
     
     public Long totalVendidoPorProduto(int produtoId) {
+
         VendaRepository repo = new VendaRepository();
         return repo.totalVendidoPorProduto(produtoId);
     }
@@ -42,6 +44,7 @@ public class VendaService {
     public double getFaturamentoTotal() {
         
         List<Venda> vendas = vendaRepository.buscarTodos();
+
         double faturamentoTotal = 0;
         for(Venda v : vendas) {
             faturamentoTotal +=  v.getProduto().getPreco()  * v.getQuantidade();
@@ -50,6 +53,7 @@ public class VendaService {
     }
 
     public int getQuantidadeVendida() {
+
         List<Venda> vendas =   vendaRepository.buscarTodos();
         int total = 0;
         for(Venda v : vendas) {
@@ -59,6 +63,7 @@ public class VendaService {
     }
 
     public String getProdutoMaisVendido() {
+
         List<Object[]> lista =
                 vendaRepository.topProdutosVendidos();
         if(lista.isEmpty()) {
@@ -68,6 +73,7 @@ public class VendaService {
     }
    
     public double getCustoTotal(){
+
      List<Venda> vendas =
             vendaRepository.buscarTodos();
 
