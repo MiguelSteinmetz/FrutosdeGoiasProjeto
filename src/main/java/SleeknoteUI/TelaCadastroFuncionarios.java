@@ -283,13 +283,13 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         int linhaSelecionada = TabelaCadastroFuncionario.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecione alguém na tabela para editar.");
+            javax.swing.JOptionPane.showMessageDialog(this, "SELECIONE ALGUÉM NA TABELA PARA EDITAR.");
             return;
         }
 
         try {
             model.Usuario func = new model.Usuario();
-        
+
             // Seta o ID para que o 'atualizar' saiba qual registro alterar no banco
             int id = Integer.parseInt(TabelaCadastroFuncionario.getValueAt(linhaSelecionada, 0).toString());
             func.setId(id);
@@ -301,12 +301,12 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
             repository.UsuarioRepository repo = new repository.UsuarioRepository();
             repo.atualizar(func);
 
-            javax.swing.JOptionPane.showMessageDialog(this, "Dados atualizados!");
-             log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Editou um Funcionario" );
+            javax.swing.JOptionPane.showMessageDialog(this, "DADOS ATUALIZADOS!");
+             log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"EDITOU UM FUNCIONARIO" );
             listarUsuario();
-            
+
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "ERRO AO ATUALIZAR: " + e.getMessage());
         }
 
     }//GEN-LAST:event_BntEditarActionPerformed
@@ -327,8 +327,8 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
             repo.salvar(novoUsuario); // Certifique-se de que o método no seu repo se chama 'cadastrar' ou 'salvar'
         
             // 3. Feedback para o usuário
-            javax.swing.JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
-            log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Cadastrou um Funcionario" );
+            javax.swing.JOptionPane.showMessageDialog(this, "FUNCIONÁRIO CADASTRADO COM SUCESSO!");
+            log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"CADASTROU UM FUNCIONARIO" );
             // 4. Limpar os campos após o cadastro
             TxtNome.setText("");
             TxtId.setText("");
@@ -339,7 +339,7 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
             carregarTabela();
         
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage()); 
+            javax.swing.JOptionPane.showMessageDialog(this, "ERRO AO CADASTRAR: " + e.getMessage());
         }
         
         
@@ -350,11 +350,11 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         int linhaSelecionada = TabelaCadastroFuncionario.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um funcionário na tabela.");
+            javax.swing.JOptionPane.showMessageDialog(this, "SELECIONE UM FUNCIONÁRIO NA TABELA.");
             return;
         }
 
-        int confirmar = javax.swing.JOptionPane.showConfirmDialog(this, "Excluir funcionário?", "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
+        int confirmar = javax.swing.JOptionPane.showConfirmDialog(this,  "EXCLUIR FUNCIONÁRIO?", "CONFIRMAR", javax.swing.JOptionPane.YES_NO_OPTION);
 
         if (confirmar == javax.swing.JOptionPane.YES_OPTION) {
             try {
@@ -366,8 +366,8 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
 
                 if (usuarioParaRemover != null) {
                     repo.remover(usuarioParaRemover);
-                    javax.swing.JOptionPane.showMessageDialog(this, "Funcionário removido com sucesso!");
-                    log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Removeu um Funcionario" );
+                    javax.swing.JOptionPane.showMessageDialog(this, "FUNCIONÁRIO REMOVIDO COM SUCESSO!");
+                    log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"REMOVEU UM FUNCIONARIO" );
                     carregarTabela(); 
                 }
             } catch (Exception e) {
