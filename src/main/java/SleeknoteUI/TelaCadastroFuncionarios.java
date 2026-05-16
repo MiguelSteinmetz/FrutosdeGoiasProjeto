@@ -371,7 +371,7 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
                     carregarTabela(); 
                 }
             } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao remover: " + e.getMessage());
+                javax.swing.JOptionPane.showMessageDialog(this, " ERRO AO REMOVER: " + e.getMessage());
             }
         }
         
