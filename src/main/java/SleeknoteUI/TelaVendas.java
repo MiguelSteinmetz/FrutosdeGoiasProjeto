@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import repository.ProdutoRepository;
 import javax.swing.JDialog;
-import model.ItemCarrinho;
 import model.Usuario;
 import model.Venda;
 import service.LogService;

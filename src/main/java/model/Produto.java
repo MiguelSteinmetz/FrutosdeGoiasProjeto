@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Produto")
+
 public class Produto {
 
 

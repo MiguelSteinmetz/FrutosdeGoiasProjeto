@@ -590,19 +590,7 @@ public class TelaProdutos extends javax.swing.JPanel {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        Login tela = new Login();
-
-    tela.setSize(this.getSize());
-
-    this.removeAll();
-
-    this.setLayout(new java.awt.BorderLayout());
-
-    this.add(tela, java.awt.BorderLayout.CENTER);
-
-    this.revalidate();
-
-    this.repaint();
+        
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
