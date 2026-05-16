@@ -127,7 +127,7 @@ public class TelaVendas extends javax.swing.JPanel {
         if (linhaProduto == -1) {
 
             JOptionPane.showMessageDialog(null,
-                    "Selecione um produto!");
+                    "SELECIONE UM PRODUTO!");
 
             return;
         }
@@ -231,7 +231,7 @@ public class TelaVendas extends javax.swing.JPanel {
 
         String cargo = u.getTipo();
 
-        if (!cargo.equals("Gerente")) {
+        if (!cargo.equals("GERENTE")) {
             
             BntRelatorios.setEnabled(false);
             BntFuncionarios.setEnabled(false);
@@ -550,7 +550,7 @@ public class TelaVendas extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(
                 null,
-                "Carrinho vazio!"
+                "CARRINHO VAZIO!"
         );
 
         return;
@@ -561,15 +561,15 @@ public class TelaVendas extends javax.swing.JPanel {
     // opções
     String[] formasPagamento = {
         "PIX",
-        "Cartão de Débito",
-        "Cartão de Crédito"
+        "CARTÃO DE DÉBITO",
+        "CARTÃO DE CRÉDITO",
     };
 
     // seleção
     String pagamento = (String) JOptionPane.showInputDialog(
             null,
-            "Selecione a forma de pagamento:",
-            "Pagamento",
+            "SELECIONE A FORMA DE PAGAMENTO",
+            "PAGAMENTO",
             JOptionPane.QUESTION_MESSAGE,
             null,
             formasPagamento,
@@ -619,10 +619,10 @@ public class TelaVendas extends javax.swing.JPanel {
     //
     int confirmar = JOptionPane.showConfirmDialog(
             null,
-            "Forma: " + pagamento
-            + "\nTotal: " + total
-            + "\n\nConfirmar pagamento?",
-            "Finalizar Compra",
+            "FORMA: " + pagamento
+            + "\nTOTAL: " + total
+            + "\n\nCONFIRMAR PAGAMENTO?",
+            "FINALIZAR COMPRA",
             JOptionPane.YES_NO_OPTION
     );
 
@@ -631,12 +631,12 @@ public class TelaVendas extends javax.swing.JPanel {
         salvarVenda(pagamento);
         JOptionPane.showMessageDialog(
                 null,
-                "Pagamento realizado com sucesso!"
-                + "\nForma: " + pagamento
-                + "\nTotal: " + total
+                "PAGAMENTO FINALIZADO!"
+                + "\nFORMA: " + pagamento
+                + "\nTOTAL: " + total
         );
         
-         log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Vendeu um Produto" );
+         log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"VENDEU UM PRODUTO" );
        
         
         carrinho.setRowCount(0);
@@ -774,7 +774,7 @@ public class TelaVendas extends javax.swing.JPanel {
         if (linha == -1) {
 
             JOptionPane.showMessageDialog(null,
-                    "Selecione um item do carrinho!");
+                    "SELECIONE UM ITEM DO CARRINHO!");
 
             return;
         }
@@ -796,7 +796,7 @@ public class TelaVendas extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(
                     null,
-                    "Selecione um item do carrinho!"
+                    "SSELECIONE UM ITEM DO CARRINHO!"
             );
 
             return;
