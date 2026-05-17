@@ -4,18 +4,15 @@ import model.LogSistema;
 import repository.LogRepository;
 import java.util.List;
 
-public  class
+public class LogService {
 
-LogService  {
+    private LogRepository repository = new LogRepository();
 
-    private  LogRepository  repository  = new LogRepository();
-
-    public  void  registrar(String usuario, String acao) {
+    public void registrar(String usuario, String acao) {
 
         LogSistema log = new LogSistema(usuario, acao);
 
         repository.salvar(log);
-
     }
 
     public List<LogSistema> listarTodos() {

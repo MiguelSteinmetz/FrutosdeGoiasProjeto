@@ -52,23 +52,15 @@ public class telaRelatorioVendas extends javax.swing.JInternalFrame {
 
     for (Venda v : lista) {
 
-    String nomeUsuario;
-
-    if (v.getUsuario() != null) {
-        nomeUsuario = v.getUsuario().getNome();
-    } else {
-        nomeUsuario = "Sem usuário";
+        modelo.addRow(new Object[]{
+            v.getUsuario().getNome(),
+            v.getProduto().getNome(),
+            v.getTipoPagamento(),
+            v.getQuantidade(),
+            v.getValorTotal(),
+            v.getData()
+        });
     }
-
-    modelo.addRow(new Object[]{
-        nomeUsuario,
-        v.getProduto().getNome(),
-        v.getTipoPagamento(),
-        v.getQuantidade(),
-        v.getValorTotal(),
-        v.getData()
-    });
-}
 }
   
   public void criarGrafico() {
@@ -100,13 +92,14 @@ public class telaRelatorioVendas extends javax.swing.JInternalFrame {
 
     JFreeChart grafico = ChartFactory.createBarChart(  "Vendas por Produto",  "Produto",    "Valor",  dados  );
         CategoryPlot CategoryPlot;
-        
     CategoryPlot plot = grafico.getCategoryPlot();
-    BarRenderer renderer = (BarRenderer) plot.getRenderer();
-    renderer.setMaximumBarWidth(0.05);
-    renderer.setSeriesPaint( 0, Color.orange);
 
-    ChartPanel painel = new ChartPanel(grafico);
+    BarRenderer renderer =
+        (BarRenderer) plot.getRenderer();
+
+renderer.setSeriesPaint( 0, Color.BLUE);
+    ChartPanel painel =
+            new ChartPanel(grafico);
 
     jPanelGrafico.removeAll();
     jPanelGrafico.setLayout( new BorderLayout());
@@ -125,7 +118,7 @@ public class telaRelatorioVendas extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jPanelGrafico = new javax.swing.JPanel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 650));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

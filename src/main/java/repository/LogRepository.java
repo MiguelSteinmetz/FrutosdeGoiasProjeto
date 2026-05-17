@@ -26,12 +26,10 @@ public class LogRepository {
 
         List<LogSistema> logs = em
                 .createQuery("FROM LogSistema", LogSistema.class)
-
                 .getResultList();
 
         em.close();
 
         return logs;
-
     }
 }

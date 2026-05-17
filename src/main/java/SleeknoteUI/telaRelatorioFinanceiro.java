@@ -1,7 +1,6 @@
 package SleeknoteUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +9,6 @@ import model.Venda;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import service.VendaService;
 
@@ -20,8 +17,6 @@ import service.VendaService;
  * @author Erik_
  */
 public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
-    
-    
 
     public telaRelatorioFinanceiro() {
         initComponents();
@@ -43,17 +38,18 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lbQuantVendida = new javax.swing.JLabel();
-        lbFatTotal = new javax.swing.JLabel();
-        lbCustoTotal = new javax.swing.JLabel();
-        lbLucroBrutoTotal = new javax.swing.JLabel();
         jPanelRelatorioFinanceiro = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        lbQuantVendida = new javax.swing.JLabel();
+        lbLucroBrutoTotal = new javax.swing.JLabel();
+        lbCustoTotal = new javax.swing.JLabel();
+        lbFatTotal = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
         setPreferredSize(new java.awt.Dimension(1248, 913));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setMinimumSize(new java.awt.Dimension(910, 438));
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 650));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -67,36 +63,24 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 210, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Quantidade vendida:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Faturamento total: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Custo total");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Lucro bruto total:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
-
-        lbQuantVendida.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbQuantVendida.setText("0");
-        jPanel1.add(lbQuantVendida, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 110, 30));
-
-        lbFatTotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbFatTotal.setText("R$: 0");
-        jPanel1.add(lbFatTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 130, -1));
-
-        lbCustoTotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbCustoTotal.setText("R$: 0");
-        jPanel1.add(lbCustoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 130, 30));
-
-        lbLucroBrutoTotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbLucroBrutoTotal.setText("R$: 0");
-        jPanel1.add(lbLucroBrutoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 130, 30));
 
         javax.swing.GroupLayout jPanelRelatorioFinanceiroLayout = new javax.swing.GroupLayout(jPanelRelatorioFinanceiro);
         jPanelRelatorioFinanceiro.setLayout(jPanelRelatorioFinanceiroLayout);
@@ -110,6 +94,47 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
         );
 
         jPanel1.add(jPanelRelatorioFinanceiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 420, 310));
+
+        lbQuantVendida.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbQuantVendida.setText("0");
+
+        lbLucroBrutoTotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbLucroBrutoTotal.setText("R$: 0");
+
+        lbCustoTotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbCustoTotal.setText("R$: 0");
+
+        lbFatTotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbFatTotal.setText("R$: 0");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbQuantVendida, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbLucroBrutoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbCustoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbFatTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(lbFatTotal)
+                .addGap(18, 18, 18)
+                .addComponent(lbCustoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lbLucroBrutoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(lbQuantVendida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, -1, 200));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,11 +199,6 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
                     dados
             );
 
-    CategoryPlot plot = grafico.getCategoryPlot();
-    BarRenderer renderer = (BarRenderer) plot.getRenderer();
-    renderer.setMaximumBarWidth(0.05);
-    renderer.setSeriesPaint( 0, Color.orange);
-    
     ChartPanel painel =
             new ChartPanel(grafico);
 
@@ -193,6 +213,7 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
     );
 
     jPanelRelatorioFinanceiro.revalidate();
+
     jPanelRelatorioFinanceiro.repaint();
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,6 +224,7 @@ public class telaRelatorioFinanceiro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelRelatorioFinanceiro;
     private javax.swing.JLabel lbCustoTotal;
     private javax.swing.JLabel lbFatTotal;
