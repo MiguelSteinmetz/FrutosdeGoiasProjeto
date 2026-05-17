@@ -1,15 +1,22 @@
+
 package SleeknoteUI;
 
+import model.Usuario;
+import service.LogService;
 import service.UsuarioService;
+import model.SessaoUsuario;
 
 public class Login extends javax.swing.JPanel {
 
+    
     private UsuarioService service = new UsuarioService();
     private MenuPrincipal mainPanel;
+    LogService log = new LogService();
 
     public Login(MenuPrincipal mainPanel) {
         this.mainPanel = mainPanel;
         initComponents();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -23,7 +30,6 @@ public class Login extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -46,14 +52,14 @@ public class Login extends javax.swing.JPanel {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo_256x256.png")));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel4.setText("Login");
+        jLabel4.setText("LOGIN");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        jLabel5.setText("Senha");
+        jLabel5.setText("SENHA");
 
-        jCheckBox1.setText("Lembre-me");
+      
 
-        jButton1.setText("Logar");
+        jButton1.setText("LOGAR");
         jButton1.addActionListener(evt -> logar());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -69,7 +75,6 @@ public class Login extends javax.swing.JPanel {
                                         .addComponent(jTextField1, 200, 200, 200)
                                         .addComponent(jLabel5)
                                         .addComponent(jPasswordField1, 200, 200, 200)
-                                        .addComponent(jCheckBox1)
                                         .addComponent(jButton1, 200, 200, 200))
                                 .addGap(100)
                                 .addComponent(jPanel3))
@@ -90,7 +95,6 @@ public class Login extends javax.swing.JPanel {
                                 .addGap(10)
                                 .addComponent(jPasswordField1, 30, 30, 30)
                                 .addGap(10)
-                                .addComponent(jCheckBox1)
                                 .addGap(20)
                                 .addComponent(jButton1, 40, 40, 40))
         );
@@ -100,18 +104,22 @@ public class Login extends javax.swing.JPanel {
     }
 
     private void logar() {
-        String login = jTextField1.getText();
+         String login = jTextField1.getText();
         String senha = new String(jPasswordField1.getPassword());
 
         if (login.isEmpty() || senha.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            javax.swing.JOptionPane.showMessageDialog(this, " ATENÇÃO PREENCHA TODOS OS CAMPOS! ");
             return;
         }
-         if (service.autenticar(login, senha)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Bem-vindo!");
+        Usuario logado = service.autenticar(login, senha);
+        
+        if (logado != null) {
+            SessaoUsuario.setUsuarioLogado(logado);
+            log.registrar(logado.getNome(), " ENTROU NO SISTEMA ");
+          
             mainPanel.irParaMenu(); //troca de tela para menu
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+            javax.swing.JOptionPane.showMessageDialog(this, " USUÁRIO OU SENHA INVÁLIDOS! ");
         }
     }
 
@@ -125,4 +133,5 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+
 }

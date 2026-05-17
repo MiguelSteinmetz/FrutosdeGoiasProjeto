@@ -3,6 +3,7 @@ package config;
 import org.flywaydb.core.Flyway;
 
 public class FlyWayconfig {
+
     public static void migrate() {
 
         Flyway flyway = Flyway.configure()
@@ -10,6 +11,7 @@ public class FlyWayconfig {
                         "postgres",
                         "admin")
                 .baselineOnMigrate(true)
+
                 .load();
 
         flyway.migrate();

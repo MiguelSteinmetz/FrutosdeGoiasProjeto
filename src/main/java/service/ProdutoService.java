@@ -5,7 +5,7 @@
 
 package service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import model.Produto;
 import repository.ProdutoRepository;
@@ -18,7 +18,8 @@ public class ProdutoService {
         if (p.getPreco() > 0) {
             repositoryProduto.salvar(p);
         } else {
-            System.out.println("Erro: Preço inválido!");
+            System.out.println("ERRO: PREÇO INVÁLIDO!");
+
         }
     }
 
@@ -30,15 +31,25 @@ public class ProdutoService {
     public Produto buscarPorId(int id) {
         Produto p = repositoryProduto.buscarPorId(id);
         if (p == null) {
-            System.out.println("Aviso: Produto " + id + " não encontrado.");
+            System.out.println("AVISO PRODUTO " + id + " NÃO ENCONTRADO!.");
         }
         return p;
     }
+    public  List<Produto>  buscarPorNome(String nome)  {
+
+    List<Produto>  lista = repositoryProduto.buscarPorNome(nome);
+
+    if (lista.isEmpty())  {
+
+        System.out.println("AVISO PRODUTO " + nome + " NÃO ENCONTRADO!.");
+    }
+
+    return lista;
+}
 
     public void deletar(Produto p){
         repositoryProduto.remover(p);
     }
-
     public void atualizar(Produto p){
         repositoryProduto.atualizar(p);
     }

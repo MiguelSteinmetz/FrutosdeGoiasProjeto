@@ -2,6 +2,8 @@ package SleeknoteUI;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.SessaoUsuario;
+import model.Usuario;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -30,7 +32,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     setSize(1366, 768);
     setLocationRelativeTo(null);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
+  
+   
     }
+    
+    
 
     // Metodos de navegacao
     
@@ -51,9 +57,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.show(container, "LOGIN");
     }
 
-    
-    // acoes dos menus
-    
+  
     private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {
         irParaProdutos();
     }
