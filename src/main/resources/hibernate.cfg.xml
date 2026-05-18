@@ -19,7 +19,6 @@
         <mapping class="model.Venda"/>
         <mapping class="model.Producao"/>
         <mapping class="model.Perda"/>
-        <mapping class="model.LogSistema"/>
 
     </session-factory>
 </hibernate-configuration>

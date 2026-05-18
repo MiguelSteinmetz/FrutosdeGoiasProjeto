@@ -1,16 +1,15 @@
+
+
 package main;
 
-import javax.swing.JFrame;
-import SleeknoteUI.MenuPrincipal;
-import SleeknoteUI.Login;
-
+import config.FlyWayconfig;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
-          java.awt.EventQueue.invokeLater(() -> {
-            new MenuPrincipal().setVisible(true);
-        });
-    
-    }
+        FlyWayconfig.migrate();
+        Sistema sistema = new Sistema();
+        sistema.iniciar();
 
+    }
 }

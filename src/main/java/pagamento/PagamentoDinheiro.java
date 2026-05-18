@@ -1,13 +1,16 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package pagamento;
 
 public class PagamentoDinheiro extends Pagamento {
-
     public PagamentoDinheiro() {
-        super("Dinheiro");
+        super("Dinheiro ");
     }
 
-    @Override
-    public double calcularValorFinal(double valorBruto) {
+    public double calcularFinal(double valorBruto) {
         return valorBruto;
     }
 }
