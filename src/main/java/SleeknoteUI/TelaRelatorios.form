@@ -113,7 +113,7 @@
                                   <Component id="BntCaixa" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="BntProdutos" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="jButton8" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="jButton9" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="BntFuncionarios" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="jButton10" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="jButton11" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
@@ -135,7 +135,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton8" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton9" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="BntFuncionarios" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton10" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -222,7 +222,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="BntFuncionarios">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="99" red="ff" type="rgb"/>
@@ -242,7 +242,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BntFuncionariosActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton10">

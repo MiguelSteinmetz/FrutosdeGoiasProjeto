@@ -25,6 +25,9 @@
             return this.em.createQuery("select u From Usuario u", Usuario.class).getResultList();
         }
 
+    return em.find(Usuario.class, id);
+    }
+    public List<Usuario> buscarPorNome(String nome) {
 
     return em.find(Usuario.class, id);
     }
