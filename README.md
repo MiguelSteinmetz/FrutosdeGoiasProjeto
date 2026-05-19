@@ -9,13 +9,21 @@ Este projeto foi desenvolvido com fins acadêmicos, simulando um sistema real ut
 O sistema permite:
 
 Cadastro de produtos
+
 Controle de vendas
+
 Gerenciamento de funcionários
+
 Relatórios administrativos
+
 Controle de estoque e lucro
+
 Login de usuários
+
 Interface gráfica moderna com Java Swing
+
 🖥️ Tecnologias Utilizadas
+
 Java
 Java Swing
 Hibernate / JPA
