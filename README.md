@@ -24,40 +24,40 @@ Interface gráfica moderna com Java Swing
 
 🖥️ Tecnologias Utilizadas
 
-Java
-Java Swing
-Hibernate / JPA
-MySQL
-Maven
-NetBeans IDE
-📂 Estrutura do Sistema
+  Java
+  Java Swing
+  Hibernate / JPA
+  MySQL
+  Maven
+  NetBeans IDE
+  📂 Estrutura do Sistema
 
-O sistema possui módulos como:
+  O sistema possui módulos como:
 
-🍦 Produtos
-💰 Vendas
-👨‍💼 Funcionários
-📊 Relatórios
-🔐 Login e autenticação
-📸 Interface do Sistema
+  🍦 Produtos
+  💰 Vendas
+  👨‍💼 Funcionários
+  📊 Relatórios
+  🔐 Login e autenticação
+  📸 Interface do Sistema
 
 O projeto possui interface gráfica desenvolvida em Java Swing com foco em organização visual e usabilidade.
 
-⚙️ Funcionalidades
-Cadastro de Produtos
-Nome
-Preço
-Quantidade
-Controle de lucro
-Controle de Vendas
-Registro de vendas
-Tipo de pagamento
-Histórico de vendas
-Funcionários
-Cadastro de usuários
-Controle de cargos
-Login no sistema
-Relatórios
-Produtos mais vendidos
-Total vendido
-Relatórios financeiros
+  ⚙️ Funcionalidades
+  Cadastro de Produtos
+  Nome
+  Preço
+  Quantidade
+  Controle de lucro
+  Controle de Vendas
+  Registro de vendas
+  Tipo de pagamento
+  Histórico de vendas
+  Funcionários
+  Cadastro de usuários
+  Controle de cargos
+  Login no sistema
+  Relatórios
+  Produtos mais vendidos
+  Total vendido
+  Relatórios financeiros
