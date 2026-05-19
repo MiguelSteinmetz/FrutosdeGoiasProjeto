@@ -48,7 +48,7 @@
     <Container class="javax.swing.JDesktopPane" name="TelaCadastroProdutosDSK">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="66" type="rgb"/>
+          <Color blue="cc" green="ff" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -116,14 +116,12 @@
                       <Component id="lbId" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="TxtId" alignment="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="TxtNome" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="TxtEstoque" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="TxtCusto" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="TxtPreco" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtNome" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="TxtEstoque" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="TxtCusto" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="TxtPreco" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="TxtId" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="343" max="-2" attributes="0"/>
@@ -148,25 +146,16 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Nome"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Estoque"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Custo"/>
           </Properties>
         </Component>
@@ -288,9 +277,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Valor"/>
           </Properties>
         </Component>
@@ -304,9 +290,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbId">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="ID"/>
           </Properties>
         </Component>

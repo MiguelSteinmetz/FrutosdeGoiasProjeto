@@ -52,15 +52,23 @@ public class telaRelatorioVendas extends javax.swing.JInternalFrame {
 
     for (Venda v : lista) {
 
-        modelo.addRow(new Object[]{
-            v.getUsuario().getNome(),
-            v.getProduto().getNome(),
-            v.getTipoPagamento(),
-            v.getQuantidade(),
-            v.getValorTotal(),
-            v.getData()
-        });
+    String nomeUsuario;
+
+    if (v.getUsuario() != null) {
+        nomeUsuario = v.getUsuario().getNome();
+    } else {
+        nomeUsuario = "Sem usuário";
     }
+
+    modelo.addRow(new Object[]{
+        nomeUsuario,
+        v.getProduto().getNome(),
+        v.getTipoPagamento(),
+        v.getQuantidade(),
+        v.getValorTotal(),
+        v.getData()
+    });
+}
 }
   
   public void criarGrafico() {
@@ -92,14 +100,13 @@ public class telaRelatorioVendas extends javax.swing.JInternalFrame {
 
     JFreeChart grafico = ChartFactory.createBarChart(  "Vendas por Produto",  "Produto",    "Valor",  dados  );
         CategoryPlot CategoryPlot;
+        
     CategoryPlot plot = grafico.getCategoryPlot();
+    BarRenderer renderer = (BarRenderer) plot.getRenderer();
+    renderer.setMaximumBarWidth(0.05);
+    renderer.setSeriesPaint( 0, Color.orange);
 
-    BarRenderer renderer =
-        (BarRenderer) plot.getRenderer();
-
-renderer.setSeriesPaint( 0, Color.BLUE);
-    ChartPanel painel =
-            new ChartPanel(grafico);
+    ChartPanel painel = new ChartPanel(grafico);
 
     jPanelGrafico.removeAll();
     jPanelGrafico.setLayout( new BorderLayout());
@@ -118,7 +125,9 @@ renderer.setSeriesPaint( 0, Color.BLUE);
         jButton2 = new javax.swing.JButton();
         jPanelGrafico = new javax.swing.JPanel();
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        setBorder(null);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 650));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -155,7 +164,7 @@ renderer.setSeriesPaint( 0, Color.BLUE);
         jButton2.setText("Relatorio Vendas");
         jButton2.setEnabled(false);
         jButton2.addActionListener(this::jButton2ActionPerformed);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 6, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, -1, -1));
 
         javax.swing.GroupLayout jPanelGraficoLayout = new javax.swing.GroupLayout(jPanelGrafico);
         jPanelGrafico.setLayout(jPanelGraficoLayout);
@@ -165,10 +174,10 @@ renderer.setSeriesPaint( 0, Color.BLUE);
         );
         jPanelGraficoLayout.setVerticalGroup(
             jPanelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanelGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 330, 340));
+        jPanel1.add(jPanelGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 330, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,13 +185,13 @@ renderer.setSeriesPaint( 0, Color.BLUE);
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 236, Short.MAX_VALUE))
+                .addGap(0, 248, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 376, Short.MAX_VALUE))
+                .addGap(0, 388, Short.MAX_VALUE))
         );
 
         pack();

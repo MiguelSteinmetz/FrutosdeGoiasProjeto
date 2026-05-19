@@ -3,9 +3,7 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-      <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
-        <BevelBorder/>
-      </Border>
+      <Border info="null"/>
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -37,7 +35,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="845" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="851" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="TelaCadastroFuncionariosDSK" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -45,7 +43,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="648" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="654" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="TelaCadastroFuncionariosDSK" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -82,9 +80,8 @@
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="TxtId" min="-2" pref="74" max="-2" attributes="0"/>
@@ -95,11 +92,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="TxtSenha" min="-2" pref="125" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TxtCargo" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="CbxCargo" min="-2" pref="120" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane3" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="149" max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -118,9 +116,9 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="TxtNome" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="TxtSenha" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="TxtCargo" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="TxtId" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="TxtLogin" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="CbxCargo" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="343" max="-2" attributes="0"/>
@@ -275,8 +273,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtSenhaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="TxtCargo">
-        </Component>
         <Component class="javax.swing.JTextField" name="TxtId">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
@@ -295,6 +291,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="ID"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="CbxCargo">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="2">
+                <StringItem index="0" value="Gerente"/>
+                <StringItem index="1" value="Funcionario"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

@@ -29,7 +29,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     layout.show(container, "LOGIN");
 
-    setSize(1366, 768);
+    setSize(1600, 1400);
     setLocationRelativeTo(null);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   
@@ -74,8 +74,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         irParaProdutos();
     }
 
-    // =========================
-    // MAIN
+  //Main
     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
@@ -83,9 +82,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
     }
 
-    // =========================
-    // COMPONENTES (mantém do NetBeans)
-    // =========================
     private javax.swing.JMenu Funcionarios;
     private javax.swing.JMenu Login;
     private javax.swing.JMenu Menu;

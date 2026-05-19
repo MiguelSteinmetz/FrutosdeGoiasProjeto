@@ -79,6 +79,8 @@ private void criarGraficoTopVendidos() {
         jButton2 = new javax.swing.JButton();
         iPanelTopVendidos = new javax.swing.JPanel();
 
+        setBorder(null);
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setMinimumSize(new java.awt.Dimension(910, 438));
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 650));
@@ -90,7 +92,7 @@ private void criarGraficoTopVendidos() {
         jButton2.setText("Top Produtos Vendidos");
         jButton2.setEnabled(false);
         jButton2.addActionListener(this::jButton2ActionPerformed);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 260, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 260, -1));
 
         javax.swing.GroupLayout iPanelTopVendidosLayout = new javax.swing.GroupLayout(iPanelTopVendidos);
         iPanelTopVendidos.setLayout(iPanelTopVendidosLayout);

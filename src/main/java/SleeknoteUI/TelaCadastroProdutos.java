@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package SleeknoteUI;
-import javax.swing.table.DefaultTableModel;
-import java.util.List;
 import model.Produto;
 import repository.ProdutoRepository;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import model.Usuario;
+import service.LogService;
+import model.SessaoUsuario;
 
 /**
  *
@@ -16,7 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
 
- 
+    
+     LogService log = new LogService();
+     
+     
     public TelaCadastroProdutos() {
         initComponents();
         listarProdutos();
@@ -76,22 +80,25 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
         TxtCusto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         TxtId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lbId = new javax.swing.JLabel();
 
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
-        setTitle("TelaCadastroProdutos");
+        setForeground(java.awt.Color.orange);
+        setIconifiable(true);
+        setTitle("Tela de Cadastro de Produtos");
+        setToolTipText("3");
+        setName(""); // NOI18N
+        setVisible(true);
 
-        TelaCadastroProdutosDSK.setBackground(new java.awt.Color(102, 102, 102));
+        TelaCadastroProdutosDSK.setBackground(new java.awt.Color(255, 255, 204));
 
         TxtNome.addActionListener(this::TxtNomeActionPerformed);
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nome");
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estoque");
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Custo");
 
         BntEditar.setBackground(new java.awt.Color(255, 153, 51));
@@ -120,11 +127,11 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Produto", "Custo", "Quantidade", "Valor"
+                "ID", "Nome", "Login", "Senha", "Cargo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -139,11 +146,14 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(TabelaCadastroProdutos);
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        TxtCusto.addActionListener(this::TxtCustoActionPerformed);
+
         jLabel7.setText("Valor");
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ID");
+        TxtId.setEditable(false);
+        TxtId.addActionListener(this::TxtIdActionPerformed);
+
+        lbId.setText("ID");
 
         TelaCadastroProdutosDSK.setLayer(TxtNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroProdutosDSK.setLayer(TxtPreco, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -158,7 +168,7 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
         TelaCadastroProdutosDSK.setLayer(TxtCusto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroProdutosDSK.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroProdutosDSK.setLayer(TxtId, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        TelaCadastroProdutosDSK.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        TelaCadastroProdutosDSK.setLayer(lbId, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout TelaCadastroProdutosDSKLayout = new javax.swing.GroupLayout(TelaCadastroProdutosDSK);
         TelaCadastroProdutosDSK.setLayout(TelaCadastroProdutosDSKLayout);
@@ -167,17 +177,6 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
             .addGroup(TelaCadastroProdutosDSKLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(TelaCadastroProdutosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaCadastroProdutosDSKLayout.createSequentialGroup()
-                        .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
                     .addGroup(TelaCadastroProdutosDSKLayout.createSequentialGroup()
                         .addGroup(TelaCadastroProdutosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(TelaCadastroProdutosDSKLayout.createSequentialGroup()
@@ -187,19 +186,32 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BntDeleta, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(52, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaCadastroProdutosDSKLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1)
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel5)
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel7)
-                        .addGap(108, 108, 108))))
+                        .addGroup(TelaCadastroProdutosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(TelaCadastroProdutosDSKLayout.createSequentialGroup()
+                                .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 21, Short.MAX_VALUE))
+                            .addGroup(TelaCadastroProdutosDSKLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(lbId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(206, 206, 206)
+                                .addComponent(jLabel6)
+                                .addGap(47, 47, 47)
+                                .addComponent(jLabel5)
+                                .addGap(94, 94, 94)
+                                .addComponent(jLabel7)))
+                        .addGap(69, 69, 69))))
         );
         TelaCadastroProdutosDSKLayout.setVerticalGroup(
             TelaCadastroProdutosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,15 +222,14 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel1))
+                    .addComponent(lbId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TelaCadastroProdutosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtId)
-                    .addGroup(TelaCadastroProdutosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TxtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TxtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(TelaCadastroProdutosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -233,21 +244,11 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(TelaCadastroProdutosDSK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(TelaCadastroProdutosDSK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(TelaCadastroProdutosDSK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(TelaCadastroProdutosDSK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -289,7 +290,8 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
 
         JOptionPane.showMessageDialog(this,
             "Produto atualizado!");
-
+        
+        log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Editou um Produto" );
         listarProdutos();
 
         limparCampos();
@@ -327,7 +329,7 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
         repository.salvar(produto);
         
         JOptionPane.showMessageDialog(this, "Produto Cadastrado com sucesso!!!");
-        
+         log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Cadastrou um Produto" );
         listarProdutos();
       }catch(Exception e) {
           JOptionPane.showMessageDialog(this, "Produto nao cadastrado \n Erro : " + e.getMessage());
@@ -365,12 +367,19 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
 
     JOptionPane.showMessageDialog(this,
         "Produto removido!!!");
+    
+    log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Deletou um Produto" );
+    
     }//GEN-LAST:event_BntDeletaActionPerformed
 
     private void TabelaCadastroProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaCadastroProdutosMouseClicked
         // TODO add your handling code here:
         int linha = TabelaCadastroProdutos.getSelectedRow();
 
+    TxtId.setText(
+        TabelaCadastroProdutos.getValueAt(linha, 0).toString()
+    );    
+        
     TxtNome.setText(
         TabelaCadastroProdutos.getValueAt(linha, 1).toString()
     );
@@ -388,6 +397,14 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
     );
     }//GEN-LAST:event_TabelaCadastroProdutosMouseClicked
 
+    private void TxtCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCustoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtCustoActionPerformed
+
+    private void TxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtIdActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BntCadastrar;
@@ -400,11 +417,11 @@ public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtNome;
     private javax.swing.JTextField TxtPreco;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lbId;
     // End of variables declaration//GEN-END:variables
 }

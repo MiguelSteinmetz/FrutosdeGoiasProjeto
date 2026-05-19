@@ -66,6 +66,8 @@ public class telaRelatorioTotalVendidos extends javax.swing.JInternalFrame {
         tblTotalVendidoProdutos1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
 
+        setBorder(null);
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setPreferredSize(new java.awt.Dimension(850, 650));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,7 +105,7 @@ public class telaRelatorioTotalVendidos extends javax.swing.JInternalFrame {
         jButton3.setText("Total Vendido Por Produto");
         jButton3.setEnabled(false);
         jButton3.addActionListener(this::jButton3ActionPerformed);
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

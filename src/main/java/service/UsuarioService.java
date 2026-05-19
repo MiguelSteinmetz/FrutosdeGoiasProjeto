@@ -9,6 +9,7 @@ import repository.UsuarioRepository;
 import java.util.List;
 
 public class UsuarioService {
+    
 
 
     UsuarioRepository usuarioRepository = new UsuarioRepository();
@@ -20,17 +21,14 @@ public class UsuarioService {
     }
 
     public Usuario autenticar(String login, String senha) {
-        for(Usuario u : usuarioRepository.buscartodos()) {
-            if (u.getLogin().equals(login) && u.getSenha().equals(senha)) {
-                return u;
-            }
-        }
-        return null;
-    }
+    Usuario usuario = usuarioRepository.buscarPorLoginESenha(login, senha);
+    return usuario;
+}
 
 
     public List<Usuario> listaUsuarios(){
         List<Usuario> lista =usuarioRepository.buscartodos();
         return lista;
     }
+    
 }

@@ -94,12 +94,12 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         TabelaCadastroFuncionario = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         TxtSenha = new javax.swing.JTextField();
-        TxtCargo = new javax.swing.JTextField();
         TxtId = new javax.swing.JTextField();
         TxtLogin = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        CbxCargo = new javax.swing.JComboBox<>();
 
-        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setBorder(null);
         setClosable(true);
         setForeground(new java.awt.Color(255, 204, 102));
         setIconifiable(true);
@@ -174,6 +174,10 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
 
         jLabel8.setText("ID");
 
+        CbxCargo.setBackground(new java.awt.Color(255, 255, 255));
+        CbxCargo.setForeground(new java.awt.Color(0, 0, 0));
+        CbxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Funcionario" }));
+
         TelaCadastroFuncionariosDSK.setLayer(TxtNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroFuncionariosDSK.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroFuncionariosDSK.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -184,10 +188,10 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         TelaCadastroFuncionariosDSK.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroFuncionariosDSK.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroFuncionariosDSK.setLayer(TxtSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        TelaCadastroFuncionariosDSK.setLayer(TxtCargo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroFuncionariosDSK.setLayer(TxtId, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroFuncionariosDSK.setLayer(TxtLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
         TelaCadastroFuncionariosDSK.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        TelaCadastroFuncionariosDSK.setLayer(CbxCargo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout TelaCadastroFuncionariosDSKLayout = new javax.swing.GroupLayout(TelaCadastroFuncionariosDSK);
         TelaCadastroFuncionariosDSK.setLayout(TelaCadastroFuncionariosDSKLayout);
@@ -211,9 +215,8 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addGap(113, 113, 113)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(87, 87, 87))
+                        .addGap(105, 105, 105)
+                        .addComponent(jLabel7))
                     .addGroup(TelaCadastroFuncionariosDSKLayout.createSequentialGroup()
                         .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,9 +226,10 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CbxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(140, 140, 140))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         TelaCadastroFuncionariosDSKLayout.setVerticalGroup(
             TelaCadastroFuncionariosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,9 +245,9 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
                 .addGroup(TelaCadastroFuncionariosDSKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CbxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -258,13 +262,13 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 845, Short.MAX_VALUE)
+            .addGap(0, 851, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(TelaCadastroFuncionariosDSK))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 648, Short.MAX_VALUE)
+            .addGap(0, 654, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(TelaCadastroFuncionariosDSK))
         );
@@ -283,30 +287,29 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         int linhaSelecionada = TabelaCadastroFuncionario.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "SELECIONE ALGUÉM NA TABELA PARA EDITAR.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione alguém na tabela para editar.");
             return;
         }
 
         try {
             model.Usuario func = new model.Usuario();
-
+        
             // Seta o ID para que o 'atualizar' saiba qual registro alterar no banco
             int id = Integer.parseInt(TabelaCadastroFuncionario.getValueAt(linhaSelecionada, 0).toString());
             func.setId(id);
             func.setNome(TxtNome.getText());
             func.setLogin(TxtLogin.getText());
             func.setSenha(TxtSenha.getText());
-            func.setTipo(TxtCargo.getText());
-
+            func.setTipo(CbxCargo.getSelectedItem().toString());
             repository.UsuarioRepository repo = new repository.UsuarioRepository();
             repo.atualizar(func);
 
-            javax.swing.JOptionPane.showMessageDialog(this, "DADOS ATUALIZADOS!");
-             log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"EDITOU UM FUNCIONARIO" );
+            javax.swing.JOptionPane.showMessageDialog(this, "Dados atualizados!");
+             log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Editou um Funcionario" );
             listarUsuario();
-
+            
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "ERRO AO ATUALIZAR: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + e.getMessage());
         }
 
     }//GEN-LAST:event_BntEditarActionPerformed
@@ -318,7 +321,7 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         novoUsuario.setNome(TxtNome.getText());
         novoUsuario.setLogin(TxtLogin.getText());
         novoUsuario.setSenha(TxtSenha.getText());
-        novoUsuario.setTipo(TxtCargo.getText()); // Assumindo que 'tipo' no seu modelo é o Cargo
+        novoUsuario.setTipo(CbxCargo.getSelectedItem().toString());// Assumindo que 'tipo' no seu modelo é o Cargo
 
         // 2. Chamar o repositório para salvar no banco
         repository.UsuarioRepository repo = new repository.UsuarioRepository();
@@ -327,19 +330,19 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
             repo.salvar(novoUsuario); // Certifique-se de que o método no seu repo se chama 'cadastrar' ou 'salvar'
         
             // 3. Feedback para o usuário
-            javax.swing.JOptionPane.showMessageDialog(this, "FUNCIONÁRIO CADASTRADO COM SUCESSO!");
-            log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"CADASTROU UM FUNCIONARIO" );
+            javax.swing.JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
+            log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Cadastrou um Funcionario" );
             // 4. Limpar os campos após o cadastro
             TxtNome.setText("");
             TxtId.setText("");
             TxtLogin.setText("");
             TxtSenha.setText("");
-            TxtCargo.setText("");
+            CbxCargo.setSelectedIndex(0);
             
             carregarTabela();
         
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "ERRO AO CADASTRAR: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage()); 
         }
         
         
@@ -350,11 +353,11 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         int linhaSelecionada = TabelaCadastroFuncionario.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "SELECIONE UM FUNCIONÁRIO NA TABELA.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um funcionário na tabela.");
             return;
         }
 
-        int confirmar = javax.swing.JOptionPane.showConfirmDialog(this,  "EXCLUIR FUNCIONÁRIO?", "CONFIRMAR", javax.swing.JOptionPane.YES_NO_OPTION);
+        int confirmar = javax.swing.JOptionPane.showConfirmDialog(this, "Excluir funcionário?", "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
 
         if (confirmar == javax.swing.JOptionPane.YES_OPTION) {
             try {
@@ -366,12 +369,12 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
 
                 if (usuarioParaRemover != null) {
                     repo.remover(usuarioParaRemover);
-                    javax.swing.JOptionPane.showMessageDialog(this, "FUNCIONÁRIO REMOVIDO COM SUCESSO!");
-                    log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"REMOVEU UM FUNCIONARIO" );
+                    javax.swing.JOptionPane.showMessageDialog(this, "Funcionário removido com sucesso!");
+                    log.registrar(SessaoUsuario.getUsuarioLogado().getNome(),"Removeu um Funcionario" );
                     carregarTabela(); 
                 }
             } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(this, " ERRO AO REMOVER: " + e.getMessage());
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao remover: " + e.getMessage());
             }
         }
         
@@ -397,7 +400,7 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
         TabelaCadastroFuncionario.getValueAt(linha, 3).toString()
     );
 
-    TxtCargo.setText(
+    CbxCargo.setSelectedItem(
         TabelaCadastroFuncionario.getValueAt(linha, 4).toString()
     );
        
@@ -420,9 +423,9 @@ public class TelaCadastroFuncionarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton BntCadastrar;
     private javax.swing.JButton BntDeleta;
     private javax.swing.JButton BntEditar;
+    private javax.swing.JComboBox<String> CbxCargo;
     private javax.swing.JTable TabelaCadastroFuncionario;
     private javax.swing.JDesktopPane TelaCadastroFuncionariosDSK;
-    private javax.swing.JTextField TxtCargo;
     private javax.swing.JTextField TxtId;
     private javax.swing.JTextField TxtLogin;
     private javax.swing.JTextField TxtNome;
