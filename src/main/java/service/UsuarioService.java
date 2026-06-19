@@ -30,5 +30,8 @@ public class UsuarioService {
         List<Usuario> lista =usuarioRepository.buscartodos();
         return lista;
     }
+    public Usuario buscarPorLogin(String login) {
+        return usuarioRepository.buscarPorLogin(login);
+    }
     
 }

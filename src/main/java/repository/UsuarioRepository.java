@@ -148,4 +148,19 @@
     .setParameter("nome", "%" + nome + "%")
     .getResultList();
     }
-}    
+        public Usuario buscarPorLogin(String login) {
+            try {
+                List<Usuario> lista = em.createQuery(
+                                "SELECT u FROM Usuario u WHERE u.login = :login",
+                                Usuario.class)
+                        .setParameter("login", login)
+                        .getResultList();
+
+                return lista.isEmpty() ? null : lista.get(0);
+
+            } catch (Exception e) {
+                System.err.println("Erro ao buscar usuário por login: " + e.getMessage());
+                return null;
+            }
+        }
+}

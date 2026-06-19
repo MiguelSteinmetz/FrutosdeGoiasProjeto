@@ -1,21 +1,15 @@
 package SleeknoteUI;
 
-import model.Usuario;
-import service.LogService;
-import service.UsuarioService;
-import model.SessaoUsuario;
+import Controller.UsuarioController;
 
 public class Login extends javax.swing.JPanel {
 
-    
-    private UsuarioService service = new UsuarioService();
+    private UsuarioController usuarioController = new UsuarioController();
     private MenuPrincipal mainPanel;
-    LogService log = new LogService();
 
     public Login(MenuPrincipal mainPanel) {
         this.mainPanel = mainPanel;
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -55,8 +49,6 @@ public class Login extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18));
         jLabel5.setText("Senha");
-
-      
 
         jButton1.setText("Logar");
         jButton1.addActionListener(evt -> logar());
@@ -103,22 +95,16 @@ public class Login extends javax.swing.JPanel {
     }
 
     private void logar() {
-         String login = jTextField1.getText();
+        String login = jTextField1.getText();
         String senha = new String(jPasswordField1.getPassword());
 
-        if (login.isEmpty() || senha.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
-            return;
-        }
-        Usuario logado = service.autenticar(login, senha);
-        
-        if (logado != null) {
-            SessaoUsuario.setUsuarioLogado(logado);
-            log.registrar(logado.getNome(), "Entrou no sistema");
-          
-            mainPanel.irParaMenu(); //troca de tela para menu
+        // Chama o Controller — View não conhece Service nem Repository
+        UsuarioController.ResultadoOperacao res = usuarioController.login(login, senha);
+
+        if (res.isSucesso()) {
+            mainPanel.irParaMenu();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+            javax.swing.JOptionPane.showMessageDialog(this, res.getMensagem());
         }
     }
 
